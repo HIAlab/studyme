@@ -18,10 +18,10 @@ class InterventionEditorName extends StatefulWidget {
       required this.save}) : super(key: key);
 
   @override
-  _InterventionEditorNameState createState() => _InterventionEditorNameState();
+  InterventionEditorNameState createState() => InterventionEditorNameState();
 }
 
-class _InterventionEditorNameState extends State<InterventionEditorName> {
+class InterventionEditorNameState extends State<InterventionEditorName> {
   String? _name;
 
   @override

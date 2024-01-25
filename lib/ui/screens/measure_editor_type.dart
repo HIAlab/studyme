@@ -18,10 +18,10 @@ class MeasureEditorType extends StatefulWidget {
   const MeasureEditorType({Key? key, required this.measure, required this.onSave}) : super(key: key);
 
   @override
-  _MeasureEditorTypeState createState() => _MeasureEditorTypeState();
+  MeasureEditorTypeState createState() => MeasureEditorTypeState();
 }
 
-class _MeasureEditorTypeState extends State<MeasureEditorType> {
+class MeasureEditorTypeState extends State<MeasureEditorType> {
   Measure? _measure;
 
   @override

@@ -14,10 +14,10 @@ class Timeline extends StatefulWidget {
       required this.callback}) : super(key: key);
 
   @override
-  _TimelineState createState() => _TimelineState();
+  TimelineState createState() => TimelineState();
 }
 
-class _TimelineState extends State<Timeline> {
+class TimelineState extends State<Timeline> {
   final ItemScrollController _scrollController = ItemScrollController();
 
   @override

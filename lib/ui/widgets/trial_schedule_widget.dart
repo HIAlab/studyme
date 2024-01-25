@@ -18,10 +18,10 @@ class TrialScheduleWidget extends StatefulWidget {
       this.activeIndex = -1}) : super(key: key);
 
   @override
-  _TrialScheduleWidgetState createState() => _TrialScheduleWidgetState();
+  TrialScheduleWidgetState createState() => TrialScheduleWidgetState();
 }
 
-class _TrialScheduleWidgetState extends State<TrialScheduleWidget> {
+class TrialScheduleWidgetState extends State<TrialScheduleWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -10,10 +10,10 @@ class Onboarding extends StatefulWidget {
   const Onboarding({Key? key}) : super(key: key);
 
   @override
-  _OnboardingState createState() => _OnboardingState();
+  OnboardingState createState() => OnboardingState();
 }
 
-class _OnboardingState extends State<Onboarding> {
+class OnboardingState extends State<Onboarding> {
   final int _numPages = 5;
   final PageController _pageController = PageController(initialPage: 0);
   int _currentPage = 0;

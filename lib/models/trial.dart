@@ -112,10 +112,11 @@ class Trial extends HiveObject {
 
     if (letter == 'a') {
       return a;
-    } else if (letter == 'b')
+    } else if (letter == 'b') {
       return b;
-    else
+    } else {
       return null;
+    }
   }
 
   int getPhaseIndexForDate(DateTime date) {

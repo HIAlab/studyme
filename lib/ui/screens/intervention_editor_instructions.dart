@@ -17,11 +17,11 @@ class InterventionEditorInstructions extends StatefulWidget {
       required this.save}) : super(key: key);
 
   @override
-  _InterventionEditorInstructionsState createState() =>
-      _InterventionEditorInstructionsState();
+  InterventionEditorInstructionsState createState() =>
+      InterventionEditorInstructionsState();
 }
 
-class _InterventionEditorInstructionsState
+class InterventionEditorInstructionsState
     extends State<InterventionEditorInstructions> {
   String? _instructions;
 

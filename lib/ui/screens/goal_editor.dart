@@ -10,10 +10,10 @@ class GoalEditor extends StatefulWidget {
   const GoalEditor({Key? key, required this.goal, required this.onSave}) : super(key: key);
 
   @override
-  _GoalEditorState createState() => _GoalEditorState();
+  GoalEditorState createState() => GoalEditorState();
 }
 
-class _GoalEditorState extends State<GoalEditor> {
+class GoalEditorState extends State<GoalEditor> {
   String? _goal;
 
   @override

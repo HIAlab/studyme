@@ -13,10 +13,10 @@ class InterventionInteractor extends StatefulWidget {
   const InterventionInteractor(this.task, {Key? key}) : super(key: key);
 
   @override
-  _InterventionInteractorState createState() => _InterventionInteractorState();
+  InterventionInteractorState createState() => InterventionInteractorState();
 }
 
-class _InterventionInteractorState extends State<InterventionInteractor> {
+class InterventionInteractorState extends State<InterventionInteractor> {
   bool _confirmed = false;
 
   @override

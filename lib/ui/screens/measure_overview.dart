@@ -20,10 +20,10 @@ class MeasureOverview extends StatefulWidget {
   const MeasureOverview({Key? key, required this.index}) : super(key: key);
 
   @override
-  _MeasureOverviewState createState() => _MeasureOverviewState();
+  MeasureOverviewState createState() => MeasureOverviewState();
 }
 
-class _MeasureOverviewState extends State<MeasureOverview> {
+class MeasureOverviewState extends State<MeasureOverview> {
   late bool _isDeleting;
 
   @override

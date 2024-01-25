@@ -9,10 +9,10 @@ class ScaleMeasureWidget extends StatefulWidget {
   const ScaleMeasureWidget(this.measure, this.updateValue, {Key? key}) : super(key: key);
 
   @override
-  _ScaleMeasureWidgetState createState() => _ScaleMeasureWidgetState();
+  ScaleMeasureWidgetState createState() => ScaleMeasureWidgetState();
 }
 
-class _ScaleMeasureWidgetState extends State<ScaleMeasureWidget> {
+class ScaleMeasureWidgetState extends State<ScaleMeasureWidget> {
   num? _state;
 
   @override

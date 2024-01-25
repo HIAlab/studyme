@@ -15,10 +15,10 @@ class MeasureEditorScale extends StatefulWidget {
       {Key? key, required this.measure, required this.onSave, required this.save}) : super(key: key);
 
   @override
-  _MeasureEditorScaleState createState() => _MeasureEditorScaleState();
+  MeasureEditorScaleState createState() => MeasureEditorScaleState();
 }
 
-class _MeasureEditorScaleState extends State<MeasureEditorScale> {
+class MeasureEditorScaleState extends State<MeasureEditorScale> {
   double? _min;
   String? _minLabel;
   double? _max;

@@ -16,10 +16,10 @@ class MeasureEditorList extends StatefulWidget {
       {Key? key, required this.measure, required this.onSave, required this.save}) : super(key: key);
 
   @override
-  _MeasureEditorListState createState() => _MeasureEditorListState();
+  MeasureEditorListState createState() => MeasureEditorListState();
 }
 
-class _MeasureEditorListState extends State<MeasureEditorList> {
+class MeasureEditorListState extends State<MeasureEditorList> {
   List<ListItem>? _items;
   String? _editedChoice;
 

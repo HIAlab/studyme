@@ -15,10 +15,10 @@ class InterventionOverview extends StatefulWidget {
   const InterventionOverview({Key? key, required this.isA}) : super(key: key);
 
   @override
-  _InterventionOverviewState createState() => _InterventionOverviewState();
+  InterventionOverviewState createState() => InterventionOverviewState();
 }
 
-class _InterventionOverviewState extends State<InterventionOverview> {
+class InterventionOverviewState extends State<InterventionOverview> {
   late bool _isDeleting;
 
   @override

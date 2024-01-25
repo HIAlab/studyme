@@ -13,10 +13,10 @@ class TrialTypeEditor extends StatefulWidget {
   const TrialTypeEditor({Key? key, required this.type, required this.onSave}) : super(key: key);
 
   @override
-  _TrialTypeEditorState createState() => _TrialTypeEditorState();
+  TrialTypeEditorState createState() => TrialTypeEditorState();
 }
 
-class _TrialTypeEditorState extends State<TrialTypeEditor> {
+class TrialTypeEditorState extends State<TrialTypeEditor> {
   TrialType? _type;
 
   @override

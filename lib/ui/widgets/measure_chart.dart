@@ -20,10 +20,10 @@ class MeasureChart extends StatefulWidget {
       required this.timeAggregation}) : super(key: key);
 
   @override
-  _MeasureChartState createState() => _MeasureChartState();
+  MeasureChartState createState() => MeasureChartState();
 }
 
-class _MeasureChartState extends State<MeasureChart> {
+class MeasureChartState extends State<MeasureChart> {
   late bool _isLoading;
 
   late List<TrialLog> _logs;

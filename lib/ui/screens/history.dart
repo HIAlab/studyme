@@ -9,10 +9,10 @@ class History extends StatefulWidget {
   const History({Key? key}) : super(key: key);
 
   @override
-  _HistoryState createState() => _HistoryState();
+  HistoryState createState() => HistoryState();
 }
 
-class _HistoryState extends State<History> {
+class HistoryState extends State<History> {
   TimeAggregation? _timeAggregation;
 
   @override

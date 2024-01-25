@@ -10,10 +10,10 @@ class GoalOverview extends StatefulWidget {
   const GoalOverview({Key? key}) : super(key: key);
 
   @override
-  _GoalOverviewState createState() => _GoalOverviewState();
+  GoalOverviewState createState() => GoalOverviewState();
 }
 
-class _GoalOverviewState extends State<GoalOverview> {
+class GoalOverviewState extends State<GoalOverview> {
   late bool _isDeleting;
 
   @override

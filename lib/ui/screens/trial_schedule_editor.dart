@@ -12,10 +12,10 @@ class TrialScheduleEditor extends StatefulWidget {
   const TrialScheduleEditor({Key? key}) : super(key: key);
 
   @override
-  _TrialScheduleEditorState createState() => _TrialScheduleEditorState();
+  TrialScheduleEditorState createState() => TrialScheduleEditorState();
 }
 
-class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
+class TrialScheduleEditorState extends State<TrialScheduleEditor> {
   TrialSchedule? _phases;
 
   @override

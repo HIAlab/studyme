@@ -11,10 +11,10 @@ class ListMeasureWidget extends StatefulWidget {
   const ListMeasureWidget(this.measure, this.updateValue, {Key? key}) : super(key: key);
 
   @override
-  _ListMeasureWidgetState createState() => _ListMeasureWidgetState();
+  ListMeasureWidgetState createState() => ListMeasureWidgetState();
 }
 
-class _ListMeasureWidgetState extends State<ListMeasureWidget> {
+class ListMeasureWidgetState extends State<ListMeasureWidget> {
   num? _state;
 
   @override

@@ -15,10 +15,10 @@ class MeasureInteractor extends StatefulWidget {
   const MeasureInteractor(this.task, {Key? key}) : super(key: key);
 
   @override
-  _MeasureInteractorState createState() => _MeasureInteractorState();
+  MeasureInteractorState createState() => MeasureInteractorState();
 }
 
-class _MeasureInteractorState extends State<MeasureInteractor> {
+class MeasureInteractorState extends State<MeasureInteractor> {
   num? _value;
   bool? _confirmed;
 

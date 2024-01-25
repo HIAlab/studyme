@@ -14,10 +14,10 @@ class MeasureEditorName extends StatefulWidget {
       {Key? key, required this.measure, required this.onSave, required this.save}) : super(key: key);
 
   @override
-  _MeasureEditorNameState createState() => _MeasureEditorNameState();
+  MeasureEditorNameState createState() => MeasureEditorNameState();
 }
 
-class _MeasureEditorNameState extends State<MeasureEditorName> {
+class MeasureEditorNameState extends State<MeasureEditorName> {
   String? _name;
 
   @override

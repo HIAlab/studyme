@@ -17,10 +17,10 @@ class TaskList extends StatefulWidget {
   const TaskList({Key? key, this.trial, this.date}) : super(key: key);
 
   @override
-  _TaskListState createState() => _TaskListState();
+  TaskListState createState() => TaskListState();
 }
 
-class _TaskListState extends State<TaskList> {
+class TaskListState extends State<TaskList> {
   late bool _isLoading;
 
   late List<String?> _completedTaskIds;

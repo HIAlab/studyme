@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:studyme/models/mixins/has_schedule.dart';
 import 'package:studyme/models/reminder.dart';
 import 'package:studyme/ui/widgets/action_button.dart';
