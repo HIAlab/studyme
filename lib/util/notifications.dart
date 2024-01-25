@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
 import 'package:studyme/models/task/task.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -25,7 +24,8 @@ class Notifications {
 
   Future<void> _configureLocalTimeZone() async {
     tz.initializeTimeZones();
-    final currentTimeZone = await FlutterNativeTimezone.getLocalTimezone();
+    DateTime dateTime = DateTime.now();
+    final currentTimeZone = dateTime.timeZoneName;
     tz.setLocalLocation(tz.getLocation(currentTimeZone));
   }
 
