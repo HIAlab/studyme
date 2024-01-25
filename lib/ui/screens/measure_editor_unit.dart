@@ -11,7 +11,7 @@ class MeasureEditorUnit extends StatefulWidget {
   final bool save;
 
   const MeasureEditorUnit(
-      {required this.measure, required this.onSave, required this.save});
+      {Key? key, required this.measure, required this.onSave, required this.save}) : super(key: key);
 
   @override
   _MeasureEditorUnitState createState() => _MeasureEditorUnitState();
@@ -35,7 +35,7 @@ class _MeasureEditorUnitState extends State<MeasureEditorUnit> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(widget.measure.name!),
-              Visibility(
+              const Visibility(
                 visible: true,
                 child: Text(
                   'Unit',
@@ -63,14 +63,14 @@ class _MeasureEditorUnitState extends State<MeasureEditorUnit> {
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                       color: Theme.of(context).primaryColor)),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextFormField(
                 autofocus: _unit == null,
                 initialValue: _unit,
                 onChanged: _changeUnit,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Unit',
                 ),
               ),
@@ -80,7 +80,7 @@ class _MeasureEditorUnitState extends State<MeasureEditorUnit> {
   }
 
   _canSubmit() {
-    return _unit != null && _unit!.length > 0;
+    return _unit != null && _unit!.isNotEmpty;
   }
 
   _submit() {

@@ -8,7 +8,7 @@ class ListMeasureWidget extends StatefulWidget {
 
   final void Function(num value)? updateValue;
 
-  ListMeasureWidget(this.measure, this.updateValue);
+  const ListMeasureWidget(this.measure, this.updateValue, {Key? key}) : super(key: key);
 
   @override
   _ListMeasureWidgetState createState() => _ListMeasureWidgetState();
@@ -34,7 +34,7 @@ class _ListMeasureWidgetState extends State<ListMeasureWidget> {
                 value: index,
                 selectedValue: _state,
                 title: Text('${widget.measure!.items![index].value}',
-                    style: TextStyle(fontSize: 20)),
+                    style: const TextStyle(fontSize: 20)),
                 onSelect: _updateValue);
           }),
     );

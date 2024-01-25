@@ -31,26 +31,27 @@ abstract class Measure with HasSchedule {
   @HiveField(3)
   String? unit;
 
+  @override
   @HiveField(4)
   Reminder? schedule;
 
   static IconData? icon;
 
   Measure({this.id, this.type, this.name, this.unit, Reminder? schedule}) {
-    this.id = id ?? Uuid().v4();
+    id = id ?? const Uuid().v4();
     this.schedule = schedule ?? Reminder();
   }
 
   Measure.clone(Measure measure) {
-    this.id = Uuid().v4();
-    this.type = measure.type;
-    this.name = measure.name;
-    this.unit = measure.unit;
-    this.schedule = measure.schedule;
+    id = const Uuid().v4();
+    type = measure.type;
+    name = measure.name;
+    unit = measure.unit;
+    schedule = measure.schedule;
   }
 
   getIcon() {
-    switch (this.runtimeType) {
+    switch (runtimeType) {
       case KeyboardMeasure:
         return KeyboardMeasure.icon;
       case ListMeasure:
@@ -63,7 +64,7 @@ abstract class Measure with HasSchedule {
   }
 
   clone() {
-    switch (this.runtimeType) {
+    switch (runtimeType) {
       case KeyboardMeasure:
         return KeyboardMeasure.clone(this as KeyboardMeasure);
       case ListMeasure:
@@ -81,7 +82,7 @@ abstract class Measure with HasSchedule {
 
   List<Task> getTasksFor(int daysSinceBeginningOfTimeRange) {
     List<TimeOfDay> times =
-        this.schedule!.getTaskTimesFor(daysSinceBeginningOfTimeRange);
+        schedule!.getTaskTimesFor(daysSinceBeginningOfTimeRange);
     return times.map((time) => MeasureTask(this, time)).toList();
   }
 

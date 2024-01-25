@@ -5,10 +5,10 @@ class HighlightedActionButton extends StatelessWidget {
   final String labelText;
   final Function()? onPressed;
 
-  HighlightedActionButton(
-      {required this.icon,
+  const HighlightedActionButton(
+      {Key? key, required this.icon,
       required this.labelText,
-      required this.onPressed});
+      required this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class HighlightedActionButton extends StatelessWidget {
         icon: Icon(icon, color: Colors.white),
         label: Text(
           labelText,
-          style: TextStyle(color: Colors.white, fontSize: 15),
+          style: const TextStyle(color: Colors.white, fontSize: 15),
         ),
         onPressed: onPressed);
   }

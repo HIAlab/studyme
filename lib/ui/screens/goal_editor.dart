@@ -7,7 +7,7 @@ class GoalEditor extends StatefulWidget {
   final Goal goal;
   final Function(Goal goal) onSave;
 
-  GoalEditor({required this.goal, required this.onSave});
+  const GoalEditor({Key? key, required this.goal, required this.onSave}) : super(key: key);
 
   @override
   _GoalEditorState createState() => _GoalEditorState();
@@ -38,7 +38,7 @@ class _GoalEditorState extends State<GoalEditor> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 4),
+                  margin: const EdgeInsets.symmetric(vertical: 4),
                   child: Text(
                       "What do you want to improve about your health or well-being?",
                       style: TextStyle(
@@ -46,7 +46,7 @@ class _GoalEditorState extends State<GoalEditor> {
                           fontWeight: FontWeight.bold,
                           color: Theme.of(context).primaryColor)),
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text("I want to...",
                     style: TextStyle(
                         fontSize: 20, color: Theme.of(context).primaryColor)),
@@ -62,7 +62,7 @@ class _GoalEditorState extends State<GoalEditor> {
   }
 
   _canSubmit() {
-    return _goal != null && _goal!.length > 0;
+    return _goal != null && _goal!.isNotEmpty;
   }
 
   _onSubmit() {

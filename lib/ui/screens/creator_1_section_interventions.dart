@@ -11,7 +11,7 @@ class CreatorInterventionSection extends StatelessWidget {
   final AppData model;
   final bool isActive;
 
-  CreatorInterventionSection(this.model, {this.isActive = true});
+  const CreatorInterventionSection(this.model, {Key? key, this.isActive = true}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class CreatorInterventionSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text('What you want to try out',
               style: TextStyle(
                   fontWeight: FontWeight.bold,
@@ -31,8 +31,8 @@ class CreatorInterventionSection extends StatelessWidget {
               alignment: MainAxisAlignment.center,
               children: [
                 OutlinedButton.icon(
-                    icon: Icon(Icons.add),
-                    label: Text('Select'),
+                    icon: const Icon(Icons.add),
+                    label: const Text('Select'),
                     onPressed: () => _addIntervention(context, true)),
               ],
             ),
@@ -42,7 +42,7 @@ class CreatorInterventionSection extends StatelessWidget {
                 showSchedule: true,
                 onTap: () => _viewIntervention(context, true)),
           if (_firstInterventionSet()) ...[
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text('Compare to something else?',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -53,8 +53,8 @@ class CreatorInterventionSection extends StatelessWidget {
                 alignment: MainAxisAlignment.center,
                 children: [
                   OutlinedButton.icon(
-                      icon: Icon(Icons.add),
-                      label: Text('Select'),
+                      icon: const Icon(Icons.add),
+                      label: const Text('Select'),
                       onPressed: () => _navigateToTrialTypeEditor(context)),
                 ],
               ),
@@ -63,12 +63,12 @@ class CreatorInterventionSection extends StatelessWidget {
                 child: ListTile(
                   title: Text(
                       model.trial!.type == TrialType.reversal ? 'No' : 'Yes'),
-                  trailing: Icon(Icons.chevron_right),
+                  trailing: const Icon(Icons.chevron_right),
                   onTap: () => _navigateToTrialTypeEditor(context),
                 ),
               ),
             if (model.trial!.type == TrialType.alternatingTreatment) ...[
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text('Compare to',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
@@ -79,8 +79,8 @@ class CreatorInterventionSection extends StatelessWidget {
                   alignment: MainAxisAlignment.center,
                   children: [
                     OutlinedButton.icon(
-                        icon: Icon(Icons.add),
-                        label: Text('Select'),
+                        icon: const Icon(Icons.add),
+                        label: const Text('Select'),
                         onPressed: () => _addIntervention(context, false)),
                   ],
                 ),

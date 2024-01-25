@@ -12,9 +12,9 @@ class InterventionEditorInstructions extends StatefulWidget {
   final bool save;
 
   const InterventionEditorInstructions(
-      {required this.intervention,
+      {Key? key, required this.intervention,
       required this.onSave,
-      required this.save});
+      required this.save}) : super(key: key);
 
   @override
   _InterventionEditorInstructionsState createState() =>
@@ -40,7 +40,7 @@ class _InterventionEditorInstructionsState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(widget.intervention!.name!),
-              Visibility(
+              const Visibility(
                 visible: true,
                 child: Text(
                   'Instructions',
@@ -69,7 +69,7 @@ class _InterventionEditorInstructionsState
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         color: Theme.of(context).primaryColor)),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -78,11 +78,11 @@ class _InterventionEditorInstructionsState
                   autofocus: _instructions == null,
                   initialValue: _instructions,
                   onChanged: _changeInstructions,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Instructions',
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                     '* The instructions will be shown to you when it is time for "${widget.intervention!.name}".\nAim to be specific enough so you will know what to do.',
                     style: TextStyle(
@@ -96,7 +96,7 @@ class _InterventionEditorInstructionsState
   }
 
   _canSubmit() {
-    return _instructions != null && _instructions!.length > 0;
+    return _instructions != null && _instructions!.isNotEmpty;
   }
 
   _submit() {

@@ -132,25 +132,25 @@ class AppData extends ChangeNotifier {
   }
 
   void scheduleNotificationsFor(DateTime date) async {
-    DateTime? _latest = box.get(lastDateWithScheduledNotificationsKey);
+    DateTime? latest = box.get(lastDateWithScheduledNotificationsKey);
 
-    int _id = box.get(notificationIdCounterKey) ?? 0;
+    int id = box.get(notificationIdCounterKey) ?? 0;
     // check that we haven't already scheduled notifications up to this date
     // clean the date, so comparison is based on day alone and not specific time
-    DateTime _cleanDate = DateTime(date.year, date.month, date.day);
-    if (_latest == null || _latest.isBefore(date)) {
+    DateTime cleanDate = DateTime(date.year, date.month, date.day);
+    if (latest == null || latest.isBefore(date)) {
       List<Task> tasks = _trial!.getTasksForDate(date);
 
       if (date.difference(DateTime.now()).inDays == 0) {
         tasks.removeWhere(
             (element) => element.time!.combined < element.time!.combined);
       }
-      tasks.forEach((task) {
-        Notifications().scheduleNotificationFor(date, task, _id);
-        _id++;
-      });
-      box.put(lastDateWithScheduledNotificationsKey, _cleanDate);
-      box.put(notificationIdCounterKey, _id);
+      for (var task in tasks) {
+        Notifications().scheduleNotificationFor(date, task, id);
+        id++;
+      }
+      box.put(lastDateWithScheduledNotificationsKey, cleanDate);
+      box.put(notificationIdCounterKey, id);
     }
   }
 
@@ -173,6 +173,6 @@ class AppData extends ChangeNotifier {
   }
 
   bool canStartTrial() {
-    return canDefineMeasures() && _trial!.measures!.length > 0;
+    return canDefineMeasures() && _trial!.measures!.isNotEmpty;
   }
 }

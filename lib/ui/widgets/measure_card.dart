@@ -6,7 +6,7 @@ class MeasureCard extends StatelessWidget {
   final bool showSchedule;
   final void Function()? onTap;
 
-  MeasureCard({this.measure, this.onTap, this.showSchedule = false});
+  const MeasureCard({Key? key, this.measure, this.onTap, this.showSchedule = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class MeasureCard extends StatelessWidget {
       leading: Icon(measure!.getIcon()),
       title: Text(measure!.name!),
       subtitle: _getSubtitle(),
-      trailing: onTap != null ? Icon(Icons.chevron_right) : null,
+      trailing: onTap != null ? const Icon(Icons.chevron_right) : null,
       onTap: onTap,
     ));
   }

@@ -16,5 +16,5 @@ class TrialLog {
   TrialLog(this.loggedItemId, this.dateTime, this.value);
 
   String get id =>
-      this.loggedItemId! + this.dateTime.toString() + this.value.toString();
+      loggedItemId! + dateTime.toString() + value.toString();
 }

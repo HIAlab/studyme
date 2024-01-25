@@ -17,7 +17,7 @@ import 'schedule_editor.dart';
 
 class MeasureOverview extends StatefulWidget {
   final int index;
-  const MeasureOverview({required this.index});
+  const MeasureOverview({Key? key, required this.index}) : super(key: key);
 
   @override
   _MeasureOverviewState createState() => _MeasureOverviewState();
@@ -35,7 +35,7 @@ class _MeasureOverviewState extends State<MeasureOverview> {
   @override
   Widget build(BuildContext context) {
     return _isDeleting
-        ? Text('')
+        ? const Text('')
         : Consumer<AppData>(builder: (context, model, child) {
             Measure measure = model.trial!.measures![widget.index];
             return Scaffold(
@@ -47,53 +47,53 @@ class _MeasureOverviewState extends State<MeasureOverview> {
                       child: Column(
                         children: [
                           EditableListTile(
-                              title: Text("Name"),
+                              title: const Text("Name"),
                               subtitle: Text(measure.name!,
-                                  style: TextStyle(fontSize: 16)),
+                                  style: const TextStyle(fontSize: 16)),
                               canEdit: measure.canEdit,
                               onTap: () => _editName(measure)),
                           if (measure is KeyboardMeasure)
                             EditableListTile(
-                              title: Text("Unit"),
+                              title: const Text("Unit"),
                               subtitle: Text(measure.unit!,
-                                  style: TextStyle(fontSize: 16)),
+                                  style: const TextStyle(fontSize: 16)),
                               canEdit: measure.canEdit,
                               onTap: () => _editUnit(measure),
                             ),
                           ListTile(
-                            title: Text("Input Type"),
+                            title: const Text("Input Type"),
                             subtitle: Row(
                               children: [
                                 Icon(measure.getIcon()),
-                                SizedBox(width: 5),
+                                const SizedBox(width: 5),
                                 Text(measure.type!.capitalize(),
-                                    style: TextStyle(fontSize: 16)),
+                                    style: const TextStyle(fontSize: 16)),
                               ],
                             ),
                           ),
                           if (measure is ListMeasure)
                             EditableListTile(
-                                title: Text("List Items"),
+                                title: const Text("List Items"),
                                 subtitle: Text(measure.itemsString,
-                                    style: TextStyle(fontSize: 16)),
+                                    style: const TextStyle(fontSize: 16)),
                                 onTap: () => _editItems(measure)),
                           if (measure is ScaleMeasure)
                             EditableListTile(
-                                title: Text("Scale"),
+                                title: const Text("Scale"),
                                 subtitle: Text(measure.scaleString,
-                                    style: TextStyle(fontSize: 16)),
+                                    style: const TextStyle(fontSize: 16)),
                                 onTap: () => _editScale(measure)),
                           EditableListTile(
-                              title: Text("Schedule"),
+                              title: const Text("Schedule"),
                               subtitle: Text(measure.schedule!.readable,
-                                  style: TextStyle(fontSize: 16)),
+                                  style: const TextStyle(fontSize: 16)),
                               onTap: () => _editSchedule(measure)),
                           ButtonBar(
                             alignment: MainAxisAlignment.center,
                             children: [
                               OutlinedButton.icon(
-                                  icon: Icon(Icons.delete),
-                                  label: Text("Remove"),
+                                  icon: const Icon(Icons.delete),
+                                  label: const Text("Remove"),
                                   onPressed: _removeMeasure),
                             ],
                           ),
@@ -160,9 +160,9 @@ class _MeasureOverviewState extends State<MeasureOverview> {
   }
 
   _getSaveFunction() {
-    return (Measure _measure) {
+    return (Measure measure) {
       Provider.of<AppData>(context, listen: false)
-          .updateMeasure(widget.index, _measure);
+          .updateMeasure(widget.index, measure);
       Navigator.pop(context);
     };
   }

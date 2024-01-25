@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'hint_card.dart';
 
 class Hints {
-  static HintCard goalEditorHint = HintCard(
+  static HintCard goalEditorHint = const HintCard(
     titleText: 'Set Goal',
     body: [
       Text(

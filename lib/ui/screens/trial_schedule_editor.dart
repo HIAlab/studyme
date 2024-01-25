@@ -9,6 +9,8 @@ import 'package:studyme/ui/widgets/trial_schedule_widget.dart';
 import 'package:studyme/util/util.dart';
 
 class TrialScheduleEditor extends StatefulWidget {
+  const TrialScheduleEditor({Key? key}) : super(key: key);
+
   @override
   _TrialScheduleEditorState createState() => _TrialScheduleEditorState();
 }
@@ -48,30 +50,30 @@ class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                           color: Theme.of(context).primaryColor)),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   TrialScheduleWidget(schedule: _phases, showDuration: true),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   TextFormField(
                     initialValue: _phases!.phaseDuration.toString(),
                     keyboardType: TextInputType.number,
                     onChanged: _updatePhaseDuration,
                     decoration:
-                        InputDecoration(labelText: 'Phase Duration (in days)'),
+                        const InputDecoration(labelText: 'Phase Duration (in days)'),
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   TextFormField(
                     initialValue: _phases!.numberOfPhasePairs.toString(),
                     keyboardType: TextInputType.number,
                     onChanged: _updateNumberOfCycles,
                     decoration:
-                        InputDecoration(labelText: 'Number of Phase Pairs'),
+                        const InputDecoration(labelText: 'Number of Phase Pairs'),
                   ),
-                  SizedBox(width: 5),
-                  SizedBox(height: 30),
-                  Text('Advanced Settings',
+                  const SizedBox(width: 5),
+                  const SizedBox(height: 30),
+                  const Text('Advanced Settings',
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   DropdownButtonFormField<PhaseOrder>(
-                    decoration: InputDecoration(labelText: 'Phase Order'),
+                    decoration: const InputDecoration(labelText: 'Phase Order'),
                     value: _phases!.phaseOrder,
                     onChanged: _updatePhaseOrder,
                     items: [PhaseOrder.alternating, PhaseOrder.counterbalanced]

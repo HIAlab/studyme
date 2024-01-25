@@ -11,7 +11,7 @@ class TaskCard extends StatelessWidget {
   final Task? task;
   final bool? isCompleted;
 
-  TaskCard({this.task, this.isCompleted});
+  const TaskCard({Key? key, this.task, this.isCompleted}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class TaskCard extends StatelessWidget {
   }
 
   TextStyle? _getTextStyle() {
-    return isCompleted! ? TextStyle(color: Colors.grey) : null;
+    return isCompleted! ? const TextStyle(color: Colors.grey) : null;
   }
 
   Function()? _getOnTap(context) {
@@ -38,11 +38,9 @@ class TaskCard extends StatelessWidget {
 
   _select(context) {
     if (task is InterventionTask) {
-      InterventionTask? _task = task as InterventionTask?;
-      _navigateToInterventionScreen(context, _task);
+      _navigateToInterventionScreen(context, task as InterventionTask?);
     } else if (task is MeasureTask) {
-      MeasureTask? _task = task as MeasureTask?;
-      _navigateToMeasureScreen(context, _task);
+      _navigateToMeasureScreen(context, task as MeasureTask?);
     }
   }
 

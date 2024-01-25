@@ -11,7 +11,7 @@ class MeasureEditorName extends StatefulWidget {
   final bool save;
 
   const MeasureEditorName(
-      {required this.measure, required this.onSave, required this.save});
+      {Key? key, required this.measure, required this.onSave, required this.save}) : super(key: key);
 
   @override
   _MeasureEditorNameState createState() => _MeasureEditorNameState();
@@ -35,7 +35,7 @@ class _MeasureEditorNameState extends State<MeasureEditorName> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(_name ?? ''),
-              Visibility(
+              const Visibility(
                 visible: true,
                 child: Text(
                   'Name',
@@ -63,14 +63,14 @@ class _MeasureEditorNameState extends State<MeasureEditorName> {
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                       color: Theme.of(context).primaryColor)),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextFormField(
                 autofocus: _name == null,
                 initialValue: _name,
                 onChanged: _changeName,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Name',
                 ),
               ),
@@ -80,7 +80,7 @@ class _MeasureEditorNameState extends State<MeasureEditorName> {
   }
 
   _canSubmit() {
-    return _name != null && _name!.length > 0;
+    return _name != null && _name!.isNotEmpty;
   }
 
   _submit() {

@@ -15,7 +15,7 @@ class MeasureEditorType extends StatefulWidget {
   final Measure measure;
   final Function(Measure measure) onSave;
 
-  const MeasureEditorType({required this.measure, required this.onSave});
+  const MeasureEditorType({Key? key, required this.measure, required this.onSave}) : super(key: key);
 
   @override
   _MeasureEditorTypeState createState() => _MeasureEditorTypeState();
@@ -39,7 +39,7 @@ class _MeasureEditorTypeState extends State<MeasureEditorType> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(_measure!.name!),
-              Visibility(
+              const Visibility(
                 visible: true,
                 child: Text(
                   'Input Type',
@@ -70,33 +70,33 @@ class _MeasureEditorTypeState extends State<MeasureEditorType> {
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         color: Theme.of(context).primaryColor)),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 ChoiceCard<String>(
                     value: KeyboardMeasure.measureType,
                     selectedValue: _measure!.type,
                     onSelect: _changeMeasureType,
-                    title: Row(
+                    title: const Row(
                       children: [
                         Icon(KeyboardMeasure.icon),
                         SizedBox(width: 5),
                         Text("Keyboard"),
                       ],
                     ),
-                    body: [
+                    body: const [
                       Text("Values are entered freely via the keyboard.")
                     ]),
                 ChoiceCard<String>(
                     value: ListMeasure.measureType,
                     selectedValue: _measure!.type,
                     onSelect: _changeMeasureType,
-                    title: Row(
+                    title: const Row(
                       children: [
                         Icon(ListMeasure.icon),
                         SizedBox(width: 5),
                         Text("List"),
                       ],
                     ),
-                    body: [
+                    body: const [
                       Text(
                           "Values are selected from a list of items that you create in the next step.")
                     ]),
@@ -104,14 +104,14 @@ class _MeasureEditorTypeState extends State<MeasureEditorType> {
                   value: ScaleMeasure.measureType,
                   selectedValue: _measure!.type,
                   onSelect: _changeMeasureType,
-                  title: Row(
+                  title: const Row(
                     children: [
                       Icon(ScaleMeasure.icon),
                       SizedBox(width: 5),
                       Text("Scale"),
                     ],
                   ),
-                  body: [
+                  body: const [
                     Text(
                         "Values are selected from a scale that you define in the next step.")
                   ],
@@ -153,17 +153,17 @@ class _MeasureEditorTypeState extends State<MeasureEditorType> {
 
   _changeMeasureType(String type) {
     if (type != _measure!.type) {
-      Measure? _newMeasure;
+      Measure? newMeasure;
       if (type == KeyboardMeasure.measureType) {
-        _newMeasure = KeyboardMeasure();
+        newMeasure = KeyboardMeasure();
       } else if (type == ListMeasure.measureType) {
-        _newMeasure = ListMeasure();
+        newMeasure = ListMeasure();
       } else if (type == ScaleMeasure.measureType) {
-        _newMeasure = ScaleMeasure();
+        newMeasure = ScaleMeasure();
       }
-      _newMeasure!.name = _measure!.name;
+      newMeasure!.name = _measure!.name;
       setState(() {
-        _measure = _newMeasure;
+        _measure = newMeasure;
       });
     }
   }

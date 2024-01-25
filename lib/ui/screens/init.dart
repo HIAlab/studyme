@@ -5,20 +5,23 @@ import 'package:studyme/models/app_state/app_state.dart';
 import 'package:studyme/routes.dart';
 
 class Init extends StatefulWidget {
+  const Init({Key? key}) : super(key: key);
+
   @override
-  _InitState createState() => _InitState();
+  InitState createState() => InitState();
 }
 
-class _InitState extends State<Init> {
+class InitState extends State<Init> {
   @override
   Widget build(BuildContext context) {
     _initAppState();
-    return Scaffold(body: Center(child: CircularProgressIndicator()));
+    return const Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 
   _initAppState() async {
     // first make sure app data is fetched from box
     await Provider.of<AppData>(context, listen: false).loadAppState();
+    if (!mounted) return;
     Provider.of<AppData>(context, listen: false)
         .addStepLogForSurvey('opened app');
     AppData appData = Provider.of<AppData>(context, listen: false);
@@ -30,7 +33,7 @@ class _InitState extends State<Init> {
       Navigator.pushReplacementNamed(context, Routes.creator);
     } else if (state == AppState.DOING) {
       // schedule notifications for next day
-      appData.scheduleNotificationsFor(DateTime.now().add(Duration(days: 1)));
+      appData.scheduleNotificationsFor(DateTime.now().add(const Duration(days: 1)));
       Navigator.pushReplacementNamed(context, Routes.dashboard);
     }
   }

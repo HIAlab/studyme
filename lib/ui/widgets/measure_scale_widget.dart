@@ -6,7 +6,7 @@ class ScaleMeasureWidget extends StatefulWidget {
 
   final void Function(num value)? updateValue;
 
-  ScaleMeasureWidget(this.measure, this.updateValue);
+  const ScaleMeasureWidget(this.measure, this.updateValue, {Key? key}) : super(key: key);
 
   @override
   _ScaleMeasureWidgetState createState() => _ScaleMeasureWidgetState();
@@ -40,7 +40,7 @@ class _ScaleMeasureWidgetState extends State<ScaleMeasureWidget> {
         ),
         Row(
           children: [
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -52,33 +52,33 @@ class _ScaleMeasureWidgetState extends State<ScaleMeasureWidget> {
                       children: [
                         Text(widget.measure!.min!.toInt().toString(),
                             textAlign: TextAlign.right,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
                         Text(widget.measure!.minLabel!,
                             textAlign: TextAlign.left,
-                            style: TextStyle(fontSize: 18)),
+                            style: const TextStyle(fontSize: 18)),
                       ],
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(widget.measure!.max!.toInt().toString(),
                             textAlign: TextAlign.right,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
                         Text(widget.measure!.maxLabel!,
                             textAlign: TextAlign.right,
-                            style: TextStyle(fontSize: 18)),
+                            style: const TextStyle(fontSize: 18)),
                       ],
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
           ],
         ),
       ],

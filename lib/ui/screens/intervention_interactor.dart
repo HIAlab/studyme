@@ -10,7 +10,7 @@ import 'package:studyme/ui/widgets/task_header.dart';
 class InterventionInteractor extends StatefulWidget {
   final InterventionTask? task;
 
-  InterventionInteractor(this.task);
+  const InterventionInteractor(this.task, {Key? key}) : super(key: key);
 
   @override
   _InterventionInteractorState createState() => _InterventionInteractorState();
@@ -32,12 +32,12 @@ class _InterventionInteractorState extends State<InterventionInteractor> {
         ], systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
       body: Padding(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: Column(
             children: [
               TaskHeader(task: widget.task),
               SwitchListTile(
-                title: Text("Done"),
+                title: const Text("Done"),
                 value: _confirmed,
                 onChanged: (value) {
                   setState(() {

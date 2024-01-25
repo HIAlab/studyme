@@ -7,6 +7,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../routes.dart';
 
 class Onboarding extends StatefulWidget {
+  const Onboarding({Key? key}) : super(key: key);
+
   @override
   _OnboardingState createState() => _OnboardingState();
 }
@@ -28,13 +30,13 @@ class _OnboardingState extends State<Onboarding> {
 
   Widget _indicator(bool isActive) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 150),
-      margin: EdgeInsets.symmetric(horizontal: 8.0),
+      duration: const Duration(milliseconds: 150),
+      margin: const EdgeInsets.symmetric(horizontal: 8.0),
       height: 8.0,
       width: isActive ? 24.0 : 16.0,
       decoration: BoxDecoration(
         color: isActive ? Colors.green : Theme.of(context).primaryColor,
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
       ),
     );
   }
@@ -43,13 +45,13 @@ class _OnboardingState extends State<Onboarding> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(vertical: 20.0),
+        padding: const EdgeInsets.symmetric(vertical: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             Expanded(
               child: PageView(
-                physics: ClampingScrollPhysics(),
+                physics: const ClampingScrollPhysics(),
                 controller: _pageController,
                 onPageChanged: (int page) {
                   setState(() {
@@ -58,21 +60,21 @@ class _OnboardingState extends State<Onboarding> {
                 },
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
                     child: ListView(children: [
-                      Text("Welcome to StudyMe",
+                      const Text("Welcome to StudyMe",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 32,
                               color: Colors.green)),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(
                           "Have you ever tried something to improve your health or wellbeing but weren't sure if it worked?",
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 25,
                               color: Theme.of(context).primaryColor)),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Text(
                           "Or maybe you tried multiple things and didn’t know which worked better?",
                           style: TextStyle(
@@ -82,7 +84,7 @@ class _OnboardingState extends State<Onboarding> {
                     ]),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
                     child: ListView(
                       children: <Widget>[
                         Text(
@@ -95,7 +97,7 @@ class _OnboardingState extends State<Onboarding> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
                     child: ListView(
                       shrinkWrap: true,
                       children: <Widget>[
@@ -105,39 +107,39 @@ class _OnboardingState extends State<Onboarding> {
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25,
                                 color: Theme.of(context).primaryColor)),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text("1. Set a goal ",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25,
                                 color: Theme.of(context).primaryColor)),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Text("Example: Lose weight",
                             style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 23,
                                 color: Theme.of(context).primaryColor)),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text(
                             "2. Pick something you want to try out to achieve that goal",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25,
                                 color: Theme.of(context).primaryColor)),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Text("Example: Run for half an hour every two days",
                             style: TextStyle(
                                 fontStyle: FontStyle.italic,
                                 fontSize: 23,
                                 color: Theme.of(context).primaryColor)),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text(
                             "2. Choose the type of data you want to collect, to see if you are achieving your goal",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 25,
                                 color: Theme.of(context).primaryColor)),
-                        SizedBox(height: 5),
+                        const SizedBox(height: 5),
                         Text("Example: Weight (kg)",
                             style: TextStyle(
                                 fontStyle: FontStyle.italic,
@@ -147,7 +149,7 @@ class _OnboardingState extends State<Onboarding> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 40.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 40.0),
                     child: ListView(
                       children: <Widget>[
                         Text(
@@ -160,7 +162,7 @@ class _OnboardingState extends State<Onboarding> {
                     ),
                   ),
                   Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 40.0),
                       child: ListView(
                         children: [
                           Text("Ready? Let's get started!",
@@ -168,12 +170,12 @@ class _OnboardingState extends State<Onboarding> {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 40,
                                   color: Theme.of(context).primaryColor)),
-                          SizedBox(height: 40),
+                          const SizedBox(height: 40),
                           Column(
                             children: [
                               OutlinedButton.icon(
-                                icon: Icon(Icons.assignment_outlined),
-                                label: Text('Terms of Use'),
+                                icon: const Icon(Icons.assignment_outlined),
+                                label: const Text('Terms of Use'),
                                 onPressed: () => launchUrl(
                                   Uri(
                                     scheme: "https",
@@ -184,7 +186,7 @@ class _OnboardingState extends State<Onboarding> {
                                 ),
                               ),
                               SwitchListTile(
-                                title: Text(
+                                title: const Text(
                                     "I have read and agree to the terms of use"),
                                 value: _acceptedTerms,
                                 onChanged: (value) {
@@ -193,10 +195,10 @@ class _OnboardingState extends State<Onboarding> {
                                   });
                                 },
                               ),
-                              SizedBox(height: 20),
+                              const SizedBox(height: 20),
                               OutlinedButton.icon(
-                                icon: Icon(Icons.privacy_tip_outlined),
-                                label: Text('Privacy Policy'),
+                                icon: const Icon(Icons.privacy_tip_outlined),
+                                label: const Text('Privacy Policy'),
                                 onPressed: () => launchUrl(
                                   Uri(
                                     scheme: "https",
@@ -207,7 +209,7 @@ class _OnboardingState extends State<Onboarding> {
                                 ),
                               ),
                               SwitchListTile(
-                                title: Text(
+                                title: const Text(
                                     "I have read and agree to the privacy policy"),
                                 value: _acceptedPrivacy,
                                 onChanged: (value) {
@@ -216,10 +218,10 @@ class _OnboardingState extends State<Onboarding> {
                                   });
                                 },
                               ),
-                              SizedBox(height: 70),
+                              const SizedBox(height: 70),
                               OutlinedButton.icon(
-                                icon: Icon(Icons.assignment_outlined),
-                                label: Text('Imprint'),
+                                icon: const Icon(Icons.assignment_outlined),
+                                label: const Text('Imprint'),
                                 onPressed: () => launchUrl(
                                   Uri(
                                     scheme: "https",
@@ -229,10 +231,10 @@ class _OnboardingState extends State<Onboarding> {
                                   )
                                 ),
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               OutlinedButton.icon(
-                                icon: Icon(Icons.assignment_outlined),
-                                label: Text('Acknowledgments'),
+                                icon: const Icon(Icons.assignment_outlined),
+                                label: const Text('Acknowledgments'),
                                 onPressed: () => launchUrl(
                                   Uri(
                                     scheme: "https",
@@ -249,7 +251,7 @@ class _OnboardingState extends State<Onboarding> {
                 ],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -262,15 +264,15 @@ class _OnboardingState extends State<Onboarding> {
                         _acceptedPrivacy = false;
                       });
                       _pageController.previousPage(
-                        duration: Duration(milliseconds: 500),
+                        duration: const Duration(milliseconds: 500),
                         curve: Curves.ease,
                       );
                     },
                     elevation: 2.0,
                     fillColor: Colors.blueGrey,
-                    child: Icon(Icons.arrow_back, color: Colors.white),
-                    padding: EdgeInsets.all(15.0),
-                    shape: CircleBorder(),
+                    padding: const EdgeInsets.all(15.0),
+                    shape: const CircleBorder(),
+                    child: const Icon(Icons.arrow_back, color: Colors.white),
                   ),
                 ),
                 Row(
@@ -286,21 +288,21 @@ class _OnboardingState extends State<Onboarding> {
                         if (_acceptedTerms && _acceptedPrivacy) {
                           _navigateToCreator();
                         } else {
-                          return null;
+                          return;
                         }
                       } else {
                         _pageController.nextPage(
-                          duration: Duration(milliseconds: 500),
+                          duration: const Duration(milliseconds: 500),
                           curve: Curves.ease,
                         );
                       }
                     },
                     elevation: 2.0,
                     fillColor: _isAtEnd() ? Colors.green : Colors.blueGrey,
+                    padding: const EdgeInsets.all(15.0),
+                    shape: const CircleBorder(),
                     child: Icon(_isAtEnd() ? Icons.check : Icons.arrow_forward,
                         color: Colors.white),
-                    padding: EdgeInsets.all(15.0),
-                    shape: CircleBorder(),
                   ),
                 )
               ],

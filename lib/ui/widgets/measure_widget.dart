@@ -17,8 +17,8 @@ class MeasureWidget extends StatelessWidget {
 
   final void Function(bool confirmed)? setConfirmed;
 
-  MeasureWidget(
-      {this.measure, this.updateValue, this.confirmed, this.setConfirmed});
+  const MeasureWidget(
+      {Key? key, this.measure, this.updateValue, this.confirmed, this.setConfirmed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -41,8 +41,8 @@ class ScaleMeasure extends Measure {
       double? max,
       this.maxLabel,
       Reminder? schedule})
-      : this.min = min ?? 0.0,
-        this.max = max ?? 10.0,
+      : min = min ?? 0.0,
+        max = max ?? 10.0,
         super(id: id, type: measureType, name: name, schedule: schedule);
 
   ScaleMeasure.clone(ScaleMeasure measure)
@@ -53,5 +53,6 @@ class ScaleMeasure extends Measure {
 
   factory ScaleMeasure.fromJson(Map<String, dynamic> json) =>
       _$ScaleMeasureFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$ScaleMeasureToJson(this);
 }

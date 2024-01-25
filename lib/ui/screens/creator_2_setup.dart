@@ -10,88 +10,88 @@ import 'package:studyme/ui/widgets/measure_card.dart';
 import 'package:studyme/ui/widgets/goal_card.dart';
 
 class CreatorSetup extends StatelessWidget {
+  const CreatorSetup({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AppData>(builder: (context, model, child) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Your Experiment'), systemOverlayStyle: SystemUiOverlayStyle.light,
+          title: const Text('Your Experiment'), systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SafeArea(
           child: SingleChildScrollView(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('You will compare data on',
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('You will compare data on',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Theme.of(context).primaryColor)),
+                    ...model.trial!.measures!
+                        .map((measure) => MeasureCard(measure: measure))
+                        ,
+                    const SizedBox(height: 10),
+                    Text('between two different phases*',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Theme.of(context).primaryColor)),
+                    PhaseCard(phase: model.trial!.a, showSchedule: true),
+                    Center(
+                      child: Text('vs.',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                               color: Theme.of(context).primaryColor)),
-                      ...model.trial!.measures!
-                          .map((measure) => MeasureCard(measure: measure))
-                          .toList(),
-                      SizedBox(height: 10),
-                      Text('between two different phases*',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                              color: Theme.of(context).primaryColor)),
-                      PhaseCard(phase: model.trial!.a, showSchedule: true),
-                      Center(
-                        child: Text('vs.',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Theme.of(context).primaryColor)),
-                      ),
-                      PhaseCard(phase: model.trial!.b, showSchedule: true),
-                      SizedBox(height: 10),
-                      if (model.trial!.type == TrialType.alternatingTreatment)
-                        Text(
-                            'to see if A or B is better for achieving your goal',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Theme.of(context).primaryColor)),
-                      if (model.trial!.type == TrialType.reversal)
-                        Text(
-                            'to see if there is a difference** between A or B for achieving your goal',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                                color: Theme.of(context).primaryColor)),
-                      GoalCard(
-                        goal: model.trial!.goal,
-                      ),
-                      SizedBox(height: 20),
+                    ),
+                    PhaseCard(phase: model.trial!.b, showSchedule: true),
+                    const SizedBox(height: 10),
+                    if (model.trial!.type == TrialType.alternatingTreatment)
                       Text(
-                          '* For a good comparison, you will complete a series of the two phases and compare A and B multiple times.',
+                          'to see if A or B is better for achieving your goal',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Theme.of(context).primaryColor)),
+                    if (model.trial!.type == TrialType.reversal)
+                      Text(
+                          'to see if there is a difference** between A or B for achieving your goal',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              color: Theme.of(context).primaryColor)),
+                    GoalCard(
+                      goal: model.trial!.goal,
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                        '* For a good comparison, you will complete a series of the two phases and compare A and B multiple times.',
+                        style: TextStyle(
+                            fontStyle: FontStyle.italic,
+                            fontSize: 18,
+                            color: Theme.of(context).primaryColor)),
+                    const SizedBox(height: 20),
+                    if (model.trial!.type == TrialType.reversal)
+                      Text(
+                          '** If there is no difference "${model.trial!.interventionA!.name}" likely doesn\'t help you achieve your goal.',
                           style: TextStyle(
                               fontStyle: FontStyle.italic,
                               fontSize: 18,
                               color: Theme.of(context).primaryColor)),
-                      SizedBox(height: 20),
-                      if (model.trial!.type == TrialType.reversal)
-                        Text(
-                            '** If there is no difference "${model.trial!.interventionA!.name}" likely doesn\'t help you achieve your goal.',
-                            style: TextStyle(
-                                fontStyle: FontStyle.italic,
-                                fontSize: 18,
-                                color: Theme.of(context).primaryColor)),
-                      SizedBox(height: 30),
-                      Center(
-                        child: HighlightedActionButton(
-                            icon: Icons.arrow_forward,
-                            labelText: 'Schedule Experiment',
-                            onPressed: () =>
-                                _navigateToCreatorPhases(context, model)),
-                      ),
-                      SizedBox(height: 60),
-                    ]),
-              ),
+                    const SizedBox(height: 30),
+                    Center(
+                      child: HighlightedActionButton(
+                          icon: Icons.arrow_forward,
+                          labelText: 'Schedule Experiment',
+                          onPressed: () =>
+                              _navigateToCreatorPhases(context, model)),
+                    ),
+                    const SizedBox(height: 60),
+                  ]),
             ),
           ),
         ),
@@ -105,7 +105,7 @@ class CreatorSetup extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CreatorSchedule(),
+        builder: (context) => const CreatorSchedule(),
       ),
     );
   }

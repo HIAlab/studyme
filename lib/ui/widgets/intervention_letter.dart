@@ -5,7 +5,7 @@ class InterventionLetter extends StatelessWidget {
   final String? letter;
   final bool isInverted;
 
-  InterventionLetter(this.letter, {this.isInverted = false});
+  const InterventionLetter(this.letter, {Key? key, this.isInverted = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

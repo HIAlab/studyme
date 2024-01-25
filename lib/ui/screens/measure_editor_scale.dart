@@ -12,7 +12,7 @@ class MeasureEditorScale extends StatefulWidget {
   final bool save;
 
   const MeasureEditorScale(
-      {required this.measure, required this.onSave, required this.save});
+      {Key? key, required this.measure, required this.onSave, required this.save}) : super(key: key);
 
   @override
   _MeasureEditorScaleState createState() => _MeasureEditorScaleState();
@@ -42,7 +42,7 @@ class _MeasureEditorScaleState extends State<MeasureEditorScale> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(widget.measure.name!),
-              Visibility(
+              const Visibility(
                 visible: true,
                 child: Text(
                   'Scale',
@@ -71,8 +71,8 @@ class _MeasureEditorScaleState extends State<MeasureEditorScale> {
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         color: Theme.of(context).primaryColor)),
-                SizedBox(height: 10),
-                Text('Scale ranges from',
+                const SizedBox(height: 10),
+                const Text('Scale ranges from',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     )),
@@ -80,16 +80,16 @@ class _MeasureEditorScaleState extends State<MeasureEditorScale> {
                   keyboardType: TextInputType.number,
                   initialValue: _min!.toInt().toString(),
                   onChanged: _updateMin,
-                  decoration: InputDecoration(labelText: 'Minimum Value'),
+                  decoration: const InputDecoration(labelText: 'Minimum Value'),
                 ),
                 TextFormField(
                   initialValue: _minLabel,
                   onChanged: _updateMinLabel,
                   decoration:
-                      InputDecoration(labelText: 'Label for Minimum Value'),
+                      const InputDecoration(labelText: 'Label for Minimum Value'),
                 ),
-                SizedBox(height: 20),
-                Text('to',
+                const SizedBox(height: 20),
+                const Text('to',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     )),
@@ -97,13 +97,13 @@ class _MeasureEditorScaleState extends State<MeasureEditorScale> {
                   keyboardType: TextInputType.number,
                   initialValue: _max!.toInt().toString(),
                   onChanged: _updateMax,
-                  decoration: InputDecoration(labelText: 'Maximum Value'),
+                  decoration: const InputDecoration(labelText: 'Maximum Value'),
                 ),
                 TextFormField(
                   initialValue: _maxLabel,
                   onChanged: _updateMaxLabel,
                   decoration:
-                      InputDecoration(labelText: 'Label for Maximum Value'),
+                      const InputDecoration(labelText: 'Label for Maximum Value'),
                 ),
               ],
             ),
@@ -144,9 +144,9 @@ class _MeasureEditorScaleState extends State<MeasureEditorScale> {
         _max != null &&
         _min! < _max! &&
         _minLabel != null &&
-        _minLabel!.length > 0 &&
+        _minLabel!.isNotEmpty &&
         _maxLabel != null &&
-        _maxLabel!.length > 0;
+        _maxLabel!.isNotEmpty;
   }
 
   _submit() {

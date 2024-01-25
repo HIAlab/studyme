@@ -13,7 +13,7 @@ class MeasureEditorList extends StatefulWidget {
   final bool save;
 
   const MeasureEditorList(
-      {required this.measure, required this.onSave, required this.save});
+      {Key? key, required this.measure, required this.onSave, required this.save}) : super(key: key);
 
   @override
   _MeasureEditorListState createState() => _MeasureEditorListState();
@@ -38,7 +38,7 @@ class _MeasureEditorListState extends State<MeasureEditorList> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(widget.measure.name!),
-              Visibility(
+              const Visibility(
                 visible: true,
                 child: Text(
                   'List Items',
@@ -66,10 +66,10 @@ class _MeasureEditorListState extends State<MeasureEditorList> {
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         color: Theme.of(context).primaryColor)),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: _items!.length,
                     itemBuilder: (content, index) {
                       ListItem choice = _items![index];
@@ -77,9 +77,9 @@ class _MeasureEditorListState extends State<MeasureEditorList> {
                       return Card(
                           child: ListTile(
                         title:
-                            Text(choice.value!, style: TextStyle(fontSize: 20)),
+                            Text(choice.value!, style: const TextStyle(fontSize: 20)),
                         trailing: IconButton(
-                          icon: Icon(Icons.delete),
+                          icon: const Icon(Icons.delete),
                           onPressed: () => _removeChoice(index),
                         ),
                       ));
@@ -88,8 +88,8 @@ class _MeasureEditorListState extends State<MeasureEditorList> {
                   alignment: MainAxisAlignment.center,
                   children: [
                     OutlinedButton.icon(
-                        icon: Icon(Icons.add),
-                        label: Text('Add Item'),
+                        icon: const Icon(Icons.add),
+                        label: const Text('Add Item'),
                         onPressed: _addChoice),
                   ],
                 ),
@@ -106,7 +106,7 @@ class _MeasureEditorListState extends State<MeasureEditorList> {
     await showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text("Add Option"),
+              title: const Text("Add Option"),
               content: TextFormField(
                 autofocus: true,
                 initialValue: null,
@@ -118,13 +118,13 @@ class _MeasureEditorListState extends State<MeasureEditorList> {
                       _updateEditedChoice(null);
                       Navigator.pop(context);
                     },
-                    child: Text("Cancel")),
+                    child: const Text("Cancel")),
                 TextButton(
                     onPressed: () => Navigator.pop(context, true),
-                    child: Text("Confirm"))
+                    child: const Text("Confirm"))
               ],
             ));
-    if (_editedChoice != null && _editedChoice!.length > 0) {
+    if (_editedChoice != null && _editedChoice!.isNotEmpty) {
       setState(() {
         _items!.add(ListItem(value: _editedChoice));
       });
@@ -144,7 +144,7 @@ class _MeasureEditorListState extends State<MeasureEditorList> {
   }
 
   _canSubmit() {
-    return _items!.length > 0 &&
+    return _items!.isNotEmpty &&
         _items!.every((element) => element.value != null);
   }
 

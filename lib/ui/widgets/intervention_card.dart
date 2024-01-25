@@ -6,7 +6,7 @@ class InterventionCard extends StatelessWidget {
   final bool showSchedule;
   final void Function()? onTap;
 
-  InterventionCard({this.intervention, this.onTap, this.showSchedule = false});
+  const InterventionCard({Key? key, this.intervention, this.onTap, this.showSchedule = false}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class InterventionCard extends StatelessWidget {
         child: ListTile(
       title: Text(intervention!.name!),
       subtitle: _getSubtitle(),
-      trailing: onTap != null ? Icon(Icons.chevron_right) : null,
+      trailing: onTap != null ? const Icon(Icons.chevron_right) : null,
       onTap: onTap,
     ));
   }

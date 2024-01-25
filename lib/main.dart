@@ -39,7 +39,7 @@ void main() async {
     ChangeNotifierProvider<LogData>(
       create: (context) => LogData(),
     )
-  ], child: MyApp()));
+  ], child: const MyApp()));
 }
 
 _setupHive() async {
@@ -67,6 +67,8 @@ _setupHive() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -77,11 +79,11 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: Routes.init,
         routes: {
-          Routes.init: (context) => Init(),
-          Routes.onboarding: (context) => Onboarding(),
-          Routes.creator: (context) => CreatorDetails(),
-          Routes.measure_library: (context) => MeasureLibrary(),
-          Routes.dashboard: (context) => Dashboard(),
+          Routes.init: (context) => const Init(),
+          Routes.onboarding: (context) => const Onboarding(),
+          Routes.creator: (context) => const CreatorDetails(),
+          Routes.measure_library: (context) => const MeasureLibrary(),
+          Routes.dashboard: (context) => const Dashboard(),
         });
   }
 }

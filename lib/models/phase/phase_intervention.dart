@@ -16,14 +16,16 @@ class InterventionPhase extends Phase {
   Intervention intervention;
 
   InterventionPhase({String? letter, Intervention? intervention})
-      : this.intervention = intervention ?? Intervention(),
+      : intervention = intervention ?? Intervention(),
         super(type: phaseType, name: intervention?.name, letter: letter);
 
+  @override
   List<Task> getTasksFor(int daysSinceBeginningOfTimeRange) {
-    return this.intervention.getTasksFor(daysSinceBeginningOfTimeRange);
+    return intervention.getTasksFor(daysSinceBeginningOfTimeRange);
   }
 
   factory InterventionPhase.fromJson(Map<String, dynamic> json) =>
       _$InterventionPhaseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$InterventionPhaseToJson(this);
 }

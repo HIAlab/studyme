@@ -10,6 +10,8 @@ import 'package:studyme/ui/widgets/library_create_button.dart';
 import 'package:studyme/ui/widgets/goal_card.dart';
 
 class GoalLibrary extends StatelessWidget {
+  const GoalLibrary({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AppData>(builder: (context, model, child) {
@@ -33,9 +35,9 @@ class GoalLibrary extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: goals.length,
                   itemBuilder: (context, index) {
-                    Goal _goal = goals[index];
+                    Goal goal = goals[index];
                     return GoalCard(
-                        goal: _goal, onTap: () => _previewGoal(context, _goal));
+                        goal: goal, onTap: () => _previewGoal(context, goal));
                   },
                 ),
               ),

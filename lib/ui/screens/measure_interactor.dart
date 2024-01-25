@@ -12,7 +12,7 @@ import 'package:studyme/ui/widgets/task_header.dart';
 class MeasureInteractor extends StatefulWidget {
   final MeasureTask? task;
 
-  MeasureInteractor(this.task);
+  const MeasureInteractor(this.task, {Key? key}) : super(key: key);
 
   @override
   _MeasureInteractorState createState() => _MeasureInteractorState();

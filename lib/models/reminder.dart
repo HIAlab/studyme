@@ -22,7 +22,7 @@ class Reminder {
   }
 
   Reminder({this.frequency = 1, List<DateTime>? timestamps})
-      : this.timestamps = timestamps ?? [];
+      : timestamps = timestamps ?? [];
 
   addTime(TimeOfDay time) {
     // only care about time and hour, but hive needs to save datetime
@@ -55,26 +55,26 @@ class Reminder {
   }
 
   String get readable {
-    if (times.length == 0) {
+    if (times.isEmpty) {
       return '';
     }
 
-    String _text;
+    String text;
     if (frequency == 1) {
-      _text = "Daily";
+      text = "Daily";
     } else {
-      _text = "Every ${frequency.toString()} days";
+      text = "Every ${frequency.toString()} days";
     }
 
-    _text += " at ";
+    text += " at ";
     for (var i = 0; i < times.length; i++) {
-      _text += "${times[i].readable}";
+      text += times[i].readable;
       if (i < times.length - 1) {
-        _text += ", ";
+        text += ", ";
       }
     }
 
-    return _text;
+    return text;
   }
 
   List<TimeOfDay> getTaskTimesFor(int daysSinceBeginningOfTimeRange) {
@@ -96,8 +96,8 @@ class Reminder {
 
   clone() {
     return Reminder(
-        frequency: this.frequency,
-        timestamps: List<DateTime>.from(this.timestamps));
+        frequency: frequency,
+        timestamps: List<DateTime>.from(timestamps));
   }
 
   factory Reminder.fromJson(Map<String, dynamic> json) =>

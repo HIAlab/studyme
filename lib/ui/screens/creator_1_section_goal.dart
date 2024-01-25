@@ -8,7 +8,7 @@ import 'goal_overview.dart';
 class CreatorGoalSection extends StatelessWidget {
   final AppData model;
 
-  CreatorGoalSection(this.model);
+  const CreatorGoalSection(this.model, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +25,8 @@ class CreatorGoalSection extends StatelessWidget {
             alignment: MainAxisAlignment.center,
             children: [
               OutlinedButton.icon(
-                  icon: Icon(Icons.add),
-                  label: Text('Select'),
+                  icon: const Icon(Icons.add),
+                  label: const Text('Select'),
                   onPressed: () => _addGoal(context)),
             ],
           ),
@@ -44,7 +44,7 @@ class CreatorGoalSection extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => GoalLibrary(),
+        builder: (context) => const GoalLibrary(),
       ),
     );
   }
@@ -53,7 +53,7 @@ class CreatorGoalSection extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => GoalOverview(),
+        builder: (context) => const GoalOverview(),
       ),
     );
   }

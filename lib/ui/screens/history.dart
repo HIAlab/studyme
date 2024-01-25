@@ -6,6 +6,8 @@ import 'package:studyme/ui/widgets/phase_card.dart';
 import 'package:studyme/ui/widgets/measure_chart.dart';
 
 class History extends StatefulWidget {
+  const History({Key? key}) : super(key: key);
+
   @override
   _HistoryState createState() => _HistoryState();
 }
@@ -30,7 +32,7 @@ class _HistoryState extends State<History> {
               PhaseCard(phase: appState.trial!.a),
               PhaseCard(phase: appState.trial!.b),
               DropdownButtonFormField<TimeAggregation>(
-                decoration: InputDecoration(labelText: 'Average per'),
+                decoration: const InputDecoration(labelText: 'Average per'),
                 value: _timeAggregation,
                 onChanged: _changeTimeAggregation,
                 items: [
@@ -44,10 +46,10 @@ class _HistoryState extends State<History> {
                   );
                 }).toList(),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: appState.trial!.measures!.length,
                   itemBuilder: (context, index) {
                     return MeasureChart(
@@ -56,7 +58,7 @@ class _HistoryState extends State<History> {
                       timeAggregation: _timeAggregation,
                     );
                   }),
-              SizedBox(height: 120)
+              const SizedBox(height: 120)
             ],
           ),
         ),

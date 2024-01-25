@@ -24,9 +24,9 @@ class TrialSchedule extends HiveObject {
   TrialSchedule();
 
   TrialSchedule.createDefault() {
-    this.phaseOrder = PhaseOrder.alternating;
-    this.phaseDuration = 7;
-    this.numberOfPhasePairs = 2;
+    phaseOrder = PhaseOrder.alternating;
+    phaseDuration = 7;
+    numberOfPhasePairs = 2;
     _updatePhaseSequence();
   }
 

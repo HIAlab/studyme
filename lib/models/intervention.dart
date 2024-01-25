@@ -25,26 +25,27 @@ class Intervention with HasSchedule {
   @HiveField(3)
   String? instructions;
 
+  @override
   @HiveField(4)
   Reminder? schedule;
 
   Intervention(
       {id, this.name, this.description, this.instructions, Reminder? schedule}) {
-    this.id = id ?? Uuid().v4();
+    this.id = id ?? const Uuid().v4();
     this.schedule = schedule ?? Reminder();
   }
 
   Intervention.clone(Intervention intervention) {
-    this.id = Uuid().v4();
-    this.name = intervention.name;
-    this.description = intervention.description;
-    this.instructions = intervention.instructions;
-    this.schedule = intervention.schedule;
+    id = const Uuid().v4();
+    name = intervention.name;
+    description = intervention.description;
+    instructions = intervention.instructions;
+    schedule = intervention.schedule;
   }
 
   List<Task> getTasksFor(int daysSinceBeginningOfTimeRange) {
     List<TimeOfDay> times =
-        this.schedule!.getTaskTimesFor(daysSinceBeginningOfTimeRange);
+        schedule!.getTaskTimesFor(daysSinceBeginningOfTimeRange);
     return times.map((time) => InterventionTask(this, time)).toList();
   }
 

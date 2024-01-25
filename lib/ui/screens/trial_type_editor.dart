@@ -10,7 +10,7 @@ class TrialTypeEditor extends StatefulWidget {
   final TrialType type;
   final Function(TrialType type) onSave;
 
-  TrialTypeEditor({required this.type, required this.onSave});
+  const TrialTypeEditor({Key? key, required this.type, required this.onSave}) : super(key: key);
 
   @override
   _TrialTypeEditorState createState() => _TrialTypeEditorState();
@@ -50,12 +50,12 @@ class _TrialTypeEditorState extends State<TrialTypeEditor> {
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         color: Theme.of(context).primaryColor)),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 ChoiceCard<TrialType>(
                   value: TrialType.reversal,
                   selectedValue: _type,
                   onSelect: _selectOption,
-                  title: Text('No'),
+                  title: const Text('No'),
                   body: [
                     Text(
                         'I just want to find out if “$interventionAName” helps me achieve my goal')
@@ -65,7 +65,7 @@ class _TrialTypeEditorState extends State<TrialTypeEditor> {
                     value: TrialType.alternatingTreatment,
                     selectedValue: _type,
                     onSelect: _selectOption,
-                    title: Text('Yes'),
+                    title: const Text('Yes'),
                     body: [
                       Text(
                           'I want to compare “$interventionAName” to something else to see which of the two options is better for achieving my goal')

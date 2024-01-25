@@ -21,11 +21,13 @@ class WithdrawalPhase extends Phase {
             name: 'Without "${withdrawnIntervention.name}"',
             letter: letter);
 
+  @override
   List<Task> getTasksFor(int daysSinceBeginningOfTimeRange) {
     return [];
   }
 
   factory WithdrawalPhase.fromJson(Map<String, dynamic> json) =>
       _$WithdrawalPhaseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$WithdrawalPhaseToJson(this);
 }

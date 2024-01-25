@@ -48,22 +48,22 @@ class Trial extends HiveObject {
   Map<DateTime, String>? stepsLogForSurvey;
 
   List<Task> getTasksForDate(DateTime date) {
-    DateTime _cleanDate = DateTime(date.year, date.month, date.day);
-    List<Task> _tasks = [];
+    DateTime cleanDate = DateTime(date.year, date.month, date.day);
+    List<Task> tasks = [];
 
     if (date.isAfter(startDate!) && date.isBefore(endDate)) {
-      int daysSinceBeginningOfTrial = _cleanDate.difference(startDate!).inDays;
+      int daysSinceBeginningOfTrial = cleanDate.difference(startDate!).inDays;
       int daysSinceBeginningOfPhase =
           daysSinceBeginningOfTrial % schedule!.phaseDuration!;
 
-      Phase _phase = getPhaseForDate(_cleanDate)!;
+      Phase phase = getPhaseForDate(cleanDate)!;
 
-      _tasks.addAll(_phase.getTasksFor(daysSinceBeginningOfPhase));
-      measures!.forEach((measure) {
-        _tasks.addAll(measure.getTasksFor(daysSinceBeginningOfTrial));
-      });
+      tasks.addAll(phase.getTasksFor(daysSinceBeginningOfPhase));
+      for (var measure in measures!) {
+        tasks.addAll(measure.getTasksFor(daysSinceBeginningOfTrial));
+      }
 
-      _tasks.sort((a, b) {
+      tasks.sort((a, b) {
         if (a.time!.combined < b.time!.combined) {
           return -1;
         } else if (a.time!.combined > b.time!.combined) {
@@ -76,17 +76,17 @@ class Trial extends HiveObject {
       print("experiment has ended");
     }
 
-    return _tasks;
+    return tasks;
   }
 
   Trial()
-      : this.measures = [],
-        this.stepsLogForSurvey = {};
+      : measures = [],
+        stepsLogForSurvey = {};
 
   DateTime get endDate {
     return startDate!
         .add(Duration(days: schedule!.totalDuration))
-        .subtract(Duration(seconds: 1));
+        .subtract(const Duration(seconds: 1));
   }
 
   int getDayOfStudyFor(DateTime date) {
@@ -108,11 +108,11 @@ class Trial extends HiveObject {
       print('trial is over or has not begun.');
       return null;
     }
-    final _letter = schedule!.phaseSequence![index];
+    final letter = schedule!.phaseSequence![index];
 
-    if (_letter == 'a')
+    if (letter == 'a') {
       return a;
-    else if (_letter == 'b')
+    } else if (letter == 'b')
       return b;
     else
       return null;
@@ -124,14 +124,14 @@ class Trial extends HiveObject {
   }
 
   generateWithSetInfos() {
-    this.schedule = TrialSchedule.createDefault();
-    if (this.type == TrialType.reversal) {
-      this.a = WithdrawalPhase.fromIntervention(
-          letter: 'a', withdrawnIntervention: this.interventionA!);
-      this.b = InterventionPhase(letter: 'b', intervention: this.interventionA!);
+    schedule = TrialSchedule.createDefault();
+    if (type == TrialType.reversal) {
+      a = WithdrawalPhase.fromIntervention(
+          letter: 'a', withdrawnIntervention: interventionA!);
+      b = InterventionPhase(letter: 'b', intervention: interventionA!);
     } else {
-      this.a = InterventionPhase(letter: 'a', intervention: this.interventionA!);
-      this.b = InterventionPhase(letter: 'b', intervention: this.interventionB!);
+      a = InterventionPhase(letter: 'a', intervention: interventionA!);
+      b = InterventionPhase(letter: 'b', intervention: interventionB!);
     }
   }
 

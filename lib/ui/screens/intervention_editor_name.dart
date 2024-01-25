@@ -12,10 +12,10 @@ class InterventionEditorName extends StatefulWidget {
   final bool save;
 
   const InterventionEditorName(
-      {required this.intervention,
+      {Key? key, required this.intervention,
       required this.isA,
       required this.onSave,
-      required this.save});
+      required this.save}) : super(key: key);
 
   @override
   _InterventionEditorNameState createState() => _InterventionEditorNameState();
@@ -39,7 +39,7 @@ class _InterventionEditorNameState extends State<InterventionEditorName> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(_name ?? ''),
-              Visibility(
+              const Visibility(
                 visible: true,
                 child: Text(
                   'Name',
@@ -71,14 +71,14 @@ class _InterventionEditorNameState extends State<InterventionEditorName> {
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         color: Theme.of(context).primaryColor)),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
                   autofocus: _name == null,
                   initialValue: _name,
                   onChanged: _changeName,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Name',
                   ),
                 ),
@@ -89,7 +89,7 @@ class _InterventionEditorNameState extends State<InterventionEditorName> {
   }
 
   _canSubmit() {
-    return _name != null && _name!.length > 0;
+    return _name != null && _name!.isNotEmpty;
   }
 
   _submit() {

@@ -30,5 +30,6 @@ class KeyboardMeasure extends Measure {
 
   factory KeyboardMeasure.fromJson(Map<String, dynamic> json) =>
       _$KeyboardMeasureFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$KeyboardMeasureToJson(this);
 }

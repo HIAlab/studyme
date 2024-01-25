@@ -6,7 +6,7 @@ import 'package:studyme/util/time_of_day_extension.dart';
 class TaskHeader extends StatelessWidget {
   final Task? task;
 
-  TaskHeader({required this.task});
+  const TaskHeader({Key? key, required this.task}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +17,14 @@ class TaskHeader extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.alarm),
-              SizedBox(width: 10),
+              const Icon(Icons.alarm),
+              const SizedBox(width: 10),
               Text(task!.time!.readable,
-                  style: TextStyle(fontWeight: FontWeight.bold)),
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
             ],
           ),
-          SizedBox(height: 5),
-          Text(task!.title!, style: TextStyle(fontSize: 20))
+          const SizedBox(height: 5),
+          Text(task!.title!, style: const TextStyle(fontSize: 20))
         ],
       ),
     );

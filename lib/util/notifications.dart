@@ -18,9 +18,7 @@ class Notifications {
   }
 
   factory Notifications() {
-    if (_instance == null) {
-      _instance = Notifications._internal();
-    }
+    _instance ??= Notifications._internal();
 
     return _instance!;
   }
@@ -32,18 +30,32 @@ class Notifications {
   }
 
   Future<void> _initialize() async {
-    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
-
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
+    final DarwinInitializationSettings initializationSettingsDarwin =
+        DarwinInitializationSettings(
+            onDidReceiveLocalNotification: onDidReceiveLocalNotification);
 
-    final InitializationSettings initializationSettings =
-        InitializationSettings(
-            android: initializationSettingsAndroid,
-            iOS: DarwinInitializationSettings(),
-            macOS: DarwinInitializationSettings());
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    InitializationSettings initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsDarwin,
+    );
+    await _flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
+  }
+
+  void onDidReceiveLocalNotification(int id, String? title, String? body, String? payload) {
+    onDidReceiveNotificationResponse(
+        NotificationResponse(
+            notificationResponseType: NotificationResponseType.selectedNotification,
+            id: id,
+            payload: payload
+        )
+    );
+  }
+
+  void onDidReceiveNotificationResponse(NotificationResponse details) async {
+    // todo: implement
   }
 
   Future<void> scheduleNotificationFor(
@@ -59,7 +71,7 @@ class Notifications {
           const NotificationDetails(
               android: AndroidNotificationDetails(
             'studyme_app',
-            'StudyMe Notifications',
+            'StudyMe',
             styleInformation: BigTextStyleInformation(''),
           )),
           uiLocalNotificationDateInterpretation:
@@ -76,23 +88,19 @@ class Notifications {
   Future<bool?>? requestPermission() {
     return _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
-        ?.requestPermissions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestNotificationsPermission();
   }
 
   debugShowPendingRequests() async {
     final List<PendingNotificationRequest> pendingNotificationRequests =
         await _flutterLocalNotificationsPlugin.pendingNotificationRequests();
 
-    if (pendingNotificationRequests.length > 0) {
-      pendingNotificationRequests.forEach((element) {
+    if (pendingNotificationRequests.isNotEmpty) {
+      for (var element in pendingNotificationRequests) {
         print(element.id);
         print(element.title);
-      });
+      }
     }
   }
 

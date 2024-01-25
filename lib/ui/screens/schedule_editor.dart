@@ -12,15 +12,15 @@ class ScheduleEditor extends StatefulWidget {
   final Function onSave;
 
   const ScheduleEditor(
-      {required this.title,
+      {Key? key, required this.title,
       required this.objectWithSchedule,
-      required this.onSave});
+      required this.onSave}) : super(key: key);
 
   @override
-  _ScheduleEditorState createState() => _ScheduleEditorState();
+  ScheduleEditorState createState() => ScheduleEditorState();
 }
 
-class _ScheduleEditorState extends State<ScheduleEditor> {
+class ScheduleEditorState extends State<ScheduleEditor> {
   Frequency? _frequency;
   Reminder? _schedule;
 
@@ -45,7 +45,7 @@ class _ScheduleEditorState extends State<ScheduleEditor> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(widget.title!),
-              Visibility(
+              const Visibility(
                 visible: true,
                 child: Text(
                   'Schedule',
@@ -74,19 +74,19 @@ class _ScheduleEditorState extends State<ScheduleEditor> {
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         color: Theme.of(context).primaryColor)),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 _buildFrequencySelector(),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: _schedule!.times.length,
                     itemBuilder: (content, index) {
                       return Card(
                         child: ListTile(
                           title: Text(_schedule!.times[index].readable),
                           trailing: IconButton(
-                            icon: Icon(Icons.delete),
+                            icon: const Icon(Icons.delete),
                             onPressed: () => _removeTime(index),
                           ),
                         ),
@@ -96,8 +96,8 @@ class _ScheduleEditorState extends State<ScheduleEditor> {
                   alignment: MainAxisAlignment.center,
                   children: [
                     OutlinedButton.icon(
-                        icon: Icon(Icons.add),
-                        label: Text("Add Time"),
+                        icon: const Icon(Icons.add),
+                        label: const Text("Add Time"),
                         onPressed: _addTime),
                   ],
                 ),
@@ -117,7 +117,7 @@ class _ScheduleEditorState extends State<ScheduleEditor> {
   }
 
   _buildFrequencySelector() {
-    Widget _dropDown = DropdownButtonFormField<Frequency>(
+    Widget dropDown = DropdownButtonFormField<Frequency>(
       onChanged: _changeFrequency,
       value: _frequency,
       items: Frequency.values
@@ -127,14 +127,14 @@ class _ScheduleEditorState extends State<ScheduleEditor> {
     );
 
     if (_frequency == Frequency.Daily) {
-      return _dropDown;
+      return dropDown;
     } else {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(child: _dropDown),
-          SizedBox(width: 5),
+          Expanded(child: dropDown),
+          const SizedBox(width: 5),
           Expanded(
             child: TextFormField(
               keyboardType: TextInputType.number,
@@ -142,8 +142,8 @@ class _ScheduleEditorState extends State<ScheduleEditor> {
               onChanged: _setFrequency,
             ),
           ),
-          SizedBox(width: 5),
-          Text("days")
+          const SizedBox(width: 5),
+          const Text("days")
         ],
       );
     }
@@ -160,7 +160,7 @@ class _ScheduleEditorState extends State<ScheduleEditor> {
 
   _setFrequency(String text) {
     try {
-      int value = text.length > 0 ? int.parse(text) : 0;
+      int value = text.isNotEmpty ? int.parse(text) : 0;
       if (value > 1) {
         _schedule!.frequency = value;
       }
@@ -170,9 +170,8 @@ class _ScheduleEditorState extends State<ScheduleEditor> {
   }
 
   Future<void> _addTime() async {
-    bool? hasGrantedNotificationPermissions =
-        await Notifications().requestPermission();
-    if (hasGrantedNotificationPermissions != false) {
+    bool? hasGrantedNotificationPermissions = await Notifications().requestPermission();
+    if (hasGrantedNotificationPermissions != false && mounted) {
       final TimeOfDay? picked = await showTimePicker(
           context: context,
           initialTime: TimeOfDay(hour: TimeOfDay.now().hour, minute: 0));
