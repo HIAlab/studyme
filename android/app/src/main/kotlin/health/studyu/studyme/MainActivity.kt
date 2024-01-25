@@ -1,4 +1,4 @@
-package com.example.studyme
+package health.studyu.studyme
 
 import io.flutter.embedding.android.FlutterActivity
 
