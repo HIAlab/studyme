@@ -76,7 +76,7 @@ class _GoalOverviewState extends State<GoalOverview> {
     setState(() {
       _isDeleting = true;
     });
-    _getSetter()(null);
+    _getSetter()();
     Navigator.pop(context);
   }
 
