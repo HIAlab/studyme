@@ -17,11 +17,11 @@ class InterventionPhaseAdapter extends TypeAdapter<InterventionPhase> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return InterventionPhase(
-      letter: fields[2] as String,
-      intervention: fields[3] as Intervention,
+      letter: fields[2] as String?,
+      intervention: fields[3] as Intervention?,
     )
-      ..type = fields[0] as String
-      ..name = fields[1] as String;
+      ..type = fields[0] as String?
+      ..name = fields[1] as String?;
   }
 
   @override
@@ -53,13 +53,12 @@ class InterventionPhaseAdapter extends TypeAdapter<InterventionPhase> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-InterventionPhase _$InterventionPhaseFromJson(Map<String, dynamic> json) {
-  return InterventionPhase(
-    letter: json['letter'] as String,
-  )
-    ..type = json['type'] as String
-    ..name = json['name'] as String;
-}
+InterventionPhase _$InterventionPhaseFromJson(Map<String, dynamic> json) =>
+    InterventionPhase(
+      letter: json['letter'] as String?,
+    )
+      ..type = json['type'] as String?
+      ..name = json['name'] as String?;
 
 Map<String, dynamic> _$InterventionPhaseToJson(InterventionPhase instance) =>
     <String, dynamic>{

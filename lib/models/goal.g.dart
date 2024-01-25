@@ -18,7 +18,7 @@ class GoalAdapter extends TypeAdapter<Goal> {
     };
     return Goal(
       id: fields[0] as dynamic,
-      goal: fields[1] as String,
+      goal: fields[1] as String?,
     );
   }
 
@@ -47,12 +47,10 @@ class GoalAdapter extends TypeAdapter<Goal> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Goal _$GoalFromJson(Map<String, dynamic> json) {
-  return Goal(
-    id: json['id'],
-    goal: json['goal'] as String,
-  );
-}
+Goal _$GoalFromJson(Map<String, dynamic> json) => Goal(
+      id: json['id'],
+      goal: json['goal'] as String?,
+    );
 
 Map<String, dynamic> _$GoalToJson(Goal instance) => <String, dynamic>{
       'id': instance.id,

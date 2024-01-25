@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:studyme/ui/widgets/hightlighted_action_button.dart';
 
 class LibraryCreateButton extends StatelessWidget {
-  final Function() onPressed;
+  final Function()? onPressed;
 
   LibraryCreateButton({this.onPressed});
 

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studyme/ui/screens/settings.dart';
 
@@ -11,7 +10,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  int _currentIndex;
+  late int _currentIndex;
 
   List<String> _titles = ['Home', 'History', 'Settings'];
 

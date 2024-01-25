@@ -17,7 +17,7 @@ class ListItemAdapter extends TypeAdapter<ListItem> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ListItem(
-      value: fields[0] as String,
+      value: fields[0] as String?,
     );
   }
 
@@ -44,11 +44,9 @@ class ListItemAdapter extends TypeAdapter<ListItem> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-ListItem _$ListItemFromJson(Map<String, dynamic> json) {
-  return ListItem(
-    value: json['value'] as String,
-  );
-}
+ListItem _$ListItemFromJson(Map<String, dynamic> json) => ListItem(
+      value: json['value'] as String?,
+    );
 
 Map<String, dynamic> _$ListItemToJson(ListItem instance) => <String, dynamic>{
       'value': instance.value,

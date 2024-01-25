@@ -6,8 +6,8 @@ import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class Notifications {
-  static Notifications _instance;
-  FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
+  static Notifications? _instance;
+  late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
 
   Notifications._internal() {
     _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
@@ -22,7 +22,7 @@ class Notifications {
       _instance = Notifications._internal();
     }
 
-    return _instance;
+    return _instance!;
   }
 
   Future<void> _configureLocalTimeZone() async {
@@ -41,14 +41,14 @@ class Notifications {
     final InitializationSettings initializationSettings =
         InitializationSettings(
             android: initializationSettingsAndroid,
-            iOS: IOSInitializationSettings(),
-            macOS: MacOSInitializationSettings());
+            iOS: DarwinInitializationSettings(),
+            macOS: DarwinInitializationSettings());
     await flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
 
   Future<void> scheduleNotificationFor(
       DateTime date, Task reminder, int id) async {
-    tz.TZDateTime scheduledTime = _getScheduledTime(date, reminder.time);
+    tz.TZDateTime scheduledTime = _getScheduledTime(date, reminder.time!);
     tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     if (!scheduledTime.isBefore(now)) {
       await _flutterLocalNotificationsPlugin.zonedSchedule(
@@ -60,10 +60,8 @@ class Notifications {
               android: AndroidNotificationDetails(
             'studyme_app',
             'StudyMe Notifications',
-            'StudyMe Notifications',
             styleInformation: BigTextStyleInformation(''),
           )),
-          androidAllowWhileIdle: true,
           uiLocalNotificationDateInterpretation:
               UILocalNotificationDateInterpretation.absoluteTime);
     }
@@ -75,7 +73,7 @@ class Notifications {
     return scheduledDate;
   }
 
-  Future<bool> requestPermission() {
+  Future<bool?>? requestPermission() {
     return _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
             IOSFlutterLocalNotificationsPlugin>()

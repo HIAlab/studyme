@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:studyme/models/measure/scale_measure.dart';
@@ -21,23 +20,23 @@ abstract class Measure with HasSchedule {
   };
 
   @HiveField(0)
-  String id;
+  String? id;
 
   @HiveField(1)
-  String type;
+  String? type;
 
   @HiveField(2)
-  String name;
+  String? name;
 
   @HiveField(3)
-  String unit;
+  String? unit;
 
   @HiveField(4)
-  Reminder schedule;
+  Reminder? schedule;
 
-  static IconData icon;
+  static IconData? icon;
 
-  Measure({this.id, this.type, this.name, this.unit, Reminder schedule}) {
+  Measure({this.id, this.type, this.name, this.unit, Reminder? schedule}) {
     this.id = id ?? Uuid().v4();
     this.schedule = schedule ?? Reminder();
   }
@@ -66,11 +65,11 @@ abstract class Measure with HasSchedule {
   clone() {
     switch (this.runtimeType) {
       case KeyboardMeasure:
-        return KeyboardMeasure.clone(this);
+        return KeyboardMeasure.clone(this as KeyboardMeasure);
       case ListMeasure:
-        return ListMeasure.clone(this);
+        return ListMeasure.clone(this as ListMeasure);
       case ScaleMeasure:
-        return ScaleMeasure.clone(this);
+        return ScaleMeasure.clone(this as ScaleMeasure);
     }
   }
 
@@ -82,12 +81,12 @@ abstract class Measure with HasSchedule {
 
   List<Task> getTasksFor(int daysSinceBeginningOfTimeRange) {
     List<TimeOfDay> times =
-        this.schedule.getTaskTimesFor(daysSinceBeginningOfTimeRange);
+        this.schedule!.getTaskTimesFor(daysSinceBeginningOfTimeRange);
     return times.map((time) => MeasureTask(this, time)).toList();
   }
 
   Map<String, dynamic> toJson();
 
   factory Measure.fromJson(Map<String, dynamic> data) =>
-      measureTypes[data["measureType"]](data);
+      measureTypes[data["measureType"]]!(data);
 }

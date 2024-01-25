@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/measure/keyboard_measure.dart';
@@ -17,14 +17,14 @@ import 'schedule_editor.dart';
 
 class MeasureOverview extends StatefulWidget {
   final int index;
-  const MeasureOverview({@required this.index});
+  const MeasureOverview({required this.index});
 
   @override
   _MeasureOverviewState createState() => _MeasureOverviewState();
 }
 
 class _MeasureOverviewState extends State<MeasureOverview> {
-  bool _isDeleting;
+  late bool _isDeleting;
 
   @override
   void initState() {
@@ -37,10 +37,10 @@ class _MeasureOverviewState extends State<MeasureOverview> {
     return _isDeleting
         ? Text('')
         : Consumer<AppData>(builder: (context, model, child) {
-            Measure measure = model.trial.measures[widget.index];
+            Measure measure = model.trial!.measures![widget.index];
             return Scaffold(
                 appBar: AppBar(
-                    brightness: Brightness.dark, title: Text(measure.name)),
+                    title: Text(measure.name!), systemOverlayStyle: SystemUiOverlayStyle.light),
                 body: SingleChildScrollView(
                   child: Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -48,14 +48,14 @@ class _MeasureOverviewState extends State<MeasureOverview> {
                         children: [
                           EditableListTile(
                               title: Text("Name"),
-                              subtitle: Text(measure.name,
+                              subtitle: Text(measure.name!,
                                   style: TextStyle(fontSize: 16)),
                               canEdit: measure.canEdit,
                               onTap: () => _editName(measure)),
                           if (measure is KeyboardMeasure)
                             EditableListTile(
                               title: Text("Unit"),
-                              subtitle: Text(measure.unit,
+                              subtitle: Text(measure.unit!,
                                   style: TextStyle(fontSize: 16)),
                               canEdit: measure.canEdit,
                               onTap: () => _editUnit(measure),
@@ -66,7 +66,7 @@ class _MeasureOverviewState extends State<MeasureOverview> {
                               children: [
                                 Icon(measure.getIcon()),
                                 SizedBox(width: 5),
-                                Text(measure.type.capitalize(),
+                                Text(measure.type!.capitalize(),
                                     style: TextStyle(fontSize: 16)),
                               ],
                             ),
@@ -85,7 +85,7 @@ class _MeasureOverviewState extends State<MeasureOverview> {
                                 onTap: () => _editScale(measure)),
                           EditableListTile(
                               title: Text("Schedule"),
-                              subtitle: Text(measure.schedule.readable,
+                              subtitle: Text(measure.schedule!.readable,
                                   style: TextStyle(fontSize: 16)),
                               onTap: () => _editSchedule(measure)),
                           ButtonBar(

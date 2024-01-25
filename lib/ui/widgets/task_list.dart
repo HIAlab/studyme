@@ -11,8 +11,8 @@ import 'package:studyme/ui/widgets/hint_card.dart';
 import 'package:studyme/ui/widgets/task_card.dart';
 
 class TaskList extends StatefulWidget {
-  final Trial trial;
-  final DateTime date;
+  final Trial? trial;
+  final DateTime? date;
 
   TaskList({this.trial, this.date});
 
@@ -21,16 +21,16 @@ class TaskList extends StatefulWidget {
 }
 
 class _TaskListState extends State<TaskList> {
-  bool _isLoading;
+  late bool _isLoading;
 
-  List<String> _completedTaskIds;
+  late List<String?> _completedTaskIds;
 
-  List<Task> _todaysTasks;
+  late List<Task> _todaysTasks;
 
   @override
   void initState() {
     _isLoading = true;
-    _todaysTasks = widget.trial.getTasksForDate(widget.date);
+    _todaysTasks = widget.trial!.getTasksForDate(widget.date!);
     super.initState();
   }
 
@@ -41,7 +41,7 @@ class _TaskListState extends State<TaskList> {
   }
 
   loadLogs() async {
-    List<String> _data =
+    List<String?> _data =
         await Provider.of<LogData>(context).getCompletedTaskIdsFor(widget.date);
     setState(() {
       _completedTaskIds = _data;
@@ -55,7 +55,7 @@ class _TaskListState extends State<TaskList> {
   }
 
   _buildTaskList() {
-    Phase _currentPhase = widget.trial.getPhaseForDate(widget.date);
+    Phase? _currentPhase = widget.trial!.getPhaseForDate(widget.date!);
     return Column(
       children: [
         if (_currentPhase is InterventionPhase) ...[

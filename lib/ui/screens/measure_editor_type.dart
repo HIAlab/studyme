@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:studyme/models/measure/keyboard_measure.dart';
 import 'package:studyme/models/measure/list_measure.dart';
 import 'package:studyme/models/measure/measure.dart';
@@ -15,14 +15,14 @@ class MeasureEditorType extends StatefulWidget {
   final Measure measure;
   final Function(Measure measure) onSave;
 
-  const MeasureEditorType({@required this.measure, @required this.onSave});
+  const MeasureEditorType({required this.measure, required this.onSave});
 
   @override
   _MeasureEditorTypeState createState() => _MeasureEditorTypeState();
 }
 
 class _MeasureEditorTypeState extends State<MeasureEditorType> {
-  Measure _measure;
+  Measure? _measure;
 
   @override
   initState() {
@@ -34,12 +34,11 @@ class _MeasureEditorTypeState extends State<MeasureEditorType> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(_measure.name),
+              Text(_measure!.name!),
               Visibility(
                 visible: true,
                 child: Text(
@@ -57,7 +56,7 @@ class _MeasureEditorTypeState extends State<MeasureEditorType> {
               canPress: _canSubmit(),
               onPressed: _submit,
             )
-          ],
+          ], systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -66,7 +65,7 @@ class _MeasureEditorTypeState extends State<MeasureEditorType> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                    'How would you like to enter the values for "${_measure.name}"?',
+                    'How would you like to enter the values for "${_measure!.name}"?',
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -74,7 +73,7 @@ class _MeasureEditorTypeState extends State<MeasureEditorType> {
                 SizedBox(height: 10),
                 ChoiceCard<String>(
                     value: KeyboardMeasure.measureType,
-                    selectedValue: _measure.type,
+                    selectedValue: _measure!.type,
                     onSelect: _changeMeasureType,
                     title: Row(
                       children: [
@@ -88,7 +87,7 @@ class _MeasureEditorTypeState extends State<MeasureEditorType> {
                     ]),
                 ChoiceCard<String>(
                     value: ListMeasure.measureType,
-                    selectedValue: _measure.type,
+                    selectedValue: _measure!.type,
                     onSelect: _changeMeasureType,
                     title: Row(
                       children: [
@@ -103,7 +102,7 @@ class _MeasureEditorTypeState extends State<MeasureEditorType> {
                     ]),
                 ChoiceCard<String>(
                   value: ScaleMeasure.measureType,
-                  selectedValue: _measure.type,
+                  selectedValue: _measure!.type,
                   onSelect: _changeMeasureType,
                   title: Row(
                     children: [
@@ -133,14 +132,14 @@ class _MeasureEditorTypeState extends State<MeasureEditorType> {
           context,
           MaterialPageRoute(
             builder: (context) => MeasureEditorList(
-                measure: _measure, onSave: widget.onSave, save: false),
+                measure: _measure as ListMeasure, onSave: widget.onSave, save: false),
           ));
     } else if (_measure is ScaleMeasure) {
       Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => MeasureEditorScale(
-                measure: _measure, onSave: widget.onSave, save: false),
+                measure: _measure as ScaleMeasure, onSave: widget.onSave, save: false),
           ));
     } else if (_measure is KeyboardMeasure) {
       Navigator.push(
@@ -153,8 +152,8 @@ class _MeasureEditorTypeState extends State<MeasureEditorType> {
   }
 
   _changeMeasureType(String type) {
-    if (type != _measure.type) {
-      Measure _newMeasure;
+    if (type != _measure!.type) {
+      Measure? _newMeasure;
       if (type == KeyboardMeasure.measureType) {
         _newMeasure = KeyboardMeasure();
       } else if (type == ListMeasure.measureType) {
@@ -162,7 +161,7 @@ class _MeasureEditorTypeState extends State<MeasureEditorType> {
       } else if (type == ScaleMeasure.measureType) {
         _newMeasure = ScaleMeasure();
       }
-      _newMeasure.name = _measure.name;
+      _newMeasure!.name = _measure!.name;
       setState(() {
         _measure = _newMeasure;
       });

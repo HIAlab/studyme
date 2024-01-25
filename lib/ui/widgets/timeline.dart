@@ -8,10 +8,10 @@ class Timeline extends StatefulWidget {
   final Widget Function(int index) callback;
 
   Timeline(
-      {@required this.activeIndex,
-      @required this.height,
-      @required this.itemCount,
-      @required this.callback});
+      {required this.activeIndex,
+      required this.height,
+      required this.itemCount,
+      required this.callback});
 
   @override
   _TimelineState createState() => _TimelineState();

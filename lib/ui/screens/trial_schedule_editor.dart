@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/phase_order.dart';
@@ -14,13 +14,13 @@ class TrialScheduleEditor extends StatefulWidget {
 }
 
 class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
-  TrialSchedule _phases;
+  TrialSchedule? _phases;
 
   @override
   void initState() {
-    final trial = Provider.of<AppData>(context, listen: false).trial;
+    final trial = Provider.of<AppData>(context, listen: false).trial!;
     if (trial.schedule != null) {
-      _phases = trial.schedule.clone();
+      _phases = trial.schedule!.clone();
     } else {
       _phases = TrialSchedule.createDefault();
     }
@@ -31,11 +31,10 @@ class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           actions: <Widget>[
             ActionButton(
                 icon: Icons.check, canPress: _canSubmit(), onPressed: _onSubmit)
-          ],
+          ], systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -53,7 +52,7 @@ class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
                   TrialScheduleWidget(schedule: _phases, showDuration: true),
                   SizedBox(height: 20),
                   TextFormField(
-                    initialValue: _phases.phaseDuration.toString(),
+                    initialValue: _phases!.phaseDuration.toString(),
                     keyboardType: TextInputType.number,
                     onChanged: _updatePhaseDuration,
                     decoration:
@@ -61,7 +60,7 @@ class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
                   ),
                   SizedBox(width: 5),
                   TextFormField(
-                    initialValue: _phases.numberOfPhasePairs.toString(),
+                    initialValue: _phases!.numberOfPhasePairs.toString(),
                     keyboardType: TextInputType.number,
                     onChanged: _updateNumberOfCycles,
                     decoration:
@@ -73,7 +72,7 @@ class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   DropdownButtonFormField<PhaseOrder>(
                     decoration: InputDecoration(labelText: 'Phase Order'),
-                    value: _phases.phaseOrder,
+                    value: _phases!.phaseOrder,
                     onChanged: _updatePhaseOrder,
                     items: [PhaseOrder.alternating, PhaseOrder.counterbalanced]
                         .map<DropdownMenuItem<PhaseOrder>>((value) {
@@ -91,10 +90,10 @@ class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
   }
 
   _canSubmit() {
-    return _phases.totalDuration > 0 &&
-        _phases.totalDuration < 1000 &&
-        _phases.phaseDuration <= 365 &&
-        _phases.numberOfPhasePairs < 100;
+    return _phases!.totalDuration > 0 &&
+        _phases!.totalDuration < 1000 &&
+        _phases!.phaseDuration! <= 365 &&
+        _phases!.numberOfPhasePairs! < 100;
   }
 
   _onSubmit() {
@@ -105,7 +104,7 @@ class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
   _updateNumberOfCycles(text) {
     textToIntSetter(text, (int number) {
       setState(() {
-        _phases.updateNumberOfCycles(number);
+        _phases!.updateNumberOfCycles(number);
       });
     });
   }
@@ -113,14 +112,14 @@ class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
   _updatePhaseDuration(text) {
     textToIntSetter(text, (int number) {
       setState(() {
-        _phases.phaseDuration = number;
+        _phases!.phaseDuration = number;
       });
     });
   }
 
   _updatePhaseOrder(phaseOrder) {
     setState(() {
-      _phases.updatePhaseOrder(phaseOrder);
+      _phases!.updatePhaseOrder(phaseOrder);
     });
   }
 }

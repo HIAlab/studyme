@@ -3,7 +3,7 @@ import 'package:studyme/models/trial.dart';
 import 'package:studyme/ui/widgets/timeline.dart';
 
 class PhaseWidget extends StatelessWidget {
-  final Trial trial;
+  final Trial? trial;
 
   PhaseWidget({this.trial});
 

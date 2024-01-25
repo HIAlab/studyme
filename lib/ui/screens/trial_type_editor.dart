@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/trial_type.dart';
@@ -9,14 +10,14 @@ class TrialTypeEditor extends StatefulWidget {
   final TrialType type;
   final Function(TrialType type) onSave;
 
-  TrialTypeEditor({this.type, this.onSave});
+  TrialTypeEditor({required this.type, required this.onSave});
 
   @override
   _TrialTypeEditorState createState() => _TrialTypeEditorState();
 }
 
 class _TrialTypeEditorState extends State<TrialTypeEditor> {
-  TrialType _type;
+  TrialType? _type;
 
   @override
   void initState() {
@@ -26,17 +27,16 @@ class _TrialTypeEditorState extends State<TrialTypeEditor> {
 
   @override
   Widget build(BuildContext context) {
-    String interventionAName =
-        Provider.of<AppData>(context).trial.interventionA.name;
+    String? interventionAName =
+        Provider.of<AppData>(context).trial!.interventionA!.name;
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           actions: <Widget>[
             ActionButton(
                 icon: Icons.check,
                 canPress: _canSubmit(),
                 onPressed: _onSubmit),
-          ],
+          ], systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -81,7 +81,7 @@ class _TrialTypeEditorState extends State<TrialTypeEditor> {
   }
 
   _onSubmit() {
-    widget.onSave(_type);
+    widget.onSave(_type!);
   }
 
   _selectOption(TrialType type) {

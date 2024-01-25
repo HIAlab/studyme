@@ -9,13 +9,13 @@ import 'measure_keyboard_widget.dart';
 import 'measure_scale_widget.dart';
 
 class MeasureWidget extends StatelessWidget {
-  final Measure measure;
+  final Measure? measure;
 
-  final void Function(num value) updateValue;
+  final void Function(num value)? updateValue;
 
-  final bool confirmed;
+  final bool? confirmed;
 
-  final void Function(bool confirmed) setConfirmed;
+  final void Function(bool confirmed)? setConfirmed;
 
   MeasureWidget(
       {this.measure, this.updateValue, this.confirmed, this.setConfirmed});
@@ -24,14 +24,13 @@ class MeasureWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (measure.runtimeType) {
       case KeyboardMeasure:
-        return KeyboardMeasureWidget(measure, updateValue);
-        break;
+        return KeyboardMeasureWidget(measure as KeyboardMeasure?, updateValue);
       case ListMeasure:
-        return ListMeasureWidget(measure, updateValue);
+        return ListMeasureWidget(measure as ListMeasure?, updateValue);
       case ScaleMeasure:
-        return ScaleMeasureWidget(measure, updateValue);
+        return ScaleMeasureWidget(measure as ScaleMeasure?, updateValue);
       default:
-        return Text('HI');
+        return Container();
     }
   }
 }

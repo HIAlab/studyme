@@ -13,7 +13,7 @@ class Reminder {
   final day = 1;
 
   @HiveField(0)
-  int frequency;
+  int? frequency;
   @HiveField(1)
   List<DateTime> timestamps;
 
@@ -21,7 +21,7 @@ class Reminder {
     return timestamps.map((e) => TimeOfDay.fromDateTime(e)).toList();
   }
 
-  Reminder({this.frequency = 1, List<DateTime> timestamps})
+  Reminder({this.frequency = 1, List<DateTime>? timestamps})
       : this.timestamps = timestamps ?? [];
 
   addTime(TimeOfDay time) {
@@ -82,8 +82,8 @@ class Reminder {
 
     if (frequency == 1) {
       hasTasksForDate = true;
-    } else if (frequency > 1 &&
-        daysSinceBeginningOfTimeRange % frequency == 0) {
+    } else if (frequency! > 1 &&
+        daysSinceBeginningOfTimeRange % frequency! == 0) {
       hasTasksForDate = true;
     }
 

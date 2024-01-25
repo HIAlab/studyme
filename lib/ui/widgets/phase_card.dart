@@ -5,13 +5,13 @@ import 'package:studyme/models/phase/phase_withdrawal.dart';
 import 'package:studyme/ui/widgets/intervention_letter.dart';
 
 class PhaseCard extends StatelessWidget {
-  final Phase phase;
+  final Phase? phase;
   final bool showSchedule;
-  final Widget trailing;
-  final void Function() onTap;
+  final Widget? trailing;
+  final void Function()? onTap;
 
   PhaseCard(
-      {@required this.phase,
+      {required this.phase,
       this.onTap,
       this.showSchedule = false,
       this.trailing});
@@ -20,7 +20,7 @@ class PhaseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         child: ListTile(
-            leading: InterventionLetter(phase.letter),
+            leading: InterventionLetter(phase!.letter),
             title: _getTitle(),
             subtitle: _getSubtitle(phase),
             trailing:
@@ -28,18 +28,18 @@ class PhaseCard extends StatelessWidget {
             onTap: onTap));
   }
 
-  Widget _getTitle() {
+  Widget? _getTitle() {
     return phase != null
-        ? Text(phase.name,
+        ? Text(phase!.name!,
             style: (phase is WithdrawalPhase)
                 ? TextStyle(fontStyle: FontStyle.italic)
                 : null)
         : null;
   }
 
-  Widget _getSubtitle(Phase phase) {
+  Widget? _getSubtitle(Phase? phase) {
     if (phase != null && showSchedule && phase is InterventionPhase) {
-      return Text(phase.intervention.schedule.readable);
+      return Text(phase.intervention.schedule!.readable);
     } else {
       return null;
     }

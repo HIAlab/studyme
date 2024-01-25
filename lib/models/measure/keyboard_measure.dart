@@ -14,11 +14,11 @@ class KeyboardMeasure extends Measure {
   static const IconData icon = Icons.dialpad;
 
   KeyboardMeasure(
-      {String id,
-      String name,
-      String description,
-      String unit,
-      Reminder schedule})
+      {String? id,
+      String? name,
+      String? description,
+      String? unit,
+      Reminder? schedule})
       : super(
             id: id,
             type: measureType,

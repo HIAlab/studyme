@@ -12,12 +12,12 @@ class Goal {
   String id;
 
   @HiveField(1)
-  String goal;
+  String? goal;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   List<Intervention> _suggestedInterventions;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   List<Intervention> get suggestedInterventions => _suggestedInterventions;
 
   Goal({id, this.goal, suggestedInterventions})

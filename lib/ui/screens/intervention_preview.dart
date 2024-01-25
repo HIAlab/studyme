@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/intervention.dart';
@@ -8,14 +9,13 @@ class InterventionPreview extends StatelessWidget {
   final bool isA;
   final Intervention intervention;
 
-  InterventionPreview({@required this.intervention, @required this.isA});
+  InterventionPreview({required this.intervention, required this.isA});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
-          title: Text(intervention.name),
+          title: Text(intervention.name!), systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -25,18 +25,18 @@ class InterventionPreview extends StatelessWidget {
                 ListTile(
                   title: Text("Name"),
                   subtitle:
-                      Text(intervention.name, style: TextStyle(fontSize: 16)),
+                      Text(intervention.name!, style: TextStyle(fontSize: 16)),
                 ),
                 if (intervention.description != null)
                   ListTile(
                     title: Text("Description"),
-                    subtitle: Text(intervention.description,
+                    subtitle: Text(intervention.description!,
                         style: TextStyle(fontSize: 16)),
                   ),
                 if (intervention.instructions != null)
                   ListTile(
                     title: Text("Instructions"),
-                    subtitle: Text(intervention.instructions,
+                    subtitle: Text(intervention.instructions!,
                         style: TextStyle(fontSize: 16)),
                   ),
                 ButtonBar(

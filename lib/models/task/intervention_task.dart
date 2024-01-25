@@ -11,5 +11,5 @@ class InterventionTask extends Task {
       : super(title: intervention.instructions, time: time);
 
   @override
-  String get id => intervention.id + time.combined.toString();
+  String get id => intervention.id! + time!.combined.toString();
 }

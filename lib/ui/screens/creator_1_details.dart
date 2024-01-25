@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/ui/screens/creator_2_setup.dart';
@@ -17,7 +17,6 @@ class CreatorDetails extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(
           title: Text('Experiment Details'),
-          brightness: Brightness.dark,
           actions: <Widget>[
             PopupMenuButton<String>(
               onSelected: (String result) {
@@ -36,7 +35,7 @@ class CreatorDetails extends StatelessWidget {
                 ),
               ],
             )
-          ],
+          ], systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SafeArea(
           child: SingleChildScrollView(

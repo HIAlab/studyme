@@ -4,9 +4,9 @@ import 'package:studyme/models/measure/list_measure.dart';
 import 'package:studyme/ui/widgets/choice_card.dart';
 
 class ListMeasureWidget extends StatefulWidget {
-  final ListMeasure measure;
+  final ListMeasure? measure;
 
-  final void Function(num value) updateValue;
+  final void Function(num value)? updateValue;
 
   ListMeasureWidget(this.measure, this.updateValue);
 
@@ -15,7 +15,7 @@ class ListMeasureWidget extends StatefulWidget {
 }
 
 class _ListMeasureWidgetState extends State<ListMeasureWidget> {
-  num _state;
+  num? _state;
 
   @override
   void initState() {
@@ -28,12 +28,12 @@ class _ListMeasureWidgetState extends State<ListMeasureWidget> {
     return Expanded(
       child: ListView.builder(
           shrinkWrap: true,
-          itemCount: widget.measure.items.length,
+          itemCount: widget.measure!.items!.length,
           itemBuilder: (context, index) {
             return ChoiceCard<num>(
                 value: index,
                 selectedValue: _state,
-                title: Text('${widget.measure.items[index].value}',
+                title: Text('${widget.measure!.items![index].value}',
                     style: TextStyle(fontSize: 20)),
                 onSelect: _updateValue);
           }),
@@ -45,7 +45,7 @@ class _ListMeasureWidgetState extends State<ListMeasureWidget> {
       _state = value;
     });
     if (widget.updateValue != null) {
-      widget.updateValue(_state);
+      widget.updateValue!(_state!);
     }
   }
 }

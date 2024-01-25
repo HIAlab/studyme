@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:studyme/models/measure/measure.dart';
 import 'package:studyme/ui/screens/schedule_editor.dart';
 
@@ -11,14 +11,14 @@ class MeasureEditorUnit extends StatefulWidget {
   final bool save;
 
   const MeasureEditorUnit(
-      {@required this.measure, @required this.onSave, @required this.save});
+      {required this.measure, required this.onSave, required this.save});
 
   @override
   _MeasureEditorUnitState createState() => _MeasureEditorUnitState();
 }
 
 class _MeasureEditorUnitState extends State<MeasureEditorUnit> {
-  String _unit;
+  String? _unit;
 
   @override
   void initState() {
@@ -30,12 +30,11 @@ class _MeasureEditorUnitState extends State<MeasureEditorUnit> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(widget.measure.name),
+              Text(widget.measure.name!),
               Visibility(
                 visible: true,
                 child: Text(
@@ -52,7 +51,7 @@ class _MeasureEditorUnitState extends State<MeasureEditorUnit> {
                 icon: widget.save ? Icons.check : Icons.arrow_forward,
                 canPress: _canSubmit(),
                 onPressed: _submit)
-          ],
+          ], systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -81,7 +80,7 @@ class _MeasureEditorUnitState extends State<MeasureEditorUnit> {
   }
 
   _canSubmit() {
-    return _unit != null && _unit.length > 0;
+    return _unit != null && _unit!.length > 0;
   }
 
   _submit() {

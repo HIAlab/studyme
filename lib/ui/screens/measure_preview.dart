@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/measure/keyboard_measure.dart';
@@ -11,13 +12,13 @@ import 'package:studyme/util/string_extension.dart';
 class MeasurePreview extends StatelessWidget {
   final Measure measure;
 
-  MeasurePreview({@required this.measure});
+  MeasurePreview({required this.measure});
 
   @override
   Widget build(BuildContext context) {
     Measure _measure = measure;
     return Scaffold(
-        appBar: AppBar(brightness: Brightness.dark, title: Text(_measure.name)),
+        appBar: AppBar(title: Text(_measure.name!), systemOverlayStyle: SystemUiOverlayStyle.light),
         body: SingleChildScrollView(
           child: Padding(
               padding: const EdgeInsets.all(10.0),
@@ -26,13 +27,13 @@ class MeasurePreview extends StatelessWidget {
                   ListTile(
                     title: Text("Name"),
                     subtitle:
-                        Text(_measure.name, style: TextStyle(fontSize: 16)),
+                        Text(_measure.name!, style: TextStyle(fontSize: 16)),
                   ),
                   if (_measure is KeyboardMeasure)
                     ListTile(
                       title: Text("Unit"),
                       subtitle:
-                          Text(_measure.unit, style: TextStyle(fontSize: 16)),
+                          Text(_measure.unit!, style: TextStyle(fontSize: 16)),
                     ),
                   ListTile(
                     title: Text("Input Type"),
@@ -42,7 +43,7 @@ class MeasurePreview extends StatelessWidget {
                           children: [
                             Icon(_measure.getIcon()),
                             SizedBox(width: 5),
-                            Text(_measure.type.capitalize(),
+                            Text(_measure.type!.capitalize(),
                                 style: TextStyle(fontSize: 16)),
                           ],
                         ),

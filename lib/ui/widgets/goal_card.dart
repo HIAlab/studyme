@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:studyme/models/goal.dart';
 
 class GoalCard extends StatelessWidget {
-  final Goal goal;
-  final void Function() onTap;
+  final Goal? goal;
+  final void Function()? onTap;
 
   GoalCard({this.goal, this.onTap});
 
@@ -12,7 +12,7 @@ class GoalCard extends StatelessWidget {
     return Card(
       child: ListTile(
         leading: Icon(Icons.star, color: Colors.yellow),
-        title: Text(goal.goal),
+        title: Text(goal!.goal!),
         trailing: onTap != null ? Icon(Icons.chevron_right) : null,
         onTap: onTap,
       ),

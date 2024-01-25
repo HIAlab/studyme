@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/app_state/default_interventions.dart';
@@ -14,14 +14,14 @@ import 'intervention_editor_name.dart';
 class InterventionLibrary extends StatelessWidget {
   final bool isA;
 
-  InterventionLibrary({@required this.isA});
+  InterventionLibrary({required this.isA});
 
   @override
   Widget build(BuildContext context) {
     return Consumer<AppData>(builder: (context, model, child) {
       return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -46,12 +46,12 @@ class InterventionLibrary extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                             color: Theme.of(context).primaryColor)),
-                    if (model.trial.goal.suggestedInterventions.length == 0)
+                    if (model.trial!.goal!.suggestedInterventions.length == 0)
                       HintCard(
                           titleText:
-                              'No suggestions for "${model.trial.goal.goal}" available'),
-                    if (model.trial.goal.suggestedInterventions.length > 0)
-                      _buildListWith(model.trial.goal.suggestedInterventions),
+                              'No suggestions for "${model.trial!.goal!.goal}" available'),
+                    if (model.trial!.goal!.suggestedInterventions.length > 0)
+                      _buildListWith(model.trial!.goal!.suggestedInterventions),
                     SizedBox(height: 10),
                     Text('Other',
                         style: TextStyle(
@@ -105,7 +105,7 @@ class InterventionLibrary extends StatelessWidget {
         builder: (context) => InterventionEditorName(
             intervention: Intervention(),
             isA: isA,
-            onSave: saveFunction,
+            onSave: saveFunction as dynamic Function(Intervention?),
             save: false),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/goal.dart';
@@ -13,7 +14,7 @@ class GoalOverview extends StatefulWidget {
 }
 
 class _GoalOverviewState extends State<GoalOverview> {
-  bool _isDeleting;
+  late bool _isDeleting;
 
   @override
   void initState() {
@@ -26,11 +27,10 @@ class _GoalOverviewState extends State<GoalOverview> {
     return _isDeleting
         ? Text('')
         : Consumer<AppData>(builder: (context, model, child) {
-            Goal goal = model.trial.goal;
+            Goal goal = model.trial!.goal!;
             return Scaffold(
                 appBar: AppBar(
-                  brightness: Brightness.dark,
-                  title: Text(goal.goal),
+                  title: Text(goal.goal!), systemOverlayStyle: SystemUiOverlayStyle.light,
                 ),
                 body: SingleChildScrollView(
                   child: Padding(
@@ -40,7 +40,7 @@ class _GoalOverviewState extends State<GoalOverview> {
                         EditableListTile(
                             title: Text("Goal"),
                             subtitle:
-                                Text(goal.goal, style: TextStyle(fontSize: 16)),
+                                Text(goal.goal!, style: TextStyle(fontSize: 16)),
                             onTap: () => _editGoal(goal)),
                         ButtonBar(
                           alignment: MainAxisAlignment.center,

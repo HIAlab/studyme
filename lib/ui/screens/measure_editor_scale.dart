@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:studyme/models/measure/measure.dart';
 import 'package:studyme/models/measure/scale_measure.dart';
 import 'package:studyme/ui/screens/schedule_editor.dart';
@@ -12,17 +12,17 @@ class MeasureEditorScale extends StatefulWidget {
   final bool save;
 
   const MeasureEditorScale(
-      {@required this.measure, @required this.onSave, @required this.save});
+      {required this.measure, required this.onSave, required this.save});
 
   @override
   _MeasureEditorScaleState createState() => _MeasureEditorScaleState();
 }
 
 class _MeasureEditorScaleState extends State<MeasureEditorScale> {
-  double _min;
-  String _minLabel;
-  double _max;
-  String _maxLabel;
+  double? _min;
+  String? _minLabel;
+  double? _max;
+  String? _maxLabel;
 
   @override
   void initState() {
@@ -37,12 +37,11 @@ class _MeasureEditorScaleState extends State<MeasureEditorScale> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(widget.measure.name),
+              Text(widget.measure.name!),
               Visibility(
                 visible: true,
                 child: Text(
@@ -59,7 +58,7 @@ class _MeasureEditorScaleState extends State<MeasureEditorScale> {
                 icon: widget.save ? Icons.check : Icons.arrow_forward,
                 canPress: _canSubmit(),
                 onPressed: _submit)
-          ],
+          ], systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -79,7 +78,7 @@ class _MeasureEditorScaleState extends State<MeasureEditorScale> {
                     )),
                 TextFormField(
                   keyboardType: TextInputType.number,
-                  initialValue: _min.toInt().toString(),
+                  initialValue: _min!.toInt().toString(),
                   onChanged: _updateMin,
                   decoration: InputDecoration(labelText: 'Minimum Value'),
                 ),
@@ -96,7 +95,7 @@ class _MeasureEditorScaleState extends State<MeasureEditorScale> {
                     )),
                 TextFormField(
                   keyboardType: TextInputType.number,
-                  initialValue: _max.toInt().toString(),
+                  initialValue: _max!.toInt().toString(),
                   onChanged: _updateMax,
                   decoration: InputDecoration(labelText: 'Maximum Value'),
                 ),
@@ -143,11 +142,11 @@ class _MeasureEditorScaleState extends State<MeasureEditorScale> {
   _canSubmit() {
     return _min != null &&
         _max != null &&
-        _min < _max &&
+        _min! < _max! &&
         _minLabel != null &&
-        _minLabel.length > 0 &&
+        _minLabel!.length > 0 &&
         _maxLabel != null &&
-        _maxLabel.length > 0;
+        _maxLabel!.length > 0;
   }
 
   _submit() {

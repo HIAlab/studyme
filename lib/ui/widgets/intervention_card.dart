@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:studyme/models/intervention.dart';
 
 class InterventionCard extends StatelessWidget {
-  final Intervention intervention;
+  final Intervention? intervention;
   final bool showSchedule;
-  final void Function() onTap;
+  final void Function()? onTap;
 
   InterventionCard({this.intervention, this.onTap, this.showSchedule = false});
 
@@ -12,7 +12,7 @@ class InterventionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         child: ListTile(
-      title: Text(intervention.name),
+      title: Text(intervention!.name!),
       subtitle: _getSubtitle(),
       trailing: onTap != null ? Icon(Icons.chevron_right) : null,
       onTap: onTap,
@@ -20,8 +20,8 @@ class InterventionCard extends StatelessWidget {
   }
 
   _getSubtitle() {
-    if (showSchedule && intervention.schedule != null) {
-      return Text(intervention.schedule.readable);
+    if (showSchedule && intervention!.schedule != null) {
+      return Text(intervention!.schedule!.readable);
     } else {
       return null;
     }

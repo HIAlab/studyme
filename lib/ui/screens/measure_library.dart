@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/measure/keyboard_measure.dart';
@@ -17,14 +17,14 @@ class MeasureLibrary extends StatelessWidget {
       List<Measure> _unaddedMeasures = model.unaddedMeasures;
       return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
               Text(
-                  "What ${(model.trial.measures.length > 0) ? 'other ' : ''}data do you want to collect to assess if you are achieving your goal?",
+                  "What ${(model.trial!.measures!.length > 0) ? 'other ' : ''}data do you want to collect to assess if you are achieving your goal?",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -68,7 +68,7 @@ class MeasureLibrary extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (context) => MeasureEditorName(
-            measure: KeyboardMeasure(), onSave: saveFunction, save: false),
+            measure: KeyboardMeasure(), onSave: saveFunction as dynamic Function(Measure), save: false),
       ),
     );
   }

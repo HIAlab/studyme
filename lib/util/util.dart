@@ -7,8 +7,8 @@ toast(context, text) {
 }
 
 class Option {
-  String name;
-  void Function() callback;
+  String? name;
+  void Function()? callback;
 
   Option({this.name, this.callback});
 }

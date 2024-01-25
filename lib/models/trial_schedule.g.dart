@@ -17,10 +17,10 @@ class TrialScheduleAdapter extends TypeAdapter<TrialSchedule> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TrialSchedule()
-      ..phaseOrder = fields[0] as PhaseOrder
-      ..phaseDuration = fields[1] as int
-      ..phaseSequence = (fields[2] as List)?.cast<String>()
-      ..numberOfPhasePairs = fields[3] as int;
+      ..phaseOrder = fields[0] as PhaseOrder?
+      ..phaseDuration = fields[1] as int?
+      ..phaseSequence = (fields[2] as List?)?.cast<String>()
+      ..numberOfPhasePairs = fields[3] as int?;
   }
 
   @override
@@ -52,14 +52,15 @@ class TrialScheduleAdapter extends TypeAdapter<TrialSchedule> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-TrialSchedule _$TrialScheduleFromJson(Map<String, dynamic> json) {
-  return TrialSchedule()
-    ..phaseOrder = _$enumDecodeNullable(_$PhaseOrderEnumMap, json['phaseOrder'])
-    ..phaseDuration = json['phaseDuration'] as int
-    ..phaseSequence =
-        (json['phaseSequence'] as List)?.map((e) => e as String)?.toList()
-    ..numberOfPhasePairs = json['numberOfPhasePairs'] as int;
-}
+TrialSchedule _$TrialScheduleFromJson(Map<String, dynamic> json) =>
+    TrialSchedule()
+      ..phaseOrder =
+          $enumDecodeNullable(_$PhaseOrderEnumMap, json['phaseOrder'])
+      ..phaseDuration = json['phaseDuration'] as int?
+      ..phaseSequence = (json['phaseSequence'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList()
+      ..numberOfPhasePairs = json['numberOfPhasePairs'] as int?;
 
 Map<String, dynamic> _$TrialScheduleToJson(TrialSchedule instance) =>
     <String, dynamic>{
@@ -68,38 +69,6 @@ Map<String, dynamic> _$TrialScheduleToJson(TrialSchedule instance) =>
       'phaseSequence': instance.phaseSequence,
       'numberOfPhasePairs': instance.numberOfPhasePairs,
     };
-
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
-}
-
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
-}
 
 const _$PhaseOrderEnumMap = {
   PhaseOrder.alternating: 'alternating',

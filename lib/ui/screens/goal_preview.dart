@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/goal.dart';
@@ -6,14 +7,13 @@ import 'package:studyme/models/goal.dart';
 class GoalPreview extends StatelessWidget {
   final Goal goal;
 
-  GoalPreview({@required this.goal});
+  GoalPreview({required this.goal});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
-          title: Text(goal.goal),
+          title: Text(goal.goal!), systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -22,7 +22,7 @@ class GoalPreview extends StatelessWidget {
               children: [
                 ListTile(
                   title: Text("Goal"),
-                  subtitle: Text(goal.goal, style: TextStyle(fontSize: 16)),
+                  subtitle: Text(goal.goal!, style: TextStyle(fontSize: 16)),
                 ),
                 ButtonBar(
                   alignment: MainAxisAlignment.center,

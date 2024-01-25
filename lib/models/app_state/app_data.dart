@@ -22,18 +22,18 @@ class AppData extends ChangeNotifier {
   static const interventionALetter = 'a';
   static const interventionBLetter = 'b';
 
-  Box box;
-  Trial _trial;
-  List<Measure> _measures;
+  late Box box;
+  Trial? _trial;
+  List<Measure>? _measures;
 
-  AppState get state => box.get(stateKey);
-  Trial get trial => _trial;
-  List<Measure> get measures => _measures;
+  AppState? get state => box.get(stateKey);
+  Trial? get trial => _trial;
+  List<Measure>? get measures => _measures;
 
   List<Measure> get unaddedMeasures {
     List<Measure> measures = defaultMeasures;
     measures.removeWhere(
-        (i) => _trial.measures.map((x) => x.id).toList().contains(i.id));
+        (i) => _trial!.measures!.map((x) => x.id).toList().contains(i.id));
     return measures;
   }
 
@@ -51,60 +51,60 @@ class AppData extends ChangeNotifier {
   }
 
   void addStepLogForSurvey(String logMessage) {
-    _trial.stepsLogForSurvey[DateTime.now()] = logMessage;
-    _trial.save();
+    _trial!.stepsLogForSurvey![DateTime.now()] = logMessage;
+    _trial!.save();
   }
 
   void setGoal(Goal goal) {
-    _trial.goal = goal;
-    _trial.save();
+    _trial!.goal = goal;
+    _trial!.save();
     notifyListeners();
   }
 
   void setTrialType(TrialType type) {
-    _trial.type = type;
+    _trial!.type = type;
 
-    _trial.save();
+    _trial!.save();
     notifyListeners();
   }
 
   void setInterventionA(Intervention intervention) {
-    _trial.interventionA = intervention;
-    _trial.save();
+    _trial!.interventionA = intervention;
+    _trial!.save();
     notifyListeners();
   }
 
   void setInterventionB(Intervention intervention) {
-    _trial.interventionB = intervention;
-    _trial.save();
+    _trial!.interventionB = intervention;
+    _trial!.save();
     notifyListeners();
   }
 
   void addMeasure(Measure measure) {
-    _trial.measures.add(measure);
-    _trial.save();
+    _trial!.measures!.add(measure);
+    _trial!.save();
     notifyListeners();
   }
 
   void updateMeasure(int index, Measure newMeasure) {
     if (index >= 0) {
-      _trial.measures[index] = newMeasure;
-      _trial.save();
+      _trial!.measures![index] = newMeasure;
+      _trial!.save();
       notifyListeners();
     }
   }
 
   void removeMeasure(int index) {
     if (index >= 0) {
-      _trial.measures.removeAt(index);
-      _trial.save();
+      _trial!.measures!.removeAt(index);
+      _trial!.save();
       notifyListeners();
     }
   }
 
-  void updateSchedule(TrialSchedule schedule) {
-    _trial.schedule = schedule;
-    _trial.save();
+  void updateSchedule(TrialSchedule? schedule) {
+    _trial!.schedule = schedule;
+    _trial!.save();
     notifyListeners();
   }
 
@@ -115,15 +115,15 @@ class AppData extends ChangeNotifier {
 
   finishEditingDetails() {
     saveAppState(AppState.CREATING_PHASES);
-    _trial.generateWithSetInfos();
-    _trial.save();
+    _trial!.generateWithSetInfos();
+    _trial!.save();
   }
 
   startTrial() {
     saveAppState(AppState.DOING);
     DateTime now = DateTime.now();
-    _trial.startDate = DateTime(now.year, now.month, now.day);
-    _trial.save();
+    _trial!.startDate = DateTime(now.year, now.month, now.day);
+    _trial!.save();
     scheduleNotificationsFor(now);
   }
 
@@ -132,18 +132,18 @@ class AppData extends ChangeNotifier {
   }
 
   void scheduleNotificationsFor(DateTime date) async {
-    DateTime _latest = box.get(lastDateWithScheduledNotificationsKey);
+    DateTime? _latest = box.get(lastDateWithScheduledNotificationsKey);
 
     int _id = box.get(notificationIdCounterKey) ?? 0;
     // check that we haven't already scheduled notifications up to this date
     // clean the date, so comparison is based on day alone and not specific time
     DateTime _cleanDate = DateTime(date.year, date.month, date.day);
     if (_latest == null || _latest.isBefore(date)) {
-      List<Task> tasks = _trial.getTasksForDate(date);
+      List<Task> tasks = _trial!.getTasksForDate(date);
 
       if (date.difference(DateTime.now()).inDays == 0) {
         tasks.removeWhere(
-            (element) => element.time.combined < element.time.combined);
+            (element) => element.time!.combined < element.time!.combined);
       }
       tasks.forEach((task) {
         Notifications().scheduleNotificationFor(date, task, _id);
@@ -161,18 +161,18 @@ class AppData extends ChangeNotifier {
   }
 
   bool canDefineInterventions() {
-    return _trial.goal != null;
+    return _trial!.goal != null;
   }
 
   bool canDefineMeasures() {
     return canDefineInterventions() &&
-        ((_trial.type == TrialType.reversal && _trial.interventionA != null) ||
-            (_trial.type == TrialType.alternatingTreatment &&
-                _trial.interventionA != null &&
-                _trial.interventionB != null));
+        ((_trial!.type == TrialType.reversal && _trial!.interventionA != null) ||
+            (_trial!.type == TrialType.alternatingTreatment &&
+                _trial!.interventionA != null &&
+                _trial!.interventionB != null));
   }
 
   bool canStartTrial() {
-    return canDefineMeasures() && _trial.measures.length > 0;
+    return canDefineMeasures() && _trial!.measures!.length > 0;
   }
 }

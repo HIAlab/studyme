@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
@@ -12,7 +11,7 @@ class History extends StatefulWidget {
 }
 
 class _HistoryState extends State<History> {
-  TimeAggregation _timeAggregation;
+  TimeAggregation? _timeAggregation;
 
   @override
   initState() {
@@ -28,8 +27,8 @@ class _HistoryState extends State<History> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              PhaseCard(phase: appState.trial.a),
-              PhaseCard(phase: appState.trial.b),
+              PhaseCard(phase: appState.trial!.a),
+              PhaseCard(phase: appState.trial!.b),
               DropdownButtonFormField<TimeAggregation>(
                 decoration: InputDecoration(labelText: 'Average per'),
                 value: _timeAggregation,
@@ -49,10 +48,10 @@ class _HistoryState extends State<History> {
               ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
-                  itemCount: appState.trial.measures.length,
+                  itemCount: appState.trial!.measures!.length,
                   itemBuilder: (context, index) {
                     return MeasureChart(
-                      measure: appState.trial.measures[index],
+                      measure: appState.trial!.measures![index],
                       trial: appState.trial,
                       timeAggregation: _timeAggregation,
                     );
@@ -65,7 +64,7 @@ class _HistoryState extends State<History> {
     });
   }
 
-  _changeTimeAggregation(TimeAggregation selectedAggregation) {
+  _changeTimeAggregation(TimeAggregation? selectedAggregation) {
     setState(() {
       _timeAggregation = selectedAggregation;
     });

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class EditableListTile extends StatelessWidget {
-  final Widget title;
-  final Widget subtitle;
+  final Widget? title;
+  final Widget? subtitle;
   final bool canEdit;
-  final void Function() onTap;
+  final void Function()? onTap;
 
   EditableListTile(
       {this.title, this.subtitle, this.onTap, this.canEdit = true});

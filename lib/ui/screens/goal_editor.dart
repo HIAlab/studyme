@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:studyme/models/goal.dart';
 import 'package:studyme/ui/widgets/action_button.dart';
 
@@ -6,14 +7,14 @@ class GoalEditor extends StatefulWidget {
   final Goal goal;
   final Function(Goal goal) onSave;
 
-  GoalEditor({@required this.goal, @required this.onSave});
+  GoalEditor({required this.goal, required this.onSave});
 
   @override
   _GoalEditorState createState() => _GoalEditorState();
 }
 
 class _GoalEditorState extends State<GoalEditor> {
-  String _goal;
+  String? _goal;
 
   @override
   void initState() {
@@ -25,11 +26,10 @@ class _GoalEditorState extends State<GoalEditor> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           actions: <Widget>[
             ActionButton(
                 icon: Icons.check, canPress: _canSubmit(), onPressed: _onSubmit)
-          ],
+          ], systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -62,7 +62,7 @@ class _GoalEditorState extends State<GoalEditor> {
   }
 
   _canSubmit() {
-    return _goal != null && _goal.length > 0;
+    return _goal != null && _goal!.length > 0;
   }
 
   _onSubmit() {

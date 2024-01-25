@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/ui/screens/goal_library.dart';
@@ -32,13 +31,13 @@ class CreatorGoalSection extends StatelessWidget {
             ],
           ),
         if (_goalIsSet())
-          GoalCard(goal: model.trial.goal, onTap: () => _viewGoal(context))
+          GoalCard(goal: model.trial!.goal, onTap: () => _viewGoal(context))
       ],
     );
   }
 
   bool _goalIsSet() {
-    return model.trial.goal != null;
+    return model.trial!.goal != null;
   }
 
   _addGoal(context) {

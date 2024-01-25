@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/app_state/app_state.dart';
@@ -23,7 +22,7 @@ class _InitState extends State<Init> {
     Provider.of<AppData>(context, listen: false)
         .addStepLogForSurvey('opened app');
     AppData appData = Provider.of<AppData>(context, listen: false);
-    AppState state = appData.state;
+    AppState? state = appData.state;
     if (state == AppState.ONBOARDING) {
       Navigator.pushReplacementNamed(context, Routes.onboarding);
     } else if (state == AppState.CREATING_DETAILS ||

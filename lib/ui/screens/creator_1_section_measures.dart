@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/routes.dart';
@@ -25,11 +24,11 @@ class CreatorMeasureSection extends StatelessWidget {
         ListView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: model.trial.measures.length,
+          itemCount: model.trial!.measures!.length,
           itemBuilder: (context, index) {
             return MeasureCard(
                 showSchedule: true,
-                measure: model.trial.measures[index],
+                measure: model.trial!.measures![index],
                 onTap: () {
                   _viewMeasure(context, index);
                 });
@@ -41,7 +40,7 @@ class CreatorMeasureSection extends StatelessWidget {
             OutlinedButton.icon(
                 icon: Icon(Icons.add),
                 label: Text('Add' +
-                    (model.trial.measures.length > 0 ? ' another' : '')),
+                    (model.trial!.measures!.length > 0 ? ' another' : '')),
                 onPressed: () => _addMeasure(context)),
           ],
         ),

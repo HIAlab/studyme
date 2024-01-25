@@ -17,11 +17,11 @@ class KeyboardMeasureAdapter extends TypeAdapter<KeyboardMeasure> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return KeyboardMeasure(
-      id: fields[0] as String,
-      name: fields[2] as String,
-      unit: fields[3] as String,
-      schedule: fields[4] as Reminder,
-    )..type = fields[1] as String;
+      id: fields[0] as String?,
+      name: fields[2] as String?,
+      unit: fields[3] as String?,
+      schedule: fields[4] as Reminder?,
+    )..type = fields[1] as String?;
   }
 
   @override
@@ -55,16 +55,15 @@ class KeyboardMeasureAdapter extends TypeAdapter<KeyboardMeasure> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-KeyboardMeasure _$KeyboardMeasureFromJson(Map<String, dynamic> json) {
-  return KeyboardMeasure(
-    id: json['id'] as String,
-    name: json['name'] as String,
-    unit: json['unit'] as String,
-    schedule: json['schedule'] == null
-        ? null
-        : Reminder.fromJson(json['schedule'] as Map<String, dynamic>),
-  )..type = json['type'] as String;
-}
+KeyboardMeasure _$KeyboardMeasureFromJson(Map<String, dynamic> json) =>
+    KeyboardMeasure(
+      id: json['id'] as String?,
+      name: json['name'] as String?,
+      unit: json['unit'] as String?,
+      schedule: json['schedule'] == null
+          ? null
+          : Reminder.fromJson(json['schedule'] as Map<String, dynamic>),
+    )..type = json['type'] as String?;
 
 Map<String, dynamic> _$KeyboardMeasureToJson(KeyboardMeasure instance) =>
     <String, dynamic>{

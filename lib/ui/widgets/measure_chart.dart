@@ -1,7 +1,6 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import "package:collection/collection.dart";
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/log_data.dart';
 import 'package:studyme/models/log/trial_log.dart';
@@ -12,22 +11,22 @@ import 'package:studyme/models/trial.dart';
 
 class MeasureChart extends StatefulWidget {
   final Measure measure;
-  final Trial trial;
-  final TimeAggregation timeAggregation;
+  final Trial? trial;
+  final TimeAggregation? timeAggregation;
 
   MeasureChart(
-      {@required this.measure,
-      @required this.trial,
-      @required this.timeAggregation});
+      {required this.measure,
+      required this.trial,
+      required this.timeAggregation});
 
   @override
   _MeasureChartState createState() => _MeasureChartState();
 }
 
 class _MeasureChartState extends State<MeasureChart> {
-  bool _isLoading;
+  late bool _isLoading;
 
-  List<TrialLog> _logs;
+  late List<TrialLog> _logs;
 
   @override
   void initState() {
@@ -44,7 +43,7 @@ class _MeasureChartState extends State<MeasureChart> {
   loadLogs() async {
     List<TrialLog> _data =
         await Provider.of<LogData>(context).getMeasureLogs(widget.measure);
-    _data.removeWhere((log) => !widget.trial.isInStudyTimeframe(log.dateTime));
+    _data.removeWhere((log) => !widget.trial!.isInStudyTimeframe(log.dateTime!));
     setState(() {
       _logs = _data;
       _isLoading = false;
@@ -78,7 +77,8 @@ class _MeasureChartState extends State<MeasureChart> {
     return charts.NumericComboChart(_getSeriesData(),
         animate: false,
         behaviors: [
-          if (_seperators != null) (() => _seperators)(),
+          if (_seperators != null)
+            _seperators,
           charts.ChartTitle(
             widget.timeAggregation.readable,
             outerPadding: 0,
@@ -88,7 +88,7 @@ class _MeasureChartState extends State<MeasureChart> {
           ),
           if (widget.measure.unit != null)
             charts.ChartTitle(
-              widget.measure.unit,
+              widget.measure.unit!,
               outerPadding: 0,
               innerPadding: 2,
               behaviorPosition: charts.BehaviorPosition.start,
@@ -104,37 +104,37 @@ class _MeasureChartState extends State<MeasureChart> {
         ],
         domainAxis: charts.NumericAxisSpec(
             viewport: _getExtents(),
-            tickFormatterSpec: _getFormatterSpec(),
+            tickFormatterSpec: _getFormatterSpec() as charts.NumericTickFormatterSpec?,
             tickProviderSpec: _getProviderSpec()),
         primaryMeasureAxis: widget.measure.tickProvider);
   }
 
-  charts.RangeAnnotation _getSeperators() {
+  charts.RangeAnnotation<num>? _getSeperators() {
     if (widget.timeAggregation == TimeAggregation.Day) {
-      return charts.RangeAnnotation(
-        Iterable.generate(widget.trial.schedule.numberOfPhases + 1)
+      final annotationSegments =
+        Iterable.generate(widget.trial!.schedule!.numberOfPhases + 1)
             .map((i) => charts.LineAnnotationSegment<num>(
-                  i * widget.trial.schedule.phaseDuration - 0.5,
-                  charts.RangeAnnotationAxisType.domain,
-                  color: charts.MaterialPalette.gray.shade400,
-                  strokeWidthPx: 1,
-                ))
-            .toList(),
-      );
+          i * widget.trial!.schedule!.phaseDuration - 0.5,
+          charts.RangeAnnotationAxisType.domain,
+          color: charts.MaterialPalette.gray.shade400,
+          strokeWidthPx: 1,
+        )).toList();
+      return charts.RangeAnnotation(annotationSegments);
     } else {
-      return charts.RangeAnnotation([]);
+      //return charts.RangeAnnotation([]);
+      return null;
     }
   }
 
-  charts.NumericExtents _getExtents() {
+  charts.NumericExtents? _getExtents() {
     if (widget.timeAggregation == TimeAggregation.Day) {
       return charts.NumericExtents(
           0,
-          widget.trial.schedule.numberOfPhases *
-                  widget.trial.schedule.phaseDuration -
+          widget.trial!.schedule!.numberOfPhases *
+                  widget.trial!.schedule!.phaseDuration! -
               1);
     } else if (widget.timeAggregation == TimeAggregation.Segment) {
-      return charts.NumericExtents(0, widget.trial.schedule.numberOfPhases - 1);
+      return charts.NumericExtents(0, widget.trial!.schedule!.numberOfPhases - 1);
     } else if (widget.timeAggregation == TimeAggregation.Phase) {
       return charts.NumericExtents(0, 1);
     } else {
@@ -142,30 +142,30 @@ class _MeasureChartState extends State<MeasureChart> {
     }
   }
 
-  charts.TickFormatterSpec _getFormatterSpec() {
+  charts.TickFormatterSpec? _getFormatterSpec() {
     if (widget.timeAggregation == TimeAggregation.Day) {
       return charts.BasicNumericTickFormatterSpec(
-          (value) => (value + 1).toInt().toString());
+          (value) => (value! + 1).toInt().toString());
     } else if (widget.timeAggregation == TimeAggregation.Segment) {
       return charts.BasicNumericTickFormatterSpec((value) =>
-          "${(value + 1).toString()} (${widget.trial.schedule.phaseSequence[value].toUpperCase()})");
+          "${(value! + 1).toString()} (${widget.trial!.schedule!.phaseSequence![value as int].toUpperCase()})");
     } else if (widget.timeAggregation == TimeAggregation.Phase) {
       return charts.BasicNumericTickFormatterSpec((value) {
         if (value == 0) return 'A';
         if (value == 1)
           return 'B';
         else
-          return null;
+          return '';
       });
     } else {
       return null;
     }
   }
 
-  charts.NumericTickProviderSpec _getProviderSpec() {
+  charts.NumericTickProviderSpec? _getProviderSpec() {
     if (widget.timeAggregation == TimeAggregation.Segment) {
       return charts.StaticNumericTickProviderSpec(
-          Iterable.generate(widget.trial.schedule.numberOfPhases)
+          Iterable.generate(widget.trial!.schedule!.numberOfPhases)
               .map((e) => charts.TickSpec<num>(e))
               .toList());
     } else if (widget.timeAggregation == TimeAggregation.Phase) {
@@ -200,57 +200,57 @@ class _MeasureChartState extends State<MeasureChart> {
       final _logsGroupedByDate = groupBy(
           _logs,
           (TrialLog log) => DateTime(
-              log.dateTime.year, log.dateTime.month, log.dateTime.day));
+              log.dateTime!.year, log.dateTime!.month, log.dateTime!.day));
       return _logsGroupedByDate.entries.map((entry) {
-        num _aggregationUnit = widget.trial.getDayOfStudyFor(entry.key);
-        Phase _phase = widget.trial.getPhaseForDate(entry.key);
+        num _aggregationUnit = widget.trial!.getDayOfStudyFor(entry.key);
+        Phase _phase = widget.trial!.getPhaseForDate(entry.key)!;
         return _ChartValue(_aggregationUnit,
             _aggregate(_getValuesFromLogs(entry.value)), _phase.letter);
       }).toList();
     } else if (widget.timeAggregation == TimeAggregation.Segment) {
       final _logsGroupedByPhase = groupBy(_logs,
-          (TrialLog log) => widget.trial.getPhaseIndexForDate(log.dateTime));
+          (TrialLog log) => widget.trial!.getPhaseIndexForDate(log.dateTime!));
       return _logsGroupedByPhase.entries.map((entry) {
-        Phase _phase = widget.trial.getPhaseForPhaseIndex(entry.key);
+        Phase _phase = widget.trial!.getPhaseForPhaseIndex(entry.key)!;
         return _ChartValue(entry.key,
             _aggregate(_getValuesFromLogs(entry.value)), _phase.letter);
       }).toList();
     } else if (widget.timeAggregation == TimeAggregation.Phase) {
       final _logsGroupedByIntervention = groupBy(
-          _logs, (TrialLog log) => widget.trial.getPhaseForDate(log.dateTime));
+          _logs, (TrialLog log) => widget.trial!.getPhaseForDate(log.dateTime!));
       return _logsGroupedByIntervention.entries.map((entry) {
         int aggregationUnit;
-        if (entry.key.letter == 'a') {
+        if (entry.key!.letter == 'a') {
           aggregationUnit = 0;
         } else {
           aggregationUnit = 1;
         }
         return _ChartValue(aggregationUnit,
-            _aggregate(_getValuesFromLogs(entry.value)), entry.key.letter);
+            _aggregate(_getValuesFromLogs(entry.value)), entry.key!.letter);
       }).toList();
     } else {
       return [];
     }
   }
 
-  List<num> _getValuesFromLogs(List<TrialLog> logs) {
+  List<num?> _getValuesFromLogs(List<TrialLog> logs) {
     return logs.map((log) => log.value).toList();
   }
 
-  _aggregate(List<num> values) {
+  _aggregate(List<num?> values) {
     return _calculateMean(values);
   }
 
-  _calculateMean(List<num> values) => _calculateSum(values) / values.length;
+  _calculateMean(List<num?> values) => _calculateSum(values) / values.length;
 
-  _calculateSum(List<num> values) => values.reduce((a, b) => a + b);
+  _calculateSum(List<num?> values) => values.reduce((a, b) => a! + b!);
 }
 
 class _ChartValue {
   final dynamic aggregationUnit;
-  final num value;
-  final String loggedItemId;
-  charts.Color color;
+  final num? value;
+  final String? loggedItemId;
+  late charts.Color color;
 
   _ChartValue(this.aggregationUnit, this.value, this.loggedItemId) {
     this.color = this.loggedItemId == 'a'

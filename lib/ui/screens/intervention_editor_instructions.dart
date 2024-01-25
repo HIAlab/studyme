@@ -1,20 +1,20 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:studyme/models/intervention.dart';
 
 import '../widgets/action_button.dart';
 import 'schedule_editor.dart';
 
 class InterventionEditorInstructions extends StatefulWidget {
-  final Intervention intervention;
+  final Intervention? intervention;
 
-  final Function(Intervention intervention) onSave;
+  final Function(Intervention? intervention) onSave;
   final bool save;
 
   const InterventionEditorInstructions(
-      {@required this.intervention,
-      @required this.onSave,
-      @required this.save});
+      {required this.intervention,
+      required this.onSave,
+      required this.save});
 
   @override
   _InterventionEditorInstructionsState createState() =>
@@ -23,11 +23,11 @@ class InterventionEditorInstructions extends StatefulWidget {
 
 class _InterventionEditorInstructionsState
     extends State<InterventionEditorInstructions> {
-  String _instructions;
+  String? _instructions;
 
   @override
   void initState() {
-    _instructions = widget.intervention.instructions;
+    _instructions = widget.intervention!.instructions;
     super.initState();
   }
 
@@ -35,12 +35,11 @@ class _InterventionEditorInstructionsState
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(widget.intervention.name),
+              Text(widget.intervention!.name!),
               Visibility(
                 visible: true,
                 child: Text(
@@ -57,7 +56,7 @@ class _InterventionEditorInstructionsState
                 icon: widget.save ? Icons.check : Icons.arrow_forward,
                 canPress: _canSubmit(),
                 onPressed: _submit)
-          ],
+          ], systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -85,7 +84,7 @@ class _InterventionEditorInstructionsState
                 ),
                 SizedBox(height: 20),
                 Text(
-                    '* The instructions will be shown to you when it is time for "${widget.intervention.name}".\nAim to be specific enough so you will know what to do.',
+                    '* The instructions will be shown to you when it is time for "${widget.intervention!.name}".\nAim to be specific enough so you will know what to do.',
                     style: TextStyle(
                         fontStyle: FontStyle.italic,
                         fontSize: 20,
@@ -97,18 +96,18 @@ class _InterventionEditorInstructionsState
   }
 
   _canSubmit() {
-    return _instructions != null && _instructions.length > 0;
+    return _instructions != null && _instructions!.length > 0;
   }
 
   _submit() {
-    widget.intervention.instructions = _instructions;
+    widget.intervention!.instructions = _instructions;
     widget.save
         ? widget.onSave(widget.intervention)
         : Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => ScheduleEditor(
-                  title: widget.intervention.name,
+                  title: widget.intervention!.name,
                   objectWithSchedule: widget.intervention,
                   onSave: widget.onSave),
             ));

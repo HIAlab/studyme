@@ -12,13 +12,13 @@ abstract class Phase {
     WithdrawalPhase.phaseType: (json) => WithdrawalPhase.fromJson(json),
   };
   @HiveField(0)
-  String type;
+  String? type;
 
   @HiveField(1)
-  String name;
+  String? name;
 
   @HiveField(2)
-  String letter;
+  String? letter;
 
   Phase({this.type, this.name, this.letter});
 
@@ -27,5 +27,5 @@ abstract class Phase {
   Map<String, dynamic> toJson();
 
   factory Phase.fromJson(Map<String, dynamic> data) =>
-      phaseTypes[data["phaseType"]](data);
+      phaseTypes[data["phaseType"]]!(data);
 }

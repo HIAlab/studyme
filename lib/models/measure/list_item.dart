@@ -7,7 +7,7 @@ part 'list_item.g.dart';
 @HiveType(typeId: 4)
 class ListItem extends HiveObject {
   @HiveField(0)
-  String value;
+  String? value;
 
   ListItem({this.value});
 

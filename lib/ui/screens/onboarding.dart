@@ -174,8 +174,14 @@ class _OnboardingState extends State<Onboarding> {
                               OutlinedButton.icon(
                                 icon: Icon(Icons.assignment_outlined),
                                 label: Text('Terms of Use'),
-                                onPressed: () => launch(
-                                    "https://www13.hpi.uni-potsdam.de/fileadmin/user_upload/fachgebiete/lippert/studyme/Terms_of_Use.pdf"),
+                                onPressed: () => launchUrl(
+                                  Uri(
+                                    scheme: "https",
+                                    host: "www13.hpi.uni-potsdam.de",
+                                    path:
+                                        "fileadmin/user_upload/fachgebiete/lippert/studyme/Terms_of_Use.pdf",
+                                  )
+                                ),
                               ),
                               SwitchListTile(
                                 title: Text(
@@ -191,8 +197,14 @@ class _OnboardingState extends State<Onboarding> {
                               OutlinedButton.icon(
                                 icon: Icon(Icons.privacy_tip_outlined),
                                 label: Text('Privacy Policy'),
-                                onPressed: () => launch(
-                                    'https://www13.hpi.uni-potsdam.de/fileadmin/user_upload/fachgebiete/lippert/studyme/Privacy_Policy.pdf'),
+                                onPressed: () => launchUrl(
+                                  Uri(
+                                    scheme: "https",
+                                    host: "www13.hpi.uni-potsdam.de",
+                                    path:
+                                        "fileadmin/user_upload/fachgebiete/lippert/studyme/Privacy_Policy.pdf",
+                                  )
+                                ),
                               ),
                               SwitchListTile(
                                 title: Text(
@@ -208,15 +220,27 @@ class _OnboardingState extends State<Onboarding> {
                               OutlinedButton.icon(
                                 icon: Icon(Icons.assignment_outlined),
                                 label: Text('Imprint'),
-                                onPressed: () => launch(
-                                    'https://www13.hpi.uni-potsdam.de/fileadmin/user_upload/fachgebiete/lippert/studyme/Imprint.pdf'),
+                                onPressed: () => launchUrl(
+                                  Uri(
+                                    scheme: "https",
+                                    host: "www13.hpi.uni-potsdam.de",
+                                    path:
+                                        "fileadmin/user_upload/fachgebiete/lippert/studyme/Imprint.pdf",
+                                  )
+                                ),
                               ),
                               SizedBox(height: 10),
                               OutlinedButton.icon(
                                 icon: Icon(Icons.assignment_outlined),
                                 label: Text('Acknowledgments'),
-                                onPressed: () => launch(
-                                    'https://www13.hpi.uni-potsdam.de/fileadmin/user_upload/fachgebiete/lippert/studyme/Acknowledgments.pdf'),
+                                onPressed: () => launchUrl(
+                                  Uri(
+                                    scheme: "https",
+                                    host: "www13.hpi.uni-potsdam.de",
+                                    path:
+                                        "fileadmin/user_upload/fachgebiete/lippert/studyme/Acknowledgments.pdf",
+                                  )
+                                ),
                               )
                             ],
                           )

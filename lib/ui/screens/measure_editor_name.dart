@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:studyme/models/measure/measure.dart';
 
 import '../widgets/action_button.dart';
@@ -11,14 +11,14 @@ class MeasureEditorName extends StatefulWidget {
   final bool save;
 
   const MeasureEditorName(
-      {@required this.measure, @required this.onSave, @required this.save});
+      {required this.measure, required this.onSave, required this.save});
 
   @override
   _MeasureEditorNameState createState() => _MeasureEditorNameState();
 }
 
 class _MeasureEditorNameState extends State<MeasureEditorName> {
-  String _name;
+  String? _name;
 
   @override
   void initState() {
@@ -30,7 +30,6 @@ class _MeasureEditorNameState extends State<MeasureEditorName> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,7 +51,7 @@ class _MeasureEditorNameState extends State<MeasureEditorName> {
                 icon: widget.save ? Icons.check : Icons.arrow_forward,
                 canPress: _canSubmit(),
                 onPressed: _submit)
-          ],
+          ], systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -81,7 +80,7 @@ class _MeasureEditorNameState extends State<MeasureEditorName> {
   }
 
   _canSubmit() {
-    return _name != null && _name.length > 0;
+    return _name != null && _name!.length > 0;
   }
 
   _submit() {

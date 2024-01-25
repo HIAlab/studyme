@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 class TimelineCard extends StatelessWidget {
   final bool isActive;
-  final Widget cardChild;
-  final Color cardColor;
-  final Widget belowCardChild;
+  final Widget? cardChild;
+  final Color? cardColor;
+  final Widget? belowCardChild;
 
   TimelineCard(
       {this.isActive = false,
@@ -28,7 +28,7 @@ class TimelineCard extends StatelessWidget {
                     : null,
                 color: cardColor,
                 child: Center(child: cardChild))),
-        if (belowCardChild != null) belowCardChild
+        if (belowCardChild != null) belowCardChild!
       ]),
     );
   }

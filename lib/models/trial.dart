@@ -18,55 +18,55 @@ part 'trial.g.dart';
 @HiveType(typeId: 200)
 class Trial extends HiveObject {
   @HiveField(0)
-  Goal goal;
+  Goal? goal;
 
   @HiveField(1)
-  TrialType type;
+  TrialType? type;
 
   @HiveField(2)
-  Intervention interventionA;
+  Intervention? interventionA;
 
   @HiveField(3)
-  Intervention interventionB;
+  Intervention? interventionB;
 
   @HiveField(4)
-  Phase a;
+  Phase? a;
 
   @HiveField(5)
-  Phase b;
+  Phase? b;
 
   @HiveField(6)
-  List<Measure> measures;
+  List<Measure>? measures;
 
   @HiveField(7)
-  TrialSchedule schedule;
+  TrialSchedule? schedule;
 
   @HiveField(8)
-  DateTime startDate;
+  DateTime? startDate;
 
   @HiveField(9)
-  Map<DateTime, String> stepsLogForSurvey;
+  Map<DateTime, String>? stepsLogForSurvey;
 
   List<Task> getTasksForDate(DateTime date) {
     DateTime _cleanDate = DateTime(date.year, date.month, date.day);
     List<Task> _tasks = [];
 
-    if (date.isAfter(startDate) && date.isBefore(endDate)) {
-      int daysSinceBeginningOfTrial = _cleanDate.difference(startDate).inDays;
+    if (date.isAfter(startDate!) && date.isBefore(endDate)) {
+      int daysSinceBeginningOfTrial = _cleanDate.difference(startDate!).inDays;
       int daysSinceBeginningOfPhase =
-          daysSinceBeginningOfTrial % schedule.phaseDuration;
+          daysSinceBeginningOfTrial % schedule!.phaseDuration!;
 
-      Phase _phase = getPhaseForDate(_cleanDate);
+      Phase _phase = getPhaseForDate(_cleanDate)!;
 
       _tasks.addAll(_phase.getTasksFor(daysSinceBeginningOfPhase));
-      measures.forEach((measure) {
+      measures!.forEach((measure) {
         _tasks.addAll(measure.getTasksFor(daysSinceBeginningOfTrial));
       });
 
       _tasks.sort((a, b) {
-        if (a.time.combined < b.time.combined) {
+        if (a.time!.combined < b.time!.combined) {
           return -1;
-        } else if (a.time.combined > b.time.combined) {
+        } else if (a.time!.combined > b.time!.combined) {
           return 1;
         } else {
           return 0;
@@ -84,31 +84,31 @@ class Trial extends HiveObject {
         this.stepsLogForSurvey = {};
 
   DateTime get endDate {
-    return startDate
-        .add(Duration(days: schedule.totalDuration))
+    return startDate!
+        .add(Duration(days: schedule!.totalDuration))
         .subtract(Duration(seconds: 1));
   }
 
   int getDayOfStudyFor(DateTime date) {
-    return date.differenceInDays(startDate).inDays;
+    return date.differenceInDays(startDate!).inDays;
   }
 
   bool isInStudyTimeframe(DateTime date) {
-    return date.isAfter(startDate) && date.isBefore(endDate);
+    return date.isAfter(startDate!) && date.isBefore(endDate);
   }
 
-  Phase getPhaseForDate(DateTime date) {
+  Phase? getPhaseForDate(DateTime date) {
     final index = getPhaseIndexForDate(date);
 
     return getPhaseForPhaseIndex(index);
   }
 
-  Phase getPhaseForPhaseIndex(int index) {
-    if (index < 0 || index >= schedule.numberOfPhases) {
+  Phase? getPhaseForPhaseIndex(int index) {
+    if (index < 0 || index >= schedule!.numberOfPhases) {
       print('trial is over or has not begun.');
       return null;
     }
-    final _letter = schedule.phaseSequence[index];
+    final _letter = schedule!.phaseSequence![index];
 
     if (_letter == 'a')
       return a;
@@ -119,19 +119,19 @@ class Trial extends HiveObject {
   }
 
   int getPhaseIndexForDate(DateTime date) {
-    final test = date.differenceInDays(startDate).inDays;
-    return test ~/ schedule.phaseDuration;
+    final test = date.differenceInDays(startDate!).inDays;
+    return test ~/ schedule!.phaseDuration!;
   }
 
   generateWithSetInfos() {
     this.schedule = TrialSchedule.createDefault();
     if (this.type == TrialType.reversal) {
       this.a = WithdrawalPhase.fromIntervention(
-          letter: 'a', withdrawnIntervention: this.interventionA);
-      this.b = InterventionPhase(letter: 'b', intervention: this.interventionA);
+          letter: 'a', withdrawnIntervention: this.interventionA!);
+      this.b = InterventionPhase(letter: 'b', intervention: this.interventionA!);
     } else {
-      this.a = InterventionPhase(letter: 'a', intervention: this.interventionA);
-      this.b = InterventionPhase(letter: 'b', intervention: this.interventionB);
+      this.a = InterventionPhase(letter: 'a', intervention: this.interventionA!);
+      this.b = InterventionPhase(letter: 'b', intervention: this.interventionB!);
     }
   }
 

@@ -13,12 +13,12 @@ class Settings extends StatefulWidget {
 }
 
 class _SettingsState extends State<Settings> {
-  bool createFreshExperiment;
+  bool? createFreshExperiment;
 
   @override
   Widget build(BuildContext context) {
     bool _lastTrialHasEnded = DateTime.now()
-        .isAfter(Provider.of<AppData>(context, listen: false).trial.endDate);
+        .isAfter(Provider.of<AppData>(context, listen: false).trial!.endDate);
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
@@ -32,7 +32,7 @@ class _SettingsState extends State<Settings> {
           ChoiceCard(
               value: false,
               selectedValue: createFreshExperiment,
-              onSelect: (value) {
+              onSelect: (dynamic value) {
                 setState(() {
                   createFreshExperiment = value;
                 });
@@ -45,7 +45,7 @@ class _SettingsState extends State<Settings> {
           ChoiceCard(
               value: true,
               selectedValue: createFreshExperiment,
-              onSelect: (value) {
+              onSelect: (dynamic value) {
                 setState(() {
                   createFreshExperiment = value;
                 });
@@ -75,7 +75,7 @@ class _SettingsState extends State<Settings> {
   }
 
   _editTrial(BuildContext context) async {
-    bool _confirmed = await showDialog(
+    bool? _confirmed = await showDialog(
         context: context,
         builder: (context) => AlertDialog(
               title: Text("Create new Experiment"),
@@ -108,6 +108,6 @@ class _SettingsState extends State<Settings> {
 
   _resetNotificationsAndLogs(BuildContext context) {
     Provider.of<AppData>(context, listen: false).cancelAllNotifications();
-    deleteLogs(Provider.of<AppData>(context, listen: false).trial);
+    deleteLogs(Provider.of<AppData>(context, listen: false).trial!);
   }
 }

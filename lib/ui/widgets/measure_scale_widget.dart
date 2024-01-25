@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studyme/models/measure/scale_measure.dart';
 
 class ScaleMeasureWidget extends StatefulWidget {
-  final ScaleMeasure measure;
+  final ScaleMeasure? measure;
 
-  final void Function(num value) updateValue;
+  final void Function(num value)? updateValue;
 
   ScaleMeasureWidget(this.measure, this.updateValue);
 
@@ -14,11 +13,11 @@ class ScaleMeasureWidget extends StatefulWidget {
 }
 
 class _ScaleMeasureWidgetState extends State<ScaleMeasureWidget> {
-  num _state;
+  num? _state;
 
   @override
   void initState() {
-    _state = widget.measure.min;
+    _state = widget.measure!.min;
     super.initState();
   }
 
@@ -30,14 +29,14 @@ class _ScaleMeasureWidgetState extends State<ScaleMeasureWidget> {
           onChanged: (x) => setState(() {
             _state = x;
             if (widget.updateValue != null) {
-              widget.updateValue(x);
+              widget.updateValue!(x);
             }
           }),
-          value: _state,
-          min: widget.measure.min,
-          max: widget.measure.max,
-          label: _state.round().toString(),
-          divisions: (widget.measure.max - widget.measure.min).toInt(),
+          value: _state as double,
+          min: widget.measure!.min!,
+          max: widget.measure!.max!,
+          label: _state!.round().toString(),
+          divisions: (widget.measure!.max! - widget.measure!.min!).toInt(),
         ),
         Row(
           children: [
@@ -51,11 +50,11 @@ class _ScaleMeasureWidgetState extends State<ScaleMeasureWidget> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(widget.measure.min.toInt().toString(),
+                        Text(widget.measure!.min!.toInt().toString(),
                             textAlign: TextAlign.right,
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
-                        Text(widget.measure.minLabel,
+                        Text(widget.measure!.minLabel!,
                             textAlign: TextAlign.left,
                             style: TextStyle(fontSize: 18)),
                       ],
@@ -66,11 +65,11 @@ class _ScaleMeasureWidgetState extends State<ScaleMeasureWidget> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(widget.measure.max.toInt().toString(),
+                        Text(widget.measure!.max!.toInt().toString(),
                             textAlign: TextAlign.right,
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
-                        Text(widget.measure.maxLabel,
+                        Text(widget.measure!.maxLabel!,
                             textAlign: TextAlign.right,
                             style: TextStyle(fontSize: 18)),
                       ],

@@ -12,10 +12,10 @@ part 'phase_withdrawal.g.dart';
 class WithdrawalPhase extends Phase {
   static const String phaseType = 'withdrawal';
 
-  WithdrawalPhase({String letter}) : super(letter: letter);
+  WithdrawalPhase({String? letter}) : super(letter: letter);
 
   WithdrawalPhase.fromIntervention(
-      {String letter, Intervention withdrawnIntervention})
+      {String? letter, required Intervention withdrawnIntervention})
       : super(
             type: phaseType,
             name: 'Without "${withdrawnIntervention.name}"',

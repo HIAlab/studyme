@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/phase/phase.dart';
@@ -14,8 +14,7 @@ class CreatorSchedule extends StatelessWidget {
     return Consumer<AppData>(builder: (context, model, child) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Experiment Schedule'),
-          brightness: Brightness.dark,
+          title: Text('Experiment Schedule'), systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -43,17 +42,17 @@ class CreatorSchedule extends StatelessWidget {
                       ListView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: model.trial.schedule.phaseSequence.length,
+                        itemCount: model.trial!.schedule!.phaseSequence!.length,
                         itemBuilder: (context, index) {
                           String letter =
-                              model.trial.schedule.phaseSequence[index];
-                          Phase _phase =
-                              letter == 'a' ? model.trial.a : model.trial.b;
+                              model.trial!.schedule!.phaseSequence![index];
+                          Phase? _phase =
+                              letter == 'a' ? model.trial!.a : model.trial!.b;
                           return PhaseCard(
                               phase: _phase,
                               showSchedule: true,
                               trailing: Text(
-                                  'for ${model.trial.schedule.phaseDuration} days'));
+                                  'for ${model.trial!.schedule!.phaseDuration} days'));
                         },
                       ),
                       Card(
@@ -61,7 +60,7 @@ class CreatorSchedule extends StatelessWidget {
                               leading: Icon(Icons.flag),
                               title: Text("End"),
                               trailing: Text(
-                                  "after ${model.trial.schedule.totalDuration} days"))),
+                                  "after ${model.trial!.schedule!.totalDuration} days"))),
                       SizedBox(height: 30),
                       Center(
                         child: HighlightedActionButton(
