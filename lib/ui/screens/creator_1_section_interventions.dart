@@ -125,7 +125,7 @@ class CreatorInterventionSection extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (context) => TrialTypeEditor(
-            type: model.trial!.type!,
+            type: model.trial!.type,
             onSave: (TrialType type) {
               model.setTrialType(type);
               Navigator.pushNamedAndRemoveUntil(

@@ -72,7 +72,8 @@ class ScheduleEditorState extends State<ScheduleEditor> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Theme.of(context).primaryColor)),
+                        color: Theme.of(context).primaryColor)
+                ),
                 const SizedBox(height: 10),
                 _buildFrequencySelector(),
                 const SizedBox(height: 10),

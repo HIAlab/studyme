@@ -7,7 +7,7 @@ import 'package:studyme/ui/widgets/action_button.dart';
 import 'package:studyme/ui/widgets/choice_card.dart';
 
 class TrialTypeEditor extends StatefulWidget {
-  final TrialType type;
+  final TrialType? type;
   final Function(TrialType type) onSave;
 
   const TrialTypeEditor({Key? key, required this.type, required this.onSave}) : super(key: key);
