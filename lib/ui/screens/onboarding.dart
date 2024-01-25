@@ -202,9 +202,9 @@ class OnboardingState extends State<Onboarding> {
                                 onPressed: () => launchUrl(
                                   Uri(
                                     scheme: "https",
-                                    host: "www13.hpi.uni-potsdam.de",
+                                    host: "github.com",
                                     path:
-                                        "fileadmin/user_upload/fachgebiete/lippert/studyme/Privacy_Policy.pdf",
+                                        "HIAlab/studyme/legal/privacy_policy.md",
                                   )
                                 ),
                               ),
