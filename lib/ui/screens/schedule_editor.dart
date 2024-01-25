@@ -61,7 +61,7 @@ class ScheduleEditorState extends State<ScheduleEditor> {
                 icon: Icons.check,
                 canPress: _canSubmit(),
                 onPressed: _onSubmit),
-          ], systemOverlayStyle: SystemUiOverlayStyle.light,
+          ],
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -108,7 +108,7 @@ class ScheduleEditorState extends State<ScheduleEditor> {
   }
 
   _canSubmit() {
-    return _schedule!.times.length > 0;
+    return _schedule?.times.isNotEmpty;
   }
 
   _onSubmit() {

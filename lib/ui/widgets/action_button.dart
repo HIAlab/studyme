@@ -11,7 +11,7 @@ class ActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(icon, color: canPress! ? Colors.white : null),
+      icon: Icon(icon),
       onPressed: canPress! ? () => onPressed() : null,
     );
   }
