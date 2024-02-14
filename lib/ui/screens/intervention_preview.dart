@@ -9,13 +9,16 @@ class InterventionPreview extends StatelessWidget {
   final bool isA;
   final Intervention intervention;
 
-  const InterventionPreview({Key? key, required this.intervention, required this.isA}) : super(key: key);
+  const InterventionPreview(
+      {Key? key, required this.intervention, required this.isA})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(intervention.name!), systemOverlayStyle: SystemUiOverlayStyle.light,
+          title: Text(intervention.name!),
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -24,8 +27,8 @@ class InterventionPreview extends StatelessWidget {
               children: [
                 ListTile(
                   title: const Text("Name"),
-                  subtitle:
-                      Text(intervention.name!, style: const TextStyle(fontSize: 16)),
+                  subtitle: Text(intervention.name!,
+                      style: const TextStyle(fontSize: 16)),
                 ),
                 if (intervention.description != null)
                   ListTile(

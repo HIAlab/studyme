@@ -36,7 +36,8 @@ class TrialScheduleEditorState extends State<TrialScheduleEditor> {
           actions: <Widget>[
             ActionButton(
                 icon: Icons.check, canPress: _canSubmit(), onPressed: _onSubmit)
-          ], systemOverlayStyle: SystemUiOverlayStyle.light,
+          ],
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -57,16 +58,16 @@ class TrialScheduleEditorState extends State<TrialScheduleEditor> {
                     initialValue: _phases!.phaseDuration.toString(),
                     keyboardType: TextInputType.number,
                     onChanged: _updatePhaseDuration,
-                    decoration:
-                        const InputDecoration(labelText: 'Phase Duration (in days)'),
+                    decoration: const InputDecoration(
+                        labelText: 'Phase Duration (in days)'),
                   ),
                   const SizedBox(width: 5),
                   TextFormField(
                     initialValue: _phases!.numberOfPhasePairs.toString(),
                     keyboardType: TextInputType.number,
                     onChanged: _updateNumberOfCycles,
-                    decoration:
-                        const InputDecoration(labelText: 'Number of Phase Pairs'),
+                    decoration: const InputDecoration(
+                        labelText: 'Number of Phase Pairs'),
                   ),
                   const SizedBox(width: 5),
                   const SizedBox(height: 30),

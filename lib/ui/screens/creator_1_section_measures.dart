@@ -39,7 +39,8 @@ class CreatorMeasureSection extends StatelessWidget {
           children: [
             OutlinedButton.icon(
                 icon: const Icon(Icons.add),
-                label: Text('Add${model.trial!.measures!.isNotEmpty ? ' another' : ''}'),
+                label: Text(
+                    'Add${model.trial!.measures!.isNotEmpty ? ' another' : ''}'),
                 onPressed: () => _addMeasure(context)),
           ],
         ),

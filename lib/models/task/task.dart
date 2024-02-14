@@ -8,4 +8,9 @@ abstract class Task {
   String? get id => null;
 
   Task({this.title, this.body, this.time});
+
+  @override
+  String toString() {
+    return 'Task{title: $title, body: $body, time: $time}';
+  }
 }

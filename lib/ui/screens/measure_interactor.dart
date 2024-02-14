@@ -37,7 +37,8 @@ class MeasureInteractorState extends State<MeasureInteractor> {
           actions: <Widget>[
             ActionButton(
                 icon: Icons.check, canPress: _confirmed, onPressed: _logValue)
-          ], systemOverlayStyle: SystemUiOverlayStyle.light,
+          ],
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),

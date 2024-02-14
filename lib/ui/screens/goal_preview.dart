@@ -13,7 +13,8 @@ class GoalPreview extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(goal.goal!), systemOverlayStyle: SystemUiOverlayStyle.light,
+          title: Text(goal.goal!),
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -22,7 +23,8 @@ class GoalPreview extends StatelessWidget {
               children: [
                 ListTile(
                   title: const Text("Goal"),
-                  subtitle: Text(goal.goal!, style: const TextStyle(fontSize: 16)),
+                  subtitle:
+                      Text(goal.goal!, style: const TextStyle(fontSize: 16)),
                 ),
                 ButtonBar(
                   alignment: MainAxisAlignment.center,

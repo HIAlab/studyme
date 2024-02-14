@@ -29,7 +29,8 @@ class InterventionInteractorState extends State<InterventionInteractor> {
               icon: Icons.check,
               canPress: _confirmed,
               onPressed: _markCompleted)
-        ], systemOverlayStyle: SystemUiOverlayStyle.light,
+        ],
+        systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
       body: Padding(
           padding: const EdgeInsets.all(8),

@@ -11,6 +11,7 @@ class ListItem extends HiveObject {
 
   ListItem({this.value});
 
-  factory ListItem.fromJson(Map<String, dynamic> json) => _$ListItemFromJson(json);
+  factory ListItem.fromJson(Map<String, dynamic> json) =>
+      _$ListItemFromJson(json);
   Map<String, dynamic> toJson() => _$ListItemToJson(this);
 }

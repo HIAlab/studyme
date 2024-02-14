@@ -16,7 +16,8 @@ class CreatorSchedule extends StatelessWidget {
     return Consumer<AppData>(builder: (context, model, child) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Experiment Schedule'), systemOverlayStyle: SystemUiOverlayStyle.light,
+          title: const Text('Experiment Schedule'),
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SafeArea(
           child: SingleChildScrollView(

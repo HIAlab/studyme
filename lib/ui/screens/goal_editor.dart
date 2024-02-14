@@ -7,7 +7,8 @@ class GoalEditor extends StatefulWidget {
   final Goal goal;
   final Function(Goal goal) onSave;
 
-  const GoalEditor({Key? key, required this.goal, required this.onSave}) : super(key: key);
+  const GoalEditor({Key? key, required this.goal, required this.onSave})
+      : super(key: key);
 
   @override
   GoalEditorState createState() => GoalEditorState();
@@ -29,7 +30,8 @@ class GoalEditorState extends State<GoalEditor> {
           actions: <Widget>[
             ActionButton(
                 icon: Icons.check, canPress: _canSubmit(), onPressed: _onSubmit)
-          ], systemOverlayStyle: SystemUiOverlayStyle.light,
+          ],
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(

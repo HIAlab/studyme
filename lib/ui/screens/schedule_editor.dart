@@ -11,9 +11,11 @@ class ScheduleEditor extends StatefulWidget {
   final Function onSave;
 
   const ScheduleEditor(
-      {Key? key, required this.title,
+      {Key? key,
+      required this.title,
       required this.objectWithSchedule,
-      required this.onSave}) : super(key: key);
+      required this.onSave})
+      : super(key: key);
 
   @override
   ScheduleEditorState createState() => ScheduleEditorState();
@@ -72,8 +74,7 @@ class ScheduleEditorState extends State<ScheduleEditor> {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Theme.of(context).primaryColor)
-                ),
+                        color: Theme.of(context).primaryColor)),
                 const SizedBox(height: 10),
                 _buildFrequencySelector(),
                 const SizedBox(height: 10),
@@ -170,7 +171,8 @@ class ScheduleEditorState extends State<ScheduleEditor> {
   }
 
   Future<void> _addTime() async {
-    bool? hasGrantedNotificationPermissions = await Notifications().requestPermission();
+    bool? hasGrantedNotificationPermissions =
+        await Notifications().requestPermission();
     if (hasGrantedNotificationPermissions != false && mounted) {
       final TimeOfDay? picked = await showTimePicker(
           context: context,

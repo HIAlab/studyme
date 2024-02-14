@@ -6,7 +6,8 @@ class ScaleMeasureWidget extends StatefulWidget {
 
   final void Function(num value)? updateValue;
 
-  const ScaleMeasureWidget(this.measure, this.updateValue, {Key? key}) : super(key: key);
+  const ScaleMeasureWidget(this.measure, this.updateValue, {Key? key})
+      : super(key: key);
 
   @override
   ScaleMeasureWidgetState createState() => ScaleMeasureWidgetState();

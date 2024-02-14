@@ -96,8 +96,7 @@ class Reminder {
 
   clone() {
     return Reminder(
-        frequency: frequency,
-        timestamps: List<DateTime>.from(timestamps));
+        frequency: frequency, timestamps: List<DateTime>.from(timestamps));
   }
 
   factory Reminder.fromJson(Map<String, dynamic> json) =>

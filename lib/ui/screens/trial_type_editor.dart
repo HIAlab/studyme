@@ -10,7 +10,8 @@ class TrialTypeEditor extends StatefulWidget {
   final TrialType? type;
   final Function(TrialType type) onSave;
 
-  const TrialTypeEditor({Key? key, required this.type, required this.onSave}) : super(key: key);
+  const TrialTypeEditor({Key? key, required this.type, required this.onSave})
+      : super(key: key);
 
   @override
   TrialTypeEditorState createState() => TrialTypeEditorState();
@@ -36,7 +37,8 @@ class TrialTypeEditorState extends State<TrialTypeEditor> {
                 icon: Icons.check,
                 canPress: _canSubmit(),
                 onPressed: _onSubmit),
-          ], systemOverlayStyle: SystemUiOverlayStyle.light,
+          ],
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(

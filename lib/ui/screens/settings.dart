@@ -82,9 +82,7 @@ class SettingsState extends State<Settings> {
         builder: (context) => AlertDialog(
               title: const Text("Create new Experiment"),
               content: Text(
-                  'Are you sure you want to abort and create a new experiment${createFreshExperiment == true
-                          ? ' starting fresh'
-                          : ' based on your current experiment'}?'),
+                  'Are you sure you want to abort and create a new experiment${createFreshExperiment == true ? ' starting fresh' : ' based on your current experiment'}?'),
               actions: [
                 TextButton(
                     onPressed: () => Navigator.pop(context),

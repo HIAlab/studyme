@@ -17,7 +17,8 @@ class CreatorSetup extends StatelessWidget {
     return Consumer<AppData>(builder: (context, model, child) {
       return Scaffold(
         appBar: AppBar(
-          title: const Text('Your Experiment'), systemOverlayStyle: SystemUiOverlayStyle.light,
+          title: const Text('Your Experiment'),
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -32,8 +33,7 @@ class CreatorSetup extends StatelessWidget {
                             fontSize: 20,
                             color: Theme.of(context).primaryColor)),
                     ...model.trial!.measures!
-                        .map((measure) => MeasureCard(measure: measure))
-                        ,
+                        .map((measure) => MeasureCard(measure: measure)),
                     const SizedBox(height: 10),
                     Text('between two different phases*',
                         style: TextStyle(
@@ -51,8 +51,7 @@ class CreatorSetup extends StatelessWidget {
                     PhaseCard(phase: model.trial!.b, showSchedule: true),
                     const SizedBox(height: 10),
                     if (model.trial!.type == TrialType.alternatingTreatment)
-                      Text(
-                          'to see if A or B is better for achieving your goal',
+                      Text('to see if A or B is better for achieving your goal',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 20,

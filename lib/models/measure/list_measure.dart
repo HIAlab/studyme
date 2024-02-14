@@ -48,7 +48,6 @@ class ListMeasure extends Measure {
                 .asMap()
                 .entries
                 .map((e) => TickSpec<num>(e.key, label: e.value.value))
-                
           ],
         ),
       );

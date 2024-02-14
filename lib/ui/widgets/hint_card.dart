@@ -5,7 +5,8 @@ class HintCard extends StatelessWidget {
   final List<Widget>? body;
   final bool canClose;
 
-  const HintCard({Key? key, this.titleText, this.body, this.canClose = false}) : super(key: key);
+  const HintCard({Key? key, this.titleText, this.body, this.canClose = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,8 @@ class HintCard extends StatelessWidget {
           Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
               child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start, children: body!))
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: body!))
       ]),
     );
   }

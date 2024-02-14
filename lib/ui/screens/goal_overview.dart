@@ -30,7 +30,8 @@ class GoalOverviewState extends State<GoalOverview> {
             Goal goal = model.trial!.goal!;
             return Scaffold(
                 appBar: AppBar(
-                  title: Text(goal.goal!), systemOverlayStyle: SystemUiOverlayStyle.light,
+                  title: Text(goal.goal!),
+                  systemOverlayStyle: SystemUiOverlayStyle.light,
                 ),
                 body: SingleChildScrollView(
                   child: Padding(
@@ -39,8 +40,8 @@ class GoalOverviewState extends State<GoalOverview> {
                       children: [
                         EditableListTile(
                             title: const Text("Goal"),
-                            subtitle:
-                                Text(goal.goal!, style: const TextStyle(fontSize: 16)),
+                            subtitle: Text(goal.goal!,
+                                style: const TextStyle(fontSize: 16)),
                             onTap: () => _editGoal(goal)),
                         ButtonBar(
                           alignment: MainAxisAlignment.center,

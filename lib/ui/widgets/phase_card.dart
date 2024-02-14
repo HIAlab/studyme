@@ -11,10 +11,12 @@ class PhaseCard extends StatelessWidget {
   final void Function()? onTap;
 
   const PhaseCard(
-      {Key? key, required this.phase,
+      {Key? key,
+      required this.phase,
       this.onTap,
       this.showSchedule = false,
-      this.trailing}) : super(key: key);
+      this.trailing})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +25,8 @@ class PhaseCard extends StatelessWidget {
             leading: InterventionLetter(phase!.letter),
             title: _getTitle(),
             subtitle: _getSubtitle(phase),
-            trailing:
-                trailing ?? (onTap != null ? const Icon(Icons.chevron_right) : null),
+            trailing: trailing ??
+                (onTap != null ? const Icon(Icons.chevron_right) : null),
             onTap: onTap));
   }
 

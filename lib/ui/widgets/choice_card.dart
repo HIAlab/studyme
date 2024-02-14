@@ -8,7 +8,13 @@ class ChoiceCard<T> extends StatelessWidget {
   final void Function(T value) onSelect;
 
   const ChoiceCard(
-      {Key? key, this.value, this.title, this.body, this.selectedValue, required this.onSelect}) : super(key: key);
+      {Key? key,
+      this.value,
+      this.title,
+      this.body,
+      this.selectedValue,
+      required this.onSelect})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

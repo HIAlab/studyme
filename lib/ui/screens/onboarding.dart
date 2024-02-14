@@ -176,14 +176,12 @@ class OnboardingState extends State<Onboarding> {
                               OutlinedButton.icon(
                                 icon: const Icon(Icons.assignment_outlined),
                                 label: const Text('Terms of Use'),
-                                onPressed: () => launchUrl(
-                                  Uri(
-                                    scheme: "https",
-                                    host: "www13.hpi.uni-potsdam.de",
-                                    path:
-                                        "fileadmin/user_upload/fachgebiete/lippert/studyme/Terms_of_Use.pdf",
-                                  )
-                                ),
+                                onPressed: () => launchUrl(Uri(
+                                  scheme: "https",
+                                  host: "www13.hpi.uni-potsdam.de",
+                                  path:
+                                      "fileadmin/user_upload/fachgebiete/lippert/studyme/Terms_of_Use.pdf",
+                                )),
                               ),
                               SwitchListTile(
                                 title: const Text(
@@ -199,14 +197,12 @@ class OnboardingState extends State<Onboarding> {
                               OutlinedButton.icon(
                                 icon: const Icon(Icons.privacy_tip_outlined),
                                 label: const Text('Privacy Policy'),
-                                onPressed: () => launchUrl(
-                                  Uri(
-                                    scheme: "https",
-                                    host: "github.com",
-                                    path:
-                                        "HIAlab/studyme/legal/privacy_policy.md",
-                                  )
-                                ),
+                                onPressed: () => launchUrl(Uri(
+                                  scheme: "https",
+                                  host: "github.com",
+                                  path:
+                                      "HIAlab/studyme/legal/privacy_policy.md",
+                                )),
                               ),
                               SwitchListTile(
                                 title: const Text(
@@ -222,27 +218,23 @@ class OnboardingState extends State<Onboarding> {
                               OutlinedButton.icon(
                                 icon: const Icon(Icons.assignment_outlined),
                                 label: const Text('Imprint'),
-                                onPressed: () => launchUrl(
-                                  Uri(
-                                    scheme: "https",
-                                    host: "www13.hpi.uni-potsdam.de",
-                                    path:
-                                        "fileadmin/user_upload/fachgebiete/lippert/studyme/Imprint.pdf",
-                                  )
-                                ),
+                                onPressed: () => launchUrl(Uri(
+                                  scheme: "https",
+                                  host: "www13.hpi.uni-potsdam.de",
+                                  path:
+                                      "fileadmin/user_upload/fachgebiete/lippert/studyme/Imprint.pdf",
+                                )),
                               ),
                               const SizedBox(height: 10),
                               OutlinedButton.icon(
                                 icon: const Icon(Icons.assignment_outlined),
                                 label: const Text('Acknowledgments'),
-                                onPressed: () => launchUrl(
-                                  Uri(
-                                    scheme: "https",
-                                    host: "www13.hpi.uni-potsdam.de",
-                                    path:
-                                        "fileadmin/user_upload/fachgebiete/lippert/studyme/Acknowledgments.pdf",
-                                  )
-                                ),
+                                onPressed: () => launchUrl(Uri(
+                                  scheme: "https",
+                                  host: "www13.hpi.uni-potsdam.de",
+                                  path:
+                                      "fileadmin/user_upload/fachgebiete/lippert/studyme/Acknowledgments.pdf",
+                                )),
                               )
                             ],
                           )

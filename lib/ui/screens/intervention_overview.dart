@@ -37,7 +37,8 @@ class InterventionOverviewState extends State<InterventionOverview> {
                 : model.trial!.interventionB!;
             return Scaffold(
                 appBar: AppBar(
-                  title: Text(intervention.name!), systemOverlayStyle: SystemUiOverlayStyle.light,
+                  title: Text(intervention.name!),
+                  systemOverlayStyle: SystemUiOverlayStyle.light,
                 ),
                 body: SingleChildScrollView(
                   child: Padding(

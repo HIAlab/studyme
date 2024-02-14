@@ -40,7 +40,8 @@ class MeasureOverviewState extends State<MeasureOverview> {
             Measure measure = model.trial!.measures![widget.index];
             return Scaffold(
                 appBar: AppBar(
-                    title: Text(measure.name!), systemOverlayStyle: SystemUiOverlayStyle.light),
+                    title: Text(measure.name!),
+                    systemOverlayStyle: SystemUiOverlayStyle.light),
                 body: SingleChildScrollView(
                   child: Padding(
                       padding: const EdgeInsets.all(10.0),

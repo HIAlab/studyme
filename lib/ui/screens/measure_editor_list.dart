@@ -13,7 +13,11 @@ class MeasureEditorList extends StatefulWidget {
   final bool save;
 
   const MeasureEditorList(
-      {Key? key, required this.measure, required this.onSave, required this.save}) : super(key: key);
+      {Key? key,
+      required this.measure,
+      required this.onSave,
+      required this.save})
+      : super(key: key);
 
   @override
   MeasureEditorListState createState() => MeasureEditorListState();
@@ -54,7 +58,8 @@ class MeasureEditorListState extends State<MeasureEditorList> {
                 icon: widget.save ? Icons.check : Icons.arrow_forward,
                 canPress: _canSubmit(),
                 onPressed: _submit)
-          ], systemOverlayStyle: SystemUiOverlayStyle.light,
+          ],
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -76,8 +81,8 @@ class MeasureEditorListState extends State<MeasureEditorList> {
 
                       return Card(
                           child: ListTile(
-                        title:
-                            Text(choice.value!, style: const TextStyle(fontSize: 20)),
+                        title: Text(choice.value!,
+                            style: const TextStyle(fontSize: 20)),
                         trailing: IconButton(
                           icon: const Icon(Icons.delete),
                           onPressed: () => _removeChoice(index),

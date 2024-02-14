@@ -30,7 +30,11 @@ class Intervention with HasSchedule {
   Reminder? schedule;
 
   Intervention(
-      {id, this.name, this.description, this.instructions, Reminder? schedule}) {
+      {id,
+      this.name,
+      this.description,
+      this.instructions,
+      Reminder? schedule}) {
     this.id = id ?? const Uuid().v4();
     this.schedule = schedule ?? Reminder();
   }

@@ -15,9 +15,11 @@ class MeasureChart extends StatefulWidget {
   final TimeAggregation? timeAggregation;
 
   const MeasureChart(
-      {Key? key, required this.measure,
+      {Key? key,
+      required this.measure,
       required this.trial,
-      required this.timeAggregation}) : super(key: key);
+      required this.timeAggregation})
+      : super(key: key);
 
   @override
   MeasureChartState createState() => MeasureChartState();
@@ -77,8 +79,7 @@ class MeasureChartState extends State<MeasureChart> {
     return charts.NumericComboChart(_getSeriesData(),
         animate: false,
         behaviors: [
-          if (seperators != null)
-            seperators,
+          if (seperators != null) seperators,
           charts.ChartTitle(
             widget.timeAggregation.readable,
             outerPadding: 0,
@@ -104,7 +105,8 @@ class MeasureChartState extends State<MeasureChart> {
         ],
         domainAxis: charts.NumericAxisSpec(
             viewport: _getExtents(),
-            tickFormatterSpec: _getFormatterSpec() as charts.NumericTickFormatterSpec?,
+            tickFormatterSpec:
+                _getFormatterSpec() as charts.NumericTickFormatterSpec?,
             tickProviderSpec: _getProviderSpec()),
         primaryMeasureAxis: widget.measure.tickProvider);
   }
@@ -112,13 +114,14 @@ class MeasureChartState extends State<MeasureChart> {
   charts.RangeAnnotation<num>? _getSeperators() {
     if (widget.timeAggregation == TimeAggregation.Day) {
       final annotationSegments =
-        Iterable.generate(widget.trial!.schedule!.numberOfPhases + 1)
-            .map((i) => charts.LineAnnotationSegment<num>(
-          i * widget.trial!.schedule!.phaseDuration - 0.5,
-          charts.RangeAnnotationAxisType.domain,
-          color: charts.MaterialPalette.gray.shade400,
-          strokeWidthPx: 1,
-        )).toList();
+          Iterable.generate(widget.trial!.schedule!.numberOfPhases + 1)
+              .map((i) => charts.LineAnnotationSegment<num>(
+                    i * widget.trial!.schedule!.phaseDuration - 0.5,
+                    charts.RangeAnnotationAxisType.domain,
+                    color: charts.MaterialPalette.gray.shade400,
+                    strokeWidthPx: 1,
+                  ))
+              .toList();
       return charts.RangeAnnotation(annotationSegments);
     } else {
       //return charts.RangeAnnotation([]);
@@ -134,7 +137,8 @@ class MeasureChartState extends State<MeasureChart> {
                   widget.trial!.schedule!.phaseDuration! -
               1);
     } else if (widget.timeAggregation == TimeAggregation.Segment) {
-      return charts.NumericExtents(0, widget.trial!.schedule!.numberOfPhases - 1);
+      return charts.NumericExtents(
+          0, widget.trial!.schedule!.numberOfPhases - 1);
     } else if (widget.timeAggregation == TimeAggregation.Phase) {
       return const charts.NumericExtents(0, 1);
     } else {
@@ -217,8 +221,8 @@ class MeasureChartState extends State<MeasureChart> {
             _aggregate(_getValuesFromLogs(entry.value)), phase.letter);
       }).toList();
     } else if (widget.timeAggregation == TimeAggregation.Phase) {
-      final logsGroupedByIntervention = groupBy(
-          _logs, (TrialLog log) => widget.trial!.getPhaseForDate(log.dateTime!));
+      final logsGroupedByIntervention = groupBy(_logs,
+          (TrialLog log) => widget.trial!.getPhaseForDate(log.dateTime!));
       return logsGroupedByIntervention.entries.map((entry) {
         int aggregationUnit;
         if (entry.key!.letter == 'a') {
@@ -259,7 +263,6 @@ class _ChartValue {
         : charts.MaterialPalette.green.shadeDefault;
   }
 }
-
 
 // keep this in case I need it
 /*   charts.StaticNumericTickProviderSpec _getDomainTicks() {

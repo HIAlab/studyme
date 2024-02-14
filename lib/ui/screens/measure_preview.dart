@@ -17,7 +17,9 @@ class MeasurePreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text(measure.name!), systemOverlayStyle: SystemUiOverlayStyle.light),
+        appBar: AppBar(
+            title: Text(measure.name!),
+            systemOverlayStyle: SystemUiOverlayStyle.light),
         body: SingleChildScrollView(
           child: Padding(
               padding: const EdgeInsets.all(10.0),
@@ -25,14 +27,14 @@ class MeasurePreview extends StatelessWidget {
                 children: [
                   ListTile(
                     title: const Text("Name"),
-                    subtitle:
-                        Text(measure.name!, style: const TextStyle(fontSize: 16)),
+                    subtitle: Text(measure.name!,
+                        style: const TextStyle(fontSize: 16)),
                   ),
                   if (measure is KeyboardMeasure)
                     ListTile(
                       title: const Text("Unit"),
-                      subtitle:
-                          Text(measure.unit!, style: const TextStyle(fontSize: 16)),
+                      subtitle: Text(measure.unit!,
+                          style: const TextStyle(fontSize: 16)),
                     ),
                   ListTile(
                     title: const Text("Input Type"),

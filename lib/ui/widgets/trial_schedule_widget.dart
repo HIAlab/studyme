@@ -12,10 +12,12 @@ class TrialScheduleWidget extends StatefulWidget {
   final int activeIndex;
 
   const TrialScheduleWidget(
-      {Key? key, required this.schedule,
+      {Key? key,
+      required this.schedule,
       this.showDuration = false,
       this.showExplanation = false,
-      this.activeIndex = -1}) : super(key: key);
+      this.activeIndex = -1})
+      : super(key: key);
 
   @override
   TrialScheduleWidgetState createState() => TrialScheduleWidgetState();

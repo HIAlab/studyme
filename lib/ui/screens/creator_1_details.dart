@@ -37,7 +37,8 @@ class CreatorDetails extends StatelessWidget {
                 ),
               ],
             )
-          ], systemOverlayStyle: SystemUiOverlayStyle.light,
+          ],
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -60,8 +61,7 @@ class CreatorDetails extends StatelessWidget {
                   HighlightedActionButton(
                       icon: Icons.arrow_forward,
                       labelText: 'Set Up Experiment',
-                      onPressed: () =>
-                          _navigateToCreatorPhases(context, model))
+                      onPressed: () => _navigateToCreatorPhases(context, model))
                 ],
               ]),
             ),

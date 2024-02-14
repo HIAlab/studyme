@@ -16,7 +16,11 @@ class DashboardState extends State<Dashboard> {
 
   final List<String> _titles = ['Home', 'History', 'Settings'];
 
-  final List<Function> _body = [() => const Home(), () => const History(), () => const Settings()];
+  final List<Function> _body = [
+    () => const Home(),
+    () => const History(),
+    () => const Settings()
+  ];
 
   @override
   void initState() {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:studyme/models/task/task.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
@@ -10,7 +11,6 @@ class Notifications {
 
   Notifications._internal() {
     _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
     _initialize();
     _configureLocalTimeZone();
     _instance = this;
@@ -43,14 +43,12 @@ class Notifications {
         onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
   }
 
-  void onDidReceiveLocalNotification(int id, String? title, String? body, String? payload) {
-    onDidReceiveNotificationResponse(
-        NotificationResponse(
-            notificationResponseType: NotificationResponseType.selectedNotification,
-            id: id,
-            payload: payload
-        )
-    );
+  void onDidReceiveLocalNotification(
+      int id, String? title, String? body, String? payload) {
+    onDidReceiveNotificationResponse(NotificationResponse(
+        notificationResponseType: NotificationResponseType.selectedNotification,
+        id: id,
+        payload: payload));
   }
 
   void onDidReceiveNotificationResponse(NotificationResponse details) async {

@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:studyme/models/app_state/app_state.dart';
 import 'package:studyme/models/app_state/default_measures.dart';
@@ -166,7 +166,8 @@ class AppData extends ChangeNotifier {
 
   bool canDefineMeasures() {
     return canDefineInterventions() &&
-        ((_trial!.type == TrialType.reversal && _trial!.interventionA != null) ||
+        ((_trial!.type == TrialType.reversal &&
+                _trial!.interventionA != null) ||
             (_trial!.type == TrialType.alternatingTreatment &&
                 _trial!.interventionA != null &&
                 _trial!.interventionB != null));

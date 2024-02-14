@@ -11,7 +11,11 @@ class MeasureEditorUnit extends StatefulWidget {
   final bool save;
 
   const MeasureEditorUnit(
-      {Key? key, required this.measure, required this.onSave, required this.save}) : super(key: key);
+      {Key? key,
+      required this.measure,
+      required this.onSave,
+      required this.save})
+      : super(key: key);
 
   @override
   MeasureEditorUnitState createState() => MeasureEditorUnitState();
@@ -51,7 +55,8 @@ class MeasureEditorUnitState extends State<MeasureEditorUnit> {
                 icon: widget.save ? Icons.check : Icons.arrow_forward,
                 canPress: _canSubmit(),
                 onPressed: _submit)
-          ], systemOverlayStyle: SystemUiOverlayStyle.light,
+          ],
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),

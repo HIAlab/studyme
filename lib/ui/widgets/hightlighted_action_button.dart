@@ -6,9 +6,11 @@ class HighlightedActionButton extends StatelessWidget {
   final Function()? onPressed;
 
   const HighlightedActionButton(
-      {Key? key, required this.icon,
+      {Key? key,
+      required this.icon,
       required this.labelText,
-      required this.onPressed}) : super(key: key);
+      required this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

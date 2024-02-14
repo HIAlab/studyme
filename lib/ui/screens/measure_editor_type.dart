@@ -15,7 +15,9 @@ class MeasureEditorType extends StatefulWidget {
   final Measure measure;
   final Function(Measure measure) onSave;
 
-  const MeasureEditorType({Key? key, required this.measure, required this.onSave}) : super(key: key);
+  const MeasureEditorType(
+      {Key? key, required this.measure, required this.onSave})
+      : super(key: key);
 
   @override
   MeasureEditorTypeState createState() => MeasureEditorTypeState();
@@ -56,7 +58,8 @@ class MeasureEditorTypeState extends State<MeasureEditorType> {
               canPress: _canSubmit(),
               onPressed: _submit,
             )
-          ], systemOverlayStyle: SystemUiOverlayStyle.light,
+          ],
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -132,14 +135,18 @@ class MeasureEditorTypeState extends State<MeasureEditorType> {
           context,
           MaterialPageRoute(
             builder: (context) => MeasureEditorList(
-                measure: _measure as ListMeasure, onSave: widget.onSave, save: false),
+                measure: _measure as ListMeasure,
+                onSave: widget.onSave,
+                save: false),
           ));
     } else if (_measure is ScaleMeasure) {
       Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => MeasureEditorScale(
-                measure: _measure as ScaleMeasure, onSave: widget.onSave, save: false),
+                measure: _measure as ScaleMeasure,
+                onSave: widget.onSave,
+                save: false),
           ));
     } else if (_measure is KeyboardMeasure) {
       Navigator.push(

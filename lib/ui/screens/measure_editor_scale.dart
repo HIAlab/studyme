@@ -12,7 +12,11 @@ class MeasureEditorScale extends StatefulWidget {
   final bool save;
 
   const MeasureEditorScale(
-      {Key? key, required this.measure, required this.onSave, required this.save}) : super(key: key);
+      {Key? key,
+      required this.measure,
+      required this.onSave,
+      required this.save})
+      : super(key: key);
 
   @override
   MeasureEditorScaleState createState() => MeasureEditorScaleState();
@@ -58,7 +62,8 @@ class MeasureEditorScaleState extends State<MeasureEditorScale> {
                 icon: widget.save ? Icons.check : Icons.arrow_forward,
                 canPress: _canSubmit(),
                 onPressed: _submit)
-          ], systemOverlayStyle: SystemUiOverlayStyle.light,
+          ],
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -85,8 +90,8 @@ class MeasureEditorScaleState extends State<MeasureEditorScale> {
                 TextFormField(
                   initialValue: _minLabel,
                   onChanged: _updateMinLabel,
-                  decoration:
-                      const InputDecoration(labelText: 'Label for Minimum Value'),
+                  decoration: const InputDecoration(
+                      labelText: 'Label for Minimum Value'),
                 ),
                 const SizedBox(height: 20),
                 const Text('to',
@@ -102,8 +107,8 @@ class MeasureEditorScaleState extends State<MeasureEditorScale> {
                 TextFormField(
                   initialValue: _maxLabel,
                   onChanged: _updateMaxLabel,
-                  decoration:
-                      const InputDecoration(labelText: 'Label for Maximum Value'),
+                  decoration: const InputDecoration(
+                      labelText: 'Label for Maximum Value'),
                 ),
               ],
             ),

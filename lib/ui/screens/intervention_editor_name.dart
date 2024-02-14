@@ -12,10 +12,12 @@ class InterventionEditorName extends StatefulWidget {
   final bool save;
 
   const InterventionEditorName(
-      {Key? key, required this.intervention,
+      {Key? key,
+      required this.intervention,
       required this.isA,
       required this.onSave,
-      required this.save}) : super(key: key);
+      required this.save})
+      : super(key: key);
 
   @override
   InterventionEditorNameState createState() => InterventionEditorNameState();
@@ -55,7 +57,8 @@ class InterventionEditorNameState extends State<InterventionEditorName> {
                 icon: widget.save ? Icons.check : Icons.arrow_forward,
                 canPress: _canSubmit(),
                 onPressed: _submit)
-          ], systemOverlayStyle: SystemUiOverlayStyle.light,
+          ],
+          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(

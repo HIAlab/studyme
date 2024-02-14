@@ -8,10 +8,12 @@ class Timeline extends StatefulWidget {
   final Widget Function(int index) callback;
 
   const Timeline(
-      {Key? key, required this.activeIndex,
+      {Key? key,
+      required this.activeIndex,
       required this.height,
       required this.itemCount,
-      required this.callback}) : super(key: key);
+      required this.callback})
+      : super(key: key);
 
   @override
   TimelineState createState() => TimelineState();
