@@ -62,19 +62,24 @@ class Notifications {
     tz.TZDateTime scheduledTime = _getScheduledTime(date, reminder.time!);
     tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     if (!scheduledTime.isBefore(now)) {
+      const AndroidNotificationDetails androidNotificationDetails =
+          AndroidNotificationDetails('studyme_app', 'StudyMe',
+              channelDescription: 'StudyMe notifications',
+              importance: Importance.max,
+              priority: Priority.high,
+              ticker: 'ticker');
+      const NotificationDetails notificationDetails =
+          NotificationDetails(android: androidNotificationDetails);
       await _flutterLocalNotificationsPlugin.zonedSchedule(
-          id,
-          'Time for your experiment',
-          reminder.title,
-          scheduledTime,
-          const NotificationDetails(
-              android: AndroidNotificationDetails(
-            'studyme_app',
-            'StudyMe',
-            styleInformation: BigTextStyleInformation(''),
-          )),
-          uiLocalNotificationDateInterpretation:
-              UILocalNotificationDateInterpretation.absoluteTime);
+        id,
+        'Time for your experiment',
+        reminder.title,
+        scheduledTime,
+        notificationDetails,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.wallClockTime,
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      );
     }
   }
 
@@ -100,6 +105,8 @@ class Notifications {
         print(element.id);
         print(element.title);
       }
+    } else {
+      print('No pending notifications');
     }
   }
 
