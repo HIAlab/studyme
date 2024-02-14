@@ -124,11 +124,18 @@ class AppData extends ChangeNotifier {
     DateTime now = DateTime.now();
     _trial!.startDate = DateTime(now.year, now.month, now.day);
     _trial!.save();
-    scheduleNotificationsFor(now);
+    scheduleFutureNotifications();
   }
 
   saveAppState(AppState state) {
     box.put(stateKey, state);
+  }
+
+  void scheduleFutureNotifications() {
+    // schedule notifications for the next 10 days
+    for (int i = 0; i <= 10; i++) {
+      scheduleNotificationsFor(DateTime.now().add(Duration(days: i)));
+    }
   }
 
   void scheduleNotificationsFor(DateTime date) async {

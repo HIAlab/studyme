@@ -32,12 +32,7 @@ class InitState extends State<Init> {
         state == AppState.CREATING_PHASES) {
       Navigator.pushReplacementNamed(context, Routes.creator);
     } else if (state == AppState.DOING) {
-      // schedule notifications for the next 10 days
-      appData.cancelAllNotifications();
-      for (int i = 0; i <= 10; i++) {
-        Provider.of<AppData>(context, listen: false)
-            .scheduleNotificationsFor(DateTime.now().add(Duration(days: i)));
-      }
+      appData.scheduleFutureNotifications();
       Navigator.pushReplacementNamed(context, Routes.dashboard);
     }
   }
