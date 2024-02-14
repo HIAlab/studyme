@@ -24,9 +24,8 @@ class Notifications {
 
   Future<void> _configureLocalTimeZone() async {
     tz.initializeTimeZones();
-    DateTime dateTime = DateTime.now();
-    final currentTimeZone = dateTime.timeZoneName;
-    tz.setLocalLocation(tz.getLocation(currentTimeZone));
+    final String timeZoneName = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timeZoneName));
   }
 
   Future<void> _initialize() async {
