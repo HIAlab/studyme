@@ -13,10 +13,15 @@ class LogData extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List<String?>> getCompletedTaskIdsFor(DateTime? date) async {
+  Future<List<String?>> getCompletedTaskIdsFor(DateTime date) async {
     Box box = await Hive.openBox(completedTaskIdsKey);
     List<CompletedTaskLog> logs = box.values.toList().cast<CompletedTaskLog>();
-    logs.removeWhere((log) => log.dateTime!.difference(date!).inDays.abs() > 0);
+    // remove entries that are not from today
+    logs.removeWhere((log) {
+      return log.dateTime.year != date.year ||
+          log.dateTime.month != date.month ||
+          log.dateTime.day != date.day;
+    });
     return logs.map((log) => log.taskId).toList();
   }
 
