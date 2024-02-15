@@ -5,10 +5,10 @@ part 'completed_task_log.g.dart';
 @HiveType(typeId: 51)
 class CompletedTaskLog {
   @HiveField(0)
-  String? taskId;
+  String taskId;
 
   @HiveField(1)
-  DateTime? dateTime;
+  DateTime dateTime;
 
-  CompletedTaskLog({this.taskId, this.dateTime});
+  CompletedTaskLog({required this.taskId, required this.dateTime});
 }

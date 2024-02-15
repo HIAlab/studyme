@@ -8,32 +8,32 @@ import 'package:studyme/ui/screens/measure_interactor.dart';
 import 'package:studyme/util/time_of_day_extension.dart';
 
 class TaskCard extends StatelessWidget {
-  final Task? task;
-  final bool? isCompleted;
+  final Task task;
+  final bool isCompleted;
 
-  const TaskCard({Key? key, this.task, this.isCompleted}) : super(key: key);
+  const TaskCard({Key? key, required this.task, required this.isCompleted}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
         child: ListTile(
-      leading: Text(task!.time!.readable, style: _getTextStyle()),
-      title: Text(task!.title!, style: _getTextStyle()),
+      leading: Text(task.time!.readable, style: _getTextStyle()),
+      title: Text(task.title!, style: _getTextStyle()),
       trailing: Icon(_getIcon()),
       onTap: _getOnTap(context),
     ));
   }
 
   IconData _getIcon() {
-    return isCompleted! ? Icons.check : Icons.chevron_right;
+    return isCompleted ? Icons.check : Icons.chevron_right;
   }
 
   TextStyle? _getTextStyle() {
-    return isCompleted! ? const TextStyle(color: Colors.grey) : null;
+    return isCompleted ? const TextStyle(color: Colors.grey) : null;
   }
 
   Function()? _getOnTap(context) {
-    return isCompleted! ? null : () => _select(context);
+    return isCompleted ? null : () => _select(context);
   }
 
   _select(context) {

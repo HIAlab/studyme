@@ -11,10 +11,10 @@ import 'package:studyme/ui/widgets/hint_card.dart';
 import 'package:studyme/ui/widgets/task_card.dart';
 
 class TaskList extends StatefulWidget {
-  final Trial? trial;
-  final DateTime? date;
+  final Trial trial;
+  final DateTime date;
 
-  const TaskList({Key? key, this.trial, this.date}) : super(key: key);
+  const TaskList({Key? key, required this.trial, required this.date}) : super(key: key);
 
   @override
   TaskListState createState() => TaskListState();
@@ -30,7 +30,7 @@ class TaskListState extends State<TaskList> {
   @override
   void initState() {
     _isLoading = true;
-    _todaysTasks = widget.trial!.getTasksForDate(widget.date!);
+    _todaysTasks = widget.trial.getTasksForDate(widget.date);
     super.initState();
   }
 
@@ -55,7 +55,7 @@ class TaskListState extends State<TaskList> {
   }
 
   _buildTaskList() {
-    Phase? currentPhase = widget.trial!.getPhaseForDate(widget.date!);
+    Phase? currentPhase = widget.trial.getPhaseForDate(widget.date);
     return Column(
       children: [
         if (currentPhase is InterventionPhase) ...[
