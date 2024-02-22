@@ -18,58 +18,55 @@ class CreatorSchedule extends StatelessWidget {
           title: const Text('Experiment Schedule'),
         ),
         body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    ButtonBar(
-                      alignment: MainAxisAlignment.center,
-                      children: [
-                        OutlinedButton.icon(
-                            icon: const Icon(Icons.edit),
-                            label: const Text("Edit Schedule"),
-                            onPressed: () =>
-                                _navigateToScheduleEditor(context)),
-                      ],
-                    ),
-                    const Card(
-                        child: ListTile(
-                            leading: Icon(Icons.run_circle),
-                            title: Text("Start"),
-                            trailing: Text('Today'))),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: model.trial!.schedule!.phaseSequence!.length,
-                      itemBuilder: (context, index) {
-                        String letter =
-                            model.trial!.schedule!.phaseSequence![index];
-                        Phase? phase =
-                            letter == 'a' ? model.trial!.a : model.trial!.b;
-                        return PhaseCard(
-                            phase: phase,
-                            showSchedule: true,
-                            trailing: Text(
-                                'for ${model.trial!.schedule!.phaseDuration} days'));
-                      },
-                    ),
-                    Card(
-                        child: ListTile(
-                            leading: const Icon(Icons.flag),
-                            title: const Text("End"),
-                            trailing: Text(
-                                "after ${model.trial!.schedule!.totalDuration} days"))),
-                    const SizedBox(height: 30),
-                    Center(
-                      child: HighlightedActionButton(
-                          icon: Icons.check,
-                          labelText: 'Start Experiment',
-                          onPressed: () => _startTrial(context, model)),
-                    ),
-                    const SizedBox(height: 60),
-                  ]),
-            ),
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              ButtonBar(
+                alignment: MainAxisAlignment.center,
+                children: [
+                  OutlinedButton.icon(
+                      icon: const Icon(Icons.edit),
+                      label: const Text("Edit Schedule"),
+                      onPressed: () => _navigateToScheduleEditor(context)),
+                ],
+              ),
+              const Card(
+                  child: ListTile(
+                      leading: Icon(Icons.run_circle),
+                      title: Text("Start"),
+                      trailing: Text('Today'))),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: model.trial!.schedule!.phaseSequence!.length,
+                itemBuilder: (context, index) {
+                  String letter = model.trial!.schedule!.phaseSequence![index];
+                  Phase? phase =
+                      letter == 'a' ? model.trial!.a : model.trial!.b;
+                  return PhaseCard(
+                      phase: phase,
+                      showSchedule: true,
+                      trailing: Text(
+                          'for ${model.trial!.schedule!.phaseDuration} days'));
+                },
+              ),
+              Card(
+                  child: ListTile(
+                      leading: const Icon(Icons.flag),
+                      title: const Text("End"),
+                      trailing: Text(
+                          "after ${model.trial!.schedule!.totalDuration} days"))),
+              const SizedBox(height: 30),
+              Center(
+                child: HighlightedActionButton(
+                    icon: Icons.check,
+                    labelText: 'Start Experiment',
+                    onPressed: () => _startTrial(context, model)),
+              ),
+              const SizedBox(height: 60),
+            ]),
+          ),
         ),
       );
     });
@@ -88,6 +85,7 @@ class CreatorSchedule extends StatelessWidget {
     Provider.of<AppData>(context, listen: false)
         .addStepLogForSurvey('start trial');
     model.startTrial();
-    Navigator.pushNamedAndRemoveUntil(context, Routes.dashboard, (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, Routes.dashboard, (route) => false);
   }
 }

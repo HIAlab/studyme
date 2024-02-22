@@ -30,7 +30,6 @@ class GoalEditorState extends State<GoalEditor> {
             ActionButton(
                 icon: Icons.check, canPress: _canSubmit(), onPressed: _onSubmit)
           ],
-          
         ),
         body: SingleChildScrollView(
           child: Padding(

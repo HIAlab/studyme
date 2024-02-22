@@ -19,8 +19,7 @@ class InterventionLibrary extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AppData>(builder: (context, model, child) {
       return Scaffold(
-        appBar: AppBar(
-        ),
+        appBar: AppBar(),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(

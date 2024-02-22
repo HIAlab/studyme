@@ -37,33 +37,32 @@ class CreatorDetails extends StatelessWidget {
               ],
             )
           ],
-          
         ),
         body: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(children: [
-                CreatorGoalSection(
-                  model,
-                ),
-                if (model.canDefineInterventions())
-                  CreatorInterventionSection(model),
-                if (model.canDefineMeasures()) CreatorMeasureSection(model),
-                if (model.canStartTrial()) ...[
-                  Text('or go to next step:',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                          color: Theme.of(context).primaryColor)),
-                  const SizedBox(height: 5),
-                  HighlightedActionButton(
-                      icon: Icons.arrow_forward,
-                      labelText: 'Set Up Experiment',
-                      onPressed: () => _navigateToCreatorPhases(context, model))
-                ],
-              ]),
-            ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(children: [
+              CreatorGoalSection(
+                model,
+              ),
+              if (model.canDefineInterventions())
+                CreatorInterventionSection(model),
+              if (model.canDefineMeasures()) CreatorMeasureSection(model),
+              if (model.canStartTrial()) ...[
+                Text('or go to next step:',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: Theme.of(context).primaryColor)),
+                const SizedBox(height: 5),
+                HighlightedActionButton(
+                    icon: Icons.arrow_forward,
+                    labelText: 'Set Up Experiment',
+                    onPressed: () => _navigateToCreatorPhases(context, model))
+              ],
+            ]),
           ),
+        ),
       );
     });
   }

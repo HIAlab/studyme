@@ -37,7 +37,6 @@ class MeasureInteractorState extends State<MeasureInteractor> {
             ActionButton(
                 icon: Icons.check, canPress: _confirmed, onPressed: _logValue)
           ],
-          
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),

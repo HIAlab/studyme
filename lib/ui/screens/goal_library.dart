@@ -18,29 +18,29 @@ class GoalLibrary extends StatelessWidget {
       return Scaffold(
         body: SafeArea(
           child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              Text("What is a goal you have for your health or well-being?",
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                      color: Theme.of(context).primaryColor)),
-              LibraryCreateButton(onPressed: () => _createGoal(context)),
-              Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: goals.length,
-                  itemBuilder: (context, index) {
-                    Goal goal = goals[index];
-                    return GoalCard(
-                        goal: goal, onTap: () => _previewGoal(context, goal));
-                  },
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Text("What is a goal you have for your health or well-being?",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: Theme.of(context).primaryColor)),
+                LibraryCreateButton(onPressed: () => _createGoal(context)),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: goals.length,
+                    itemBuilder: (context, index) {
+                      Goal goal = goals[index];
+                      return GoalCard(
+                          goal: goal, onTap: () => _previewGoal(context, goal));
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
         ),
       );
     });
