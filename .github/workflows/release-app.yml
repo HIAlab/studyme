@@ -3,7 +3,7 @@ name: Github Release
 on:
   push:
     tags:
-      - 'studyme_app-v*'
+      - 'studyme-v*'
   workflow_dispatch:
 
 concurrency:
