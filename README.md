@@ -12,6 +12,8 @@ Zenner AM, Böttinger E, Konigorski S (2021). StudyMe: A New Mobile App For User
 ## Acknowledgments
 The app was developed by [Alexander Zenner](https://zenner.org) as part of his Master's thesis at the [Hasso Plattner Institute](https://hpi.de), supervised by Dr. Stefan Konigorski and Prof. Dr. Erwin Böttinger.
 
+The original repository can be found [here](https://github.com/alexanderzenner/studyme).
+
 ## Coding Setup
 - Follow [these instructions](https://flutter.dev/docs/get-started/install) to set up Flutter
 - Clone this repository
