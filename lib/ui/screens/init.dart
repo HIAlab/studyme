@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/app_state/app_state.dart';
 import 'package:studyme/routes.dart';
+import 'package:studyme/util/notifications.dart';
 
 class Init extends StatefulWidget {
   const Init({Key? key}) : super(key: key);
@@ -21,6 +22,7 @@ class InitState extends State<Init> {
   _initAppState() async {
     // first make sure app data is fetched from box
     await Provider.of<AppData>(context, listen: false).loadAppState();
+    await Notifications.init();
     if (!mounted) return;
     Provider.of<AppData>(context, listen: false)
         .addStepLogForSurvey('opened app');
@@ -32,6 +34,7 @@ class InitState extends State<Init> {
         state == AppState.CREATING_PHASES) {
       Navigator.pushReplacementNamed(context, Routes.creator);
     } else if (state == AppState.DOING) {
+      if (!mounted) return;
       appData.scheduleFutureNotifications();
       Navigator.pushReplacementNamed(context, Routes.dashboard);
     }

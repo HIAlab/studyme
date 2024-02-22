@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/phase_order.dart';
@@ -37,7 +36,6 @@ class TrialScheduleEditorState extends State<TrialScheduleEditor> {
             ActionButton(
                 icon: Icons.check, canPress: _canSubmit(), onPressed: _onSubmit)
           ],
-          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -52,7 +50,7 @@ class TrialScheduleEditorState extends State<TrialScheduleEditor> {
                           fontSize: 20,
                           color: Theme.of(context).primaryColor)),
                   const SizedBox(height: 10),
-                  TrialScheduleWidget(schedule: _phases, showDuration: true),
+                  TrialScheduleWidget(schedule: _phases!, showDuration: true),
                   const SizedBox(height: 20),
                   TextFormField(
                     initialValue: _phases!.phaseDuration.toString(),

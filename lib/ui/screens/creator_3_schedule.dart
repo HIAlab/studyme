@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/phase/phase.dart';
@@ -17,10 +16,8 @@ class CreatorSchedule extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(
           title: const Text('Experiment Schedule'),
-          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
-        body: SafeArea(
-          child: SingleChildScrollView(
+        body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
@@ -73,7 +70,6 @@ class CreatorSchedule extends StatelessWidget {
                     const SizedBox(height: 60),
                   ]),
             ),
-          ),
         ),
       );
     });
@@ -92,6 +88,6 @@ class CreatorSchedule extends StatelessWidget {
     Provider.of<AppData>(context, listen: false)
         .addStepLogForSurvey('start trial');
     model.startTrial();
-    Navigator.pushNamedAndRemoveUntil(context, Routes.dashboard, (r) => false);
+    Navigator.pushNamedAndRemoveUntil(context, Routes.dashboard, (route) => false);
   }
 }

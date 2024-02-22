@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/ui/screens/creator_2_setup.dart';
@@ -38,10 +37,9 @@ class CreatorDetails extends StatelessWidget {
               ],
             )
           ],
-          systemOverlayStyle: SystemUiOverlayStyle.light,
+          
         ),
-        body: SafeArea(
-          child: SingleChildScrollView(
+        body: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(children: [
@@ -66,7 +64,6 @@ class CreatorDetails extends StatelessWidget {
               ]),
             ),
           ),
-        ),
       );
     });
   }

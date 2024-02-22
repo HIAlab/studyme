@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/app_state/default_goals.dart';
@@ -17,10 +16,8 @@ class GoalLibrary extends StatelessWidget {
     return Consumer<AppData>(builder: (context, model, child) {
       List<Goal> goals = defaultGoals;
       return Scaffold(
-        appBar: AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle.light,
-        ),
-        body: Padding(
+        body: SafeArea(
+          child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
@@ -43,6 +40,7 @@ class GoalLibrary extends StatelessWidget {
               ),
             ],
           ),
+        ),
         ),
       );
     });

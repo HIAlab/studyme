@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:studyme/models/goal.dart';
 import 'package:studyme/ui/widgets/action_button.dart';
 
@@ -31,7 +30,7 @@ class GoalEditorState extends State<GoalEditor> {
             ActionButton(
                 icon: Icons.check, canPress: _canSubmit(), onPressed: _onSubmit)
           ],
-          systemOverlayStyle: SystemUiOverlayStyle.light,
+          
         ),
         body: SingleChildScrollView(
           child: Padding(

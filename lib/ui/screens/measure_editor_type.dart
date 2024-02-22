@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:studyme/models/measure/keyboard_measure.dart';
 import 'package:studyme/models/measure/list_measure.dart';
 import 'package:studyme/models/measure/measure.dart';
@@ -59,7 +58,6 @@ class MeasureEditorTypeState extends State<MeasureEditorType> {
               onPressed: _submit,
             )
           ],
-          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(

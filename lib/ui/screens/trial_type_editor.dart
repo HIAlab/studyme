@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/trial_type.dart';
@@ -38,7 +37,6 @@ class TrialTypeEditorState extends State<TrialTypeEditor> {
                 canPress: _canSubmit(),
                 onPressed: _onSubmit),
           ],
-          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(

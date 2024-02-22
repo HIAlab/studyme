@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:studyme/models/intervention.dart';
 import 'package:studyme/ui/screens/intervention_editor_instructions.dart';
 
@@ -58,7 +57,6 @@ class InterventionEditorNameState extends State<InterventionEditorName> {
                 canPress: _canSubmit(),
                 onPressed: _submit)
           ],
-          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(

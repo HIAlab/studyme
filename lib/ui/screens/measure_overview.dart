@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/measure/keyboard_measure.dart';
@@ -41,7 +40,7 @@ class MeasureOverviewState extends State<MeasureOverview> {
             return Scaffold(
                 appBar: AppBar(
                     title: Text(measure.name!),
-                    systemOverlayStyle: SystemUiOverlayStyle.light),
+                ),
                 body: SingleChildScrollView(
                   child: Padding(
                       padding: const EdgeInsets.all(10.0),

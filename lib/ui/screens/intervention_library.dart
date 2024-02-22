@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/app_state/default_interventions.dart';
@@ -21,7 +20,6 @@ class InterventionLibrary extends StatelessWidget {
     return Consumer<AppData>(builder: (context, model, child) {
       return Scaffold(
         appBar: AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),

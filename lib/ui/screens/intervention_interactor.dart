@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/log_data.dart';
 import 'package:studyme/models/log/completed_task_log.dart';
@@ -30,7 +29,6 @@ class InterventionInteractorState extends State<InterventionInteractor> {
               canPress: _confirmed,
               onPressed: _markCompleted)
         ],
-        systemOverlayStyle: SystemUiOverlayStyle.light,
       ),
       body: Padding(
           padding: const EdgeInsets.all(8),

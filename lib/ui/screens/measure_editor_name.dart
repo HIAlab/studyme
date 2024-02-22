@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:studyme/models/measure/measure.dart';
 
 import '../widgets/action_button.dart';
@@ -56,7 +55,6 @@ class MeasureEditorNameState extends State<MeasureEditorName> {
                 canPress: _canSubmit(),
                 onPressed: _submit)
           ],
-          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),

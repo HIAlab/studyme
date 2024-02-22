@@ -6,7 +6,7 @@ import 'package:studyme/ui/widgets/timeline_card.dart';
 import 'package:studyme/util/color_map.dart';
 
 class TrialScheduleWidget extends StatefulWidget {
-  final TrialSchedule? schedule;
+  final TrialSchedule schedule;
   final bool showDuration;
   final bool showExplanation;
   final int activeIndex;
@@ -32,19 +32,19 @@ class TrialScheduleWidgetState extends State<TrialScheduleWidget> {
         Timeline(
             activeIndex: widget.activeIndex,
             height: widget.showDuration ? 71 : 50,
-            itemCount: widget.schedule!.numberOfPhases + 1,
+            itemCount: widget.schedule.numberOfPhases + 1,
             callback: (int index) {
               Widget cardContent;
               Widget? textBelowCard;
               Color? cardColor = Colors.white;
 
-              if (index == widget.schedule!.numberOfPhases) {
+              if (index == widget.schedule.numberOfPhases) {
                 cardContent = const Icon(Icons.flag);
                 if (widget.showDuration) {
                   textBelowCard = _buildTotalDurationText();
                 }
               } else {
-                String letter = widget.schedule!.phaseSequence![index];
+                String letter = widget.schedule.phaseSequence![index];
                 cardContent = InterventionLetter(letter,
                     isInverted: index < widget.activeIndex);
                 if (widget.showDuration) {
@@ -67,14 +67,14 @@ class TrialScheduleWidgetState extends State<TrialScheduleWidget> {
 
   _buildTotalDurationText() {
     return Text(
-      '= ${widget.schedule!.phaseDuration! * widget.schedule!.numberOfPhases}d',
+      '= ${widget.schedule.phaseDuration! * widget.schedule.numberOfPhases}d',
       style: const TextStyle(fontWeight: FontWeight.bold),
       overflow: TextOverflow.ellipsis,
     );
   }
 
   _buildPhaseDurationText() {
-    return Text(('${widget.schedule!.phaseDuration}d'),
+    return Text(('${widget.schedule.phaseDuration}d'),
         overflow: TextOverflow.ellipsis);
   }
 }

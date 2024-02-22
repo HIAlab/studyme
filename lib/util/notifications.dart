@@ -7,18 +7,25 @@ import 'package:timezone/timezone.dart' as tz;
 
 class Notifications {
   static Notifications? _instance;
+  Notifications._();
   late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
 
-  Notifications._internal() {
+  static Future<void> init() async {
+    final notifications = Notifications._();
+    await notifications._load();
+    _instance = notifications;
+  }
+
+  Future<void> _load() async {
     _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    _initialize();
-    _configureLocalTimeZone();
-    _instance = this;
+    await _initialize();
+    await _configureLocalTimeZone();
   }
 
   factory Notifications() {
-    _instance ??= Notifications._internal();
-
+    if (_instance == null) {
+      throw Exception('Notifications not initialized');
+    }
     return _instance!;
   }
 
@@ -30,7 +37,7 @@ class Notifications {
 
   Future<void> _initialize() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
+        AndroidInitializationSettings('@drawable/ic_launcher');
     final DarwinInitializationSettings initializationSettingsDarwin =
         DarwinInitializationSettings(
             onDidReceiveLocalNotification: onDidReceiveLocalNotification);

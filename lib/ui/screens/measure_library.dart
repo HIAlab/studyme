@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/measure/keyboard_measure.dart';
@@ -18,9 +17,6 @@ class MeasureLibrary extends StatelessWidget {
     return Consumer<AppData>(builder: (context, model, child) {
       List<Measure> unaddedMeasures = model.unaddedMeasures;
       return Scaffold(
-        appBar: AppBar(
-          systemOverlayStyle: SystemUiOverlayStyle.light,
-        ),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(

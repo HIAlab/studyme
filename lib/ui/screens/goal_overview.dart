@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/goal.dart';
@@ -31,7 +30,6 @@ class GoalOverviewState extends State<GoalOverview> {
             return Scaffold(
                 appBar: AppBar(
                   title: Text(goal.goal!),
-                  systemOverlayStyle: SystemUiOverlayStyle.light,
                 ),
                 body: SingleChildScrollView(
                   child: Padding(

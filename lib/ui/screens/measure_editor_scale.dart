@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:studyme/models/measure/measure.dart';
 import 'package:studyme/models/measure/scale_measure.dart';
 import 'package:studyme/ui/screens/schedule_editor.dart';
@@ -63,7 +62,6 @@ class MeasureEditorScaleState extends State<MeasureEditorScale> {
                 canPress: _canSubmit(),
                 onPressed: _submit)
           ],
-          systemOverlayStyle: SystemUiOverlayStyle.light,
         ),
         body: SingleChildScrollView(
           child: Padding(

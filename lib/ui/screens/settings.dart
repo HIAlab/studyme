@@ -93,7 +93,7 @@ class SettingsState extends State<Settings> {
               ],
             ));
 
-    if (confirmed != null && confirmed && mounted) {
+    if (confirmed != null && confirmed && context.mounted) {
       _resetNotificationsAndLogs(context);
       Provider.of<AppData>(context, listen: false)
           .saveAppState(AppState.CREATING_DETAILS);
