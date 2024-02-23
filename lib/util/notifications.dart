@@ -85,7 +85,7 @@ class Notifications {
             UILocalNotificationDateInterpretation.wallClockTime,
         androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
       );
-      print('Scheduled notification ${reminder.title} for $scheduledTime');
+      print('Scheduled notification ${reminder.title} for $scheduledTime in ${scheduledTime.difference(now).inMinutes} min');
     }
   }
 
