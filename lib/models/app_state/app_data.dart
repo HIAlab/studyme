@@ -16,6 +16,7 @@ import '../goal.dart';
 class AppData extends ChangeNotifier {
   static const activeTrialKey = 'trial';
   static const stateKey = 'state';
+  static const notificationIdCounterKey = 'notificationIdCounterKey';
   static const interventionALetter = 'a';
   static const interventionBLetter = 'b';
 
@@ -130,25 +131,30 @@ class AppData extends ChangeNotifier {
   }
 
   void scheduleFutureNotifications() {
-    Notifications().clearAll();
+    cancelAllNotifications();
     // schedule notifications for the next 10 days
     for (int i = 0; i <= 10; i++) {
-      _scheduleNotificationsFor(i, DateTime.now().add(Duration(days: i)));
+      _scheduleNotificationsFor(DateTime.now().add(Duration(days: i)));
     }
   }
 
-  void _scheduleNotificationsFor(int id, DateTime date) async {
-    // check that we haven't already scheduled notifications up to this date
-    // clean the date, so comparison is based on day alone and not specific time
+  void _scheduleNotificationsFor(DateTime date) async {
+    int id = box.get(notificationIdCounterKey) ?? 0;
     List<Task> tasks = _trial!.getTasksForDate(date);
-
-    if (date.difference(DateTime.now()).inDays == 0) {
+    if (date.difference(getNow()).inDays == 0) {
       tasks.removeWhere(
           (element) => element.time!.combined < element.time!.combined);
     }
-    for (var task in tasks) {
+    for (Task task in tasks) {
       Notifications().scheduleNotificationFor(date, task, id);
+      id++;
     }
+    box.put(notificationIdCounterKey, id);
+  }
+
+  void cancelAllNotifications() {
+    Notifications().clearAll();
+    box.put(notificationIdCounterKey, null);
   }
 
   bool canDefineInterventions() {

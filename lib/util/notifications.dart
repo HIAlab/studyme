@@ -37,7 +37,7 @@ class Notifications {
 
   Future<void> _initialize() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings('@drawable/ic_launcher');
+        AndroidInitializationSettings('@mipmap/ic_launcher');
     final DarwinInitializationSettings initializationSettingsDarwin =
         DarwinInitializationSettings(
             onDidReceiveLocalNotification: onDidReceiveLocalNotification);
@@ -85,7 +85,8 @@ class Notifications {
             UILocalNotificationDateInterpretation.wallClockTime,
         androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
       );
-      print('Scheduled notification ${reminder.title} for $scheduledTime in ${scheduledTime.difference(now).inMinutes} min');
+      print(
+          'Scheduled notification $id, ${reminder.title}, $scheduledTime in ${scheduledTime.difference(now).inMinutes} min');
     }
   }
 
