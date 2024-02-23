@@ -44,17 +44,18 @@ class Home extends StatelessWidget {
           TrialScheduleWidget(
               schedule: trial.schedule!, activeIndex: activeIndex),
           body,
-          kDebugMode && dateToday.isBefore(trial.endDate) ?
-          Align(
-              alignment: Alignment.bottomLeft,
-              child: ElevatedButton(
-              onPressed: () {
-                Provider.of<AppData>(context, listen: false).shiftByDays++;
-                Navigator.pushReplacementNamed(context, Routes.dashboard);
-              },
-              child: const Text('Skip to next day')
-              )
-          ) : Container()
+          kDebugMode && dateToday.isBefore(trial.endDate)
+              ? Align(
+                  alignment: Alignment.bottomLeft,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Provider.of<AppData>(context, listen: false)
+                            .shiftByDays++;
+                        Navigator.pushReplacementNamed(
+                            context, Routes.dashboard);
+                      },
+                      child: const Text('Skip to next day')))
+              : Container()
         ]),
       ),
     );
@@ -62,13 +63,17 @@ class Home extends StatelessWidget {
 
   _buildActiveBody(BuildContext context, Trial trial, DateTime date) {
     Phase? phase = trial.getPhaseForDate(date);
-    final dayOfPhase = trial.getDayOfStudyFor(date) % trial.schedule!.phaseDuration! + 1;
+    final dayOfPhase =
+        trial.getDayOfStudyFor(date) % trial.schedule!.phaseDuration! + 1;
     int shiftByDays = Provider.of<AppData>(context, listen: false).shiftByDays;
     final dateString = DateFormat('yyyy-MM-dd').format(date);
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       if (phase != null) PhaseCard(phase: phase),
-      if (kDebugMode) Text("Debug: Day of phase: $dayOfPhase of ${trial.schedule!.phaseDuration!}"),
-      if (kDebugMode) Text("Debug: Today: $dateString (shifted by $shiftByDays days)"),
+      if (kDebugMode)
+        Text(
+            "Debug: Day of phase: $dayOfPhase of ${trial.schedule!.phaseDuration!}"),
+      if (kDebugMode)
+        Text("Debug: Today: $dateString (shifted by $shiftByDays days)"),
       const SizedBox(height: 20),
       Text('Today',
           style: TextStyle(
