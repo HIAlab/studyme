@@ -20,7 +20,8 @@ class SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
-    bool lastTrialHasEnded = DateTime.now()
+    final now = Provider.of<AppData>(context, listen: false).getNow();
+    bool lastTrialHasEnded = now
         .isAfter(Provider.of<AppData>(context, listen: false).trial!.endDate);
     return Padding(
       padding: const EdgeInsets.all(10.0),
@@ -96,6 +97,7 @@ class SettingsState extends State<Settings> {
 
     if (confirmed != null && confirmed && context.mounted) {
       _resetNotificationsAndLogs(context);
+      Provider.of<AppData>(context, listen: false).shiftByDays = 0;
       Provider.of<AppData>(context, listen: false)
           .saveAppState(AppState.CREATING_DETAILS);
       if (createFreshExperiment == true) {
@@ -106,7 +108,6 @@ class SettingsState extends State<Settings> {
   }
 
   _resetNotificationsAndLogs(BuildContext context) {
-    //Provider.of<AppData>(context, listen: false).cancelAllNotifications();
     Notifications().clearAll();
     deleteLogs(Provider.of<AppData>(context, listen: false).trial!);
   }

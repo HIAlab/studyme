@@ -6,6 +6,8 @@ import 'package:studyme/models/task/intervention_task.dart';
 import 'package:studyme/ui/widgets/action_button.dart';
 import 'package:studyme/ui/widgets/task_header.dart';
 
+import '../../models/app_state/app_data.dart';
+
 class InterventionInteractor extends StatefulWidget {
   final InterventionTask? task;
 
@@ -50,7 +52,7 @@ class InterventionInteractorState extends State<InterventionInteractor> {
   }
 
   _markCompleted() {
-    var now = DateTime.now();
+    final now = Provider.of<AppData>(context, listen: false).getNow();
     Provider.of<LogData>(context, listen: false).addCompletedTaskLog(
         CompletedTaskLog(taskId: widget.task!.id, dateTime: now));
     Navigator.pop(context, true);

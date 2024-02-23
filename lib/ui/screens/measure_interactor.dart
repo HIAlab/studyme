@@ -8,6 +8,8 @@ import 'package:studyme/ui/widgets/action_button.dart';
 import 'package:studyme/ui/widgets/measure_widget.dart';
 import 'package:studyme/ui/widgets/task_header.dart';
 
+import '../../models/app_state/app_data.dart';
+
 class MeasureInteractor extends StatefulWidget {
   final MeasureTask? task;
 
@@ -64,7 +66,7 @@ class MeasureInteractorState extends State<MeasureInteractor> {
   }
 
   _logValue() {
-    var now = DateTime.now();
+    final now = Provider.of<AppData>(context, listen: false).getNow();
     var time = DateTime(now.year, now.month, now.day, widget.task!.time!.hour,
         widget.task!.time!.minute);
     if (_value != null) {

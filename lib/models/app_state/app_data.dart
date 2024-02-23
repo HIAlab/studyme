@@ -20,6 +20,7 @@ class AppData extends ChangeNotifier {
   static const interventionBLetter = 'b';
 
   late Box box;
+  int shiftByDays = 0;
   Trial? _trial;
   List<Measure>? _measures;
 
@@ -165,5 +166,9 @@ class AppData extends ChangeNotifier {
 
   bool canStartTrial() {
     return canDefineMeasures() && _trial!.measures!.isNotEmpty;
+  }
+
+  DateTime getNow() {
+    return DateTime.now().add(Duration(days: shiftByDays));
   }
 }
