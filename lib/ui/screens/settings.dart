@@ -4,6 +4,7 @@ import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/app_state/app_state.dart';
 import 'package:studyme/ui/widgets/choice_card.dart';
 import 'package:studyme/util/debug_functions.dart';
+import 'package:studyme/util/notifications.dart';
 
 import '../../routes.dart';
 
@@ -105,7 +106,8 @@ class SettingsState extends State<Settings> {
   }
 
   _resetNotificationsAndLogs(BuildContext context) {
-    Provider.of<AppData>(context, listen: false).cancelAllNotifications();
+    //Provider.of<AppData>(context, listen: false).cancelAllNotifications();
+    Notifications().clearAll();
     deleteLogs(Provider.of<AppData>(context, listen: false).trial!);
   }
 }
