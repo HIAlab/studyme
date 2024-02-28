@@ -201,7 +201,7 @@ class OnboardingState extends State<Onboarding> {
                                   scheme: "https",
                                   host: "github.com",
                                   path:
-                                      "HIAlab/studyme/legal/privacy_policy.md",
+                                      "HIAlab/studyme/blob/main/legal/privacy_policy.md",
                                 )),
                               ),
                               SwitchListTile(
