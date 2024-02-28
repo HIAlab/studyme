@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:studyme/models/goal.dart';
 
 class GoalCard extends StatelessWidget {
-  final Goal goal;
-  final void Function() onTap;
+  final Goal? goal;
+  final void Function()? onTap;
 
-  GoalCard({this.goal, this.onTap});
+  const GoalCard({Key? key, this.goal, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
-        leading: Icon(Icons.star, color: Colors.yellow),
-        title: Text(goal.goal),
-        trailing: onTap != null ? Icon(Icons.chevron_right) : null,
+        leading: const Icon(Icons.star, color: Colors.yellow),
+        title: Text(goal!.goal!),
+        trailing: onTap != null ? const Icon(Icons.chevron_right) : null,
         onTap: onTap,
       ),
     );

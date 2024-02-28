@@ -8,25 +8,25 @@ part 'trial_schedule.g.dart';
 @HiveType(typeId: 201)
 class TrialSchedule extends HiveObject {
   @HiveField(0)
-  PhaseOrder phaseOrder;
+  PhaseOrder? phaseOrder;
 
   @HiveField(1)
-  int phaseDuration;
+  int? phaseDuration;
 
   @HiveField(2)
-  List<String> phaseSequence;
+  List<String>? phaseSequence;
 
   @HiveField(3)
-  int numberOfPhasePairs;
+  int? numberOfPhasePairs;
 
-  int get numberOfPhases => phaseSequence.length;
+  int get numberOfPhases => phaseSequence!.length;
 
   TrialSchedule();
 
   TrialSchedule.createDefault() {
-    this.phaseOrder = PhaseOrder.alternating;
-    this.phaseDuration = 7;
-    this.numberOfPhasePairs = 2;
+    phaseOrder = PhaseOrder.alternating;
+    phaseDuration = 7;
+    numberOfPhasePairs = 2;
     _updatePhaseSequence();
   }
 
@@ -40,9 +40,9 @@ class TrialSchedule extends HiveObject {
     return TrialSchedule.clone(this);
   }
 
-  int get totalDuration => phaseDuration * numberOfPhases;
+  int get totalDuration => phaseDuration! * numberOfPhases;
 
-  updatePhaseOrder(PhaseOrder newPhaseOrder) {
+  updatePhaseOrder(PhaseOrder? newPhaseOrder) {
     phaseOrder = newPhaseOrder;
     _updatePhaseSequence();
   }
@@ -56,7 +56,7 @@ class TrialSchedule extends HiveObject {
     List<String> pair = ['a', 'b'];
     List<String> newPhaseSequence = [];
 
-    for (int i = 0; i < numberOfPhasePairs; i++) {
+    for (int i = 0; i < numberOfPhasePairs!; i++) {
       newPhaseSequence.addAll(pair);
       if (phaseOrder == PhaseOrder.counterbalanced) {
         pair = pair.reversed.toList();

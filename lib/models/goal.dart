@@ -12,17 +12,17 @@ class Goal {
   String id;
 
   @HiveField(1)
-  String goal;
+  String? goal;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   List<Intervention> _suggestedInterventions;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   List<Intervention> get suggestedInterventions => _suggestedInterventions;
 
   Goal({id, this.goal, suggestedInterventions})
-      : this.id = id ?? Uuid().v4(),
-        this._suggestedInterventions = suggestedInterventions ?? [];
+      : id = id ?? const Uuid().v4(),
+        _suggestedInterventions = suggestedInterventions ?? [];
 
   factory Goal.fromJson(Map<String, dynamic> json) => _$GoalFromJson(json);
   Map<String, dynamic> toJson() => _$GoalToJson(this);

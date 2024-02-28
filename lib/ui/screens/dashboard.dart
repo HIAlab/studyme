@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studyme/ui/screens/settings.dart';
 
@@ -6,16 +5,22 @@ import 'history.dart';
 import 'home.dart';
 
 class Dashboard extends StatefulWidget {
+  const Dashboard({Key? key}) : super(key: key);
+
   @override
-  _DashboardState createState() => _DashboardState();
+  DashboardState createState() => DashboardState();
 }
 
-class _DashboardState extends State<Dashboard> {
-  int _currentIndex;
+class DashboardState extends State<Dashboard> {
+  late int _currentIndex;
 
-  List<String> _titles = ['Home', 'History', 'Settings'];
+  final List<String> _titles = ['Home', 'History', 'Settings'];
 
-  List<Function> _body = [() => Home(), () => History(), () => Settings()];
+  final List<Function> _body = [
+    () => const Home(),
+    () => const History(),
+    () => const Settings()
+  ];
 
   @override
   void initState() {
@@ -37,15 +42,15 @@ class _DashboardState extends State<Dashboard> {
           },
           items: [
             BottomNavigationBarItem(
-              icon: new Icon(Icons.home),
+              icon: const Icon(Icons.home),
               label: _titles[0],
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.insert_chart),
+              icon: const Icon(Icons.insert_chart),
               label: _titles[1],
             ),
             BottomNavigationBarItem(
-              icon: new Icon(Icons.settings),
+              icon: const Icon(Icons.settings),
               label: _titles[2],
             )
           ]),

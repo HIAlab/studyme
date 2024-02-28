@@ -12,5 +12,5 @@ enum PhaseOrder {
 }
 
 extension PhaseOrderExtension on PhaseOrder {
-  String get readable => this.toString().split('.').last.capitalize();
+  String get readable => toString().split('.').last.capitalize();
 }

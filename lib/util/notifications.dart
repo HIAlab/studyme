@@ -1,71 +1,92 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:studyme/models/task/task.dart';
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 class Notifications {
-  static Notifications _instance;
-  FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
+  static Notifications? _instance;
+  Notifications._();
+  late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
 
-  Notifications._internal() {
+  static Future<void> init() async {
+    final notifications = Notifications._();
+    await notifications._load();
+    _instance = notifications;
+  }
+
+  Future<void> _load() async {
     _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-    _initialize();
-    _configureLocalTimeZone();
-    _instance = this;
+    await _initialize();
+    await _configureLocalTimeZone();
   }
 
   factory Notifications() {
     if (_instance == null) {
-      _instance = Notifications._internal();
+      throw Exception('Notifications not initialized');
     }
-
-    return _instance;
+    return _instance!;
   }
 
   Future<void> _configureLocalTimeZone() async {
     tz.initializeTimeZones();
-    final currentTimeZone = await FlutterNativeTimezone.getLocalTimezone();
-    tz.setLocalLocation(tz.getLocation(currentTimeZone));
+    final String timeZoneName = await FlutterTimezone.getLocalTimezone();
+    tz.setLocalLocation(tz.getLocation(timeZoneName));
   }
 
   Future<void> _initialize() async {
-    final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-        FlutterLocalNotificationsPlugin();
-
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
+    final DarwinInitializationSettings initializationSettingsDarwin =
+        DarwinInitializationSettings(
+            onDidReceiveLocalNotification: onDidReceiveLocalNotification);
 
-    final InitializationSettings initializationSettings =
-        InitializationSettings(
-            android: initializationSettingsAndroid,
-            iOS: IOSInitializationSettings(),
-            macOS: MacOSInitializationSettings());
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+    InitializationSettings initializationSettings = InitializationSettings(
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsDarwin,
+    );
+    await _flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
+  }
+
+  void onDidReceiveLocalNotification(
+      int id, String? title, String? body, String? payload) {
+    onDidReceiveNotificationResponse(NotificationResponse(
+        notificationResponseType: NotificationResponseType.selectedNotification,
+        id: id,
+        payload: payload));
+  }
+
+  void onDidReceiveNotificationResponse(NotificationResponse details) async {
+    // todo: implement
   }
 
   Future<void> scheduleNotificationFor(
       DateTime date, Task reminder, int id) async {
-    tz.TZDateTime scheduledTime = _getScheduledTime(date, reminder.time);
+    tz.TZDateTime scheduledTime = _getScheduledTime(date, reminder.time!);
     tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     if (!scheduledTime.isBefore(now)) {
+      const AndroidNotificationDetails androidNotificationDetails =
+          AndroidNotificationDetails('studyme_app', 'StudyMe',
+              channelDescription: 'StudyMe notifications',
+              importance: Importance.max,
+              priority: Priority.high,
+              ticker: 'ticker');
+      const NotificationDetails notificationDetails =
+          NotificationDetails(android: androidNotificationDetails);
       await _flutterLocalNotificationsPlugin.zonedSchedule(
-          id,
-          'Time for your experiment',
-          reminder.title,
-          scheduledTime,
-          const NotificationDetails(
-              android: AndroidNotificationDetails(
-            'studyme_app',
-            'StudyMe Notifications',
-            'StudyMe Notifications',
-            styleInformation: BigTextStyleInformation(''),
-          )),
-          androidAllowWhileIdle: true,
-          uiLocalNotificationDateInterpretation:
-              UILocalNotificationDateInterpretation.absoluteTime);
+        id,
+        'Time for your experiment',
+        reminder.title,
+        scheduledTime,
+        notificationDetails,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.wallClockTime,
+        androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      );
+      print(
+          'Scheduled notification $id, ${reminder.title}, $scheduledTime in ${scheduledTime.difference(now).inMinutes} min');
     }
   }
 
@@ -75,26 +96,24 @@ class Notifications {
     return scheduledDate;
   }
 
-  Future<bool> requestPermission() {
+  Future<bool?>? requestPermission() {
     return _flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
-        ?.requestPermissions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.requestNotificationsPermission();
   }
 
   debugShowPendingRequests() async {
     final List<PendingNotificationRequest> pendingNotificationRequests =
         await _flutterLocalNotificationsPlugin.pendingNotificationRequests();
 
-    if (pendingNotificationRequests.length > 0) {
-      pendingNotificationRequests.forEach((element) {
+    if (pendingNotificationRequests.isNotEmpty) {
+      for (var element in pendingNotificationRequests) {
         print(element.id);
         print(element.title);
-      });
+      }
+    } else {
+      print('No pending notifications');
     }
   }
 

@@ -17,8 +17,8 @@ class ReminderAdapter extends TypeAdapter<Reminder> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Reminder(
-      frequency: fields[0] as int,
-      timestamps: (fields[1] as List)?.cast<DateTime>(),
+      frequency: fields[0] as int?,
+      timestamps: (fields[1] as List?)?.cast<DateTime>(),
     );
   }
 
@@ -47,17 +47,15 @@ class ReminderAdapter extends TypeAdapter<Reminder> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Reminder _$ReminderFromJson(Map<String, dynamic> json) {
-  return Reminder(
-    frequency: json['frequency'] as int,
-    timestamps: (json['timestamps'] as List)
-        ?.map((e) => e == null ? null : DateTime.parse(e as String))
-        ?.toList(),
-  );
-}
+Reminder _$ReminderFromJson(Map<String, dynamic> json) => Reminder(
+      frequency: json['frequency'] as int? ?? 1,
+      timestamps: (json['timestamps'] as List<dynamic>?)
+          ?.map((e) => DateTime.parse(e as String))
+          .toList(),
+    );
 
 Map<String, dynamic> _$ReminderToJson(Reminder instance) => <String, dynamic>{
       'frequency': instance.frequency,
       'timestamps':
-          instance.timestamps?.map((e) => e?.toIso8601String())?.toList(),
+          instance.timestamps.map((e) => e.toIso8601String()).toList(),
     };

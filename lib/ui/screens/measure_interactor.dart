@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/log_data.dart';
@@ -9,18 +8,20 @@ import 'package:studyme/ui/widgets/action_button.dart';
 import 'package:studyme/ui/widgets/measure_widget.dart';
 import 'package:studyme/ui/widgets/task_header.dart';
 
-class MeasureInteractor extends StatefulWidget {
-  final MeasureTask task;
+import '../../models/app_state/app_data.dart';
 
-  MeasureInteractor(this.task);
+class MeasureInteractor extends StatefulWidget {
+  final MeasureTask? task;
+
+  const MeasureInteractor(this.task, {Key? key}) : super(key: key);
 
   @override
-  _MeasureInteractorState createState() => _MeasureInteractorState();
+  MeasureInteractorState createState() => MeasureInteractorState();
 }
 
-class _MeasureInteractorState extends State<MeasureInteractor> {
-  num _value;
-  bool _confirmed;
+class MeasureInteractorState extends State<MeasureInteractor> {
+  num? _value;
+  bool? _confirmed;
 
   @override
   void initState() {
@@ -33,8 +34,7 @@ class _MeasureInteractorState extends State<MeasureInteractor> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
-          title: Text(widget.task.measure.name),
+          title: Text(widget.task!.measure.name!),
           actions: <Widget>[
             ActionButton(
                 icon: Icons.check, canPress: _confirmed, onPressed: _logValue)
@@ -46,7 +46,7 @@ class _MeasureInteractorState extends State<MeasureInteractor> {
             children: [
               TaskHeader(task: widget.task),
               MeasureWidget(
-                measure: widget.task.measure,
+                measure: widget.task!.measure,
                 updateValue: _updateValue,
                 confirmed: _confirmed,
                 setConfirmed: (value) => setState(() {
@@ -66,16 +66,16 @@ class _MeasureInteractorState extends State<MeasureInteractor> {
   }
 
   _logValue() {
-    var now = DateTime.now();
-    var time = DateTime(now.year, now.month, now.day, widget.task.time.hour,
-        widget.task.time.minute);
+    final now = Provider.of<AppData>(context, listen: false).getNow();
+    var time = DateTime(now.year, now.month, now.day, widget.task!.time!.hour,
+        widget.task!.time!.minute);
     if (_value != null) {
-      var log = TrialLog(widget.task.measure.id, time, _value);
+      var log = TrialLog(widget.task!.measure.id, time, _value);
       Provider.of<LogData>(context, listen: false)
-          .addMeasureLogs([log], widget.task.measure);
+          .addMeasureLogs([log], widget.task!.measure);
     }
     Provider.of<LogData>(context, listen: false).addCompletedTaskLog(
-        CompletedTaskLog(taskId: widget.task.id, dateTime: now));
+        CompletedTaskLog(taskId: widget.task!.id, dateTime: now));
     Navigator.pop(context, true);
   }
 }

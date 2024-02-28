@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:studyme/models/measure/scale_measure.dart';
@@ -21,37 +20,38 @@ abstract class Measure with HasSchedule {
   };
 
   @HiveField(0)
-  String id;
+  String? id;
 
   @HiveField(1)
-  String type;
+  String? type;
 
   @HiveField(2)
-  String name;
+  String? name;
 
   @HiveField(3)
-  String unit;
+  String? unit;
 
+  @override
   @HiveField(4)
-  Reminder schedule;
+  Reminder? schedule;
 
-  static IconData icon;
+  static IconData? icon;
 
-  Measure({this.id, this.type, this.name, this.unit, Reminder schedule}) {
-    this.id = id ?? Uuid().v4();
+  Measure({this.id, this.type, this.name, this.unit, Reminder? schedule}) {
+    id = id ?? const Uuid().v4();
     this.schedule = schedule ?? Reminder();
   }
 
   Measure.clone(Measure measure) {
-    this.id = Uuid().v4();
-    this.type = measure.type;
-    this.name = measure.name;
-    this.unit = measure.unit;
-    this.schedule = measure.schedule;
+    id = const Uuid().v4();
+    type = measure.type;
+    name = measure.name;
+    unit = measure.unit;
+    schedule = measure.schedule;
   }
 
   getIcon() {
-    switch (this.runtimeType) {
+    switch (runtimeType) {
       case KeyboardMeasure:
         return KeyboardMeasure.icon;
       case ListMeasure:
@@ -64,13 +64,13 @@ abstract class Measure with HasSchedule {
   }
 
   clone() {
-    switch (this.runtimeType) {
+    switch (runtimeType) {
       case KeyboardMeasure:
-        return KeyboardMeasure.clone(this);
+        return KeyboardMeasure.clone(this as KeyboardMeasure);
       case ListMeasure:
-        return ListMeasure.clone(this);
+        return ListMeasure.clone(this as ListMeasure);
       case ScaleMeasure:
-        return ScaleMeasure.clone(this);
+        return ScaleMeasure.clone(this as ScaleMeasure);
     }
   }
 
@@ -82,12 +82,12 @@ abstract class Measure with HasSchedule {
 
   List<Task> getTasksFor(int daysSinceBeginningOfTimeRange) {
     List<TimeOfDay> times =
-        this.schedule.getTaskTimesFor(daysSinceBeginningOfTimeRange);
+        schedule!.getTaskTimesFor(daysSinceBeginningOfTimeRange);
     return times.map((time) => MeasureTask(this, time)).toList();
   }
 
   Map<String, dynamic> toJson();
 
   factory Measure.fromJson(Map<String, dynamic> data) =>
-      measureTypes[data["measureType"]](data);
+      measureTypes[data["measureType"]]!(data);
 }

@@ -3,9 +3,9 @@ import 'package:studyme/models/trial.dart';
 import 'package:studyme/ui/widgets/timeline.dart';
 
 class PhaseWidget extends StatelessWidget {
-  final Trial trial;
+  final Trial? trial;
 
-  PhaseWidget({this.trial});
+  const PhaseWidget({Key? key, this.trial}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class PhaseWidget extends StatelessWidget {
         height: 50,
         itemCount: 0,
         callback: (index) {
-          return Text("hi");
+          return const Text("hi");
         });
   }
 }

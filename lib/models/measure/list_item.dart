@@ -7,10 +7,11 @@ part 'list_item.g.dart';
 @HiveType(typeId: 4)
 class ListItem extends HiveObject {
   @HiveField(0)
-  String value;
+  String? value;
 
   ListItem({this.value});
 
-  factory ListItem.fromJson(Map<String, dynamic> json) => _$ListItemFromJson(json);
+  factory ListItem.fromJson(Map<String, dynamic> json) =>
+      _$ListItemFromJson(json);
   Map<String, dynamic> toJson() => _$ListItemToJson(this);
 }

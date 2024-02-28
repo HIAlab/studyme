@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
@@ -14,15 +13,13 @@ import 'intervention_editor_name.dart';
 class InterventionLibrary extends StatelessWidget {
   final bool isA;
 
-  InterventionLibrary({@required this.isA});
+  const InterventionLibrary({Key? key, required this.isA}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Consumer<AppData>(builder: (context, model, child) {
       return Scaffold(
-        appBar: AppBar(
-          brightness: Brightness.dark,
-        ),
+        appBar: AppBar(),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
@@ -46,13 +43,13 @@ class InterventionLibrary extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                             color: Theme.of(context).primaryColor)),
-                    if (model.trial.goal.suggestedInterventions.length == 0)
+                    if (model.trial!.goal!.suggestedInterventions.isEmpty)
                       HintCard(
                           titleText:
-                              'No suggestions for "${model.trial.goal.goal}" available'),
-                    if (model.trial.goal.suggestedInterventions.length > 0)
-                      _buildListWith(model.trial.goal.suggestedInterventions),
-                    SizedBox(height: 10),
+                              'No suggestions for "${model.trial!.goal!.goal}" available'),
+                    if (model.trial!.goal!.suggestedInterventions.isNotEmpty)
+                      _buildListWith(model.trial!.goal!.suggestedInterventions),
+                    const SizedBox(height: 10),
                     Text('Other',
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -72,13 +69,13 @@ class InterventionLibrary extends StatelessWidget {
   _buildListWith(List<Intervention> interventions) {
     return ListView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: interventions.length,
       itemBuilder: (context, index) {
-        Intervention _intervention = interventions[index];
+        Intervention intervention = interventions[index];
         return InterventionCard(
-            intervention: _intervention,
-            onTap: () => _previewIntervention(context, _intervention));
+            intervention: intervention,
+            onTap: () => _previewIntervention(context, intervention));
       },
     );
   }
@@ -94,10 +91,10 @@ class InterventionLibrary extends StatelessWidget {
   }
 
   _createIntervention(BuildContext context) {
-    Function saveFunction = (Intervention intervention) {
+    saveFunction(Intervention intervention) {
       _getSetter(context)(intervention);
       Navigator.pushNamedAndRemoveUntil(context, '/creator', (r) => false);
-    };
+    }
 
     Navigator.push(
       context,
@@ -105,7 +102,7 @@ class InterventionLibrary extends StatelessWidget {
         builder: (context) => InterventionEditorName(
             intervention: Intervention(),
             isA: isA,
-            onSave: saveFunction,
+            onSave: saveFunction as dynamic Function(Intervention?),
             save: false),
       ),
     );

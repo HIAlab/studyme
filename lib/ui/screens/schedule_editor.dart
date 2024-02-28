@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studyme/models/mixins/has_schedule.dart';
 import 'package:studyme/models/reminder.dart';
@@ -7,29 +6,31 @@ import 'package:studyme/util/notifications.dart';
 import 'package:studyme/util/time_of_day_extension.dart';
 
 class ScheduleEditor extends StatefulWidget {
-  final String title;
-  final HasSchedule objectWithSchedule;
+  final String? title;
+  final HasSchedule? objectWithSchedule;
   final Function onSave;
 
   const ScheduleEditor(
-      {@required this.title,
-      @required this.objectWithSchedule,
-      @required this.onSave});
+      {Key? key,
+      required this.title,
+      required this.objectWithSchedule,
+      required this.onSave})
+      : super(key: key);
 
   @override
-  _ScheduleEditorState createState() => _ScheduleEditorState();
+  ScheduleEditorState createState() => ScheduleEditorState();
 }
 
-class _ScheduleEditorState extends State<ScheduleEditor> {
-  Frequency _frequency;
-  Reminder _schedule;
+class ScheduleEditorState extends State<ScheduleEditor> {
+  Frequency? _frequency;
+  Reminder? _schedule;
 
   @override
   initState() {
-    _schedule = widget.objectWithSchedule.schedule.clone();
+    _schedule = widget.objectWithSchedule!.schedule!.clone();
     if (_schedule != null) {
       _frequency =
-          _schedule.frequency == 1 ? Frequency.Daily : Frequency.EveryXDays;
+          _schedule!.frequency == 1 ? Frequency.Daily : Frequency.EveryXDays;
     } else {
       _frequency = Frequency.Daily;
     }
@@ -40,13 +41,12 @@ class _ScheduleEditorState extends State<ScheduleEditor> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(widget.title),
-              Visibility(
+              Text(widget.title!),
+              const Visibility(
                 visible: true,
                 child: Text(
                   'Schedule',
@@ -75,19 +75,19 @@ class _ScheduleEditorState extends State<ScheduleEditor> {
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         color: Theme.of(context).primaryColor)),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 _buildFrequencySelector(),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: _schedule.times.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: _schedule!.times.length,
                     itemBuilder: (content, index) {
                       return Card(
                         child: ListTile(
-                          title: Text(_schedule.times[index].readable),
+                          title: Text(_schedule!.times[index].readable),
                           trailing: IconButton(
-                            icon: Icon(Icons.delete),
+                            icon: const Icon(Icons.delete),
                             onPressed: () => _removeTime(index),
                           ),
                         ),
@@ -97,8 +97,8 @@ class _ScheduleEditorState extends State<ScheduleEditor> {
                   alignment: MainAxisAlignment.center,
                   children: [
                     OutlinedButton.icon(
-                        icon: Icon(Icons.add),
-                        label: Text("Add Time"),
+                        icon: const Icon(Icons.add),
+                        label: const Text("Add Time"),
                         onPressed: _addTime),
                   ],
                 ),
@@ -109,61 +109,61 @@ class _ScheduleEditorState extends State<ScheduleEditor> {
   }
 
   _canSubmit() {
-    return _schedule.times.length > 0;
+    return _schedule?.times.isNotEmpty;
   }
 
   _onSubmit() {
-    widget.objectWithSchedule.schedule = _schedule;
+    widget.objectWithSchedule!.schedule = _schedule;
     widget.onSave(widget.objectWithSchedule);
   }
 
   _buildFrequencySelector() {
-    Widget _dropDown = DropdownButtonFormField<Frequency>(
+    Widget dropDown = DropdownButtonFormField<Frequency>(
       onChanged: _changeFrequency,
       value: _frequency,
       items: Frequency.values
           .map((value) => DropdownMenuItem<Frequency>(
-              value: value, child: Text(value.readable)))
+              value: value, child: Text(value.readable!)))
           .toList(),
     );
 
     if (_frequency == Frequency.Daily) {
-      return _dropDown;
+      return dropDown;
     } else {
       return Row(
         crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Expanded(child: _dropDown),
-          SizedBox(width: 5),
+          Expanded(child: dropDown),
+          const SizedBox(width: 5),
           Expanded(
             child: TextFormField(
               keyboardType: TextInputType.number,
-              initialValue: _schedule.frequency.toString(),
+              initialValue: _schedule!.frequency.toString(),
               onChanged: _setFrequency,
             ),
           ),
-          SizedBox(width: 5),
-          Text("days")
+          const SizedBox(width: 5),
+          const Text("days")
         ],
       );
     }
   }
 
-  _changeFrequency(Frequency newFrequency) {
+  _changeFrequency(Frequency? newFrequency) {
     if (newFrequency != _frequency) {
       setState(() {
         _frequency = newFrequency;
-        _schedule.frequency = newFrequency.initial;
+        _schedule!.frequency = newFrequency.initial;
       });
     }
   }
 
   _setFrequency(String text) {
     try {
-      int value = text.length > 0 ? int.parse(text) : 0;
+      int value = text.isNotEmpty ? int.parse(text) : 0;
       if (value > 1) {
-        _schedule.frequency = value;
+        _schedule!.frequency = value;
       }
     } on Exception catch (_) {
       print("Invalid number");
@@ -171,16 +171,16 @@ class _ScheduleEditorState extends State<ScheduleEditor> {
   }
 
   Future<void> _addTime() async {
-    bool hasGrantedNotificationPermissions =
+    bool? hasGrantedNotificationPermissions =
         await Notifications().requestPermission();
-    if (hasGrantedNotificationPermissions != false) {
-      final TimeOfDay picked = await showTimePicker(
+    if (hasGrantedNotificationPermissions != false && mounted) {
+      final TimeOfDay? picked = await showTimePicker(
           context: context,
           initialTime: TimeOfDay(hour: TimeOfDay.now().hour, minute: 0));
 
       if (picked != null) {
         setState(() {
-          _schedule.addTime(picked);
+          _schedule!.addTime(picked);
         });
       }
     }
@@ -188,15 +188,15 @@ class _ScheduleEditorState extends State<ScheduleEditor> {
 
   _removeTime(int index) {
     setState(() {
-      _schedule.removeTime(index);
+      _schedule!.removeTime(index);
     });
   }
 }
 
 enum Frequency { Daily, EveryXDays }
 
-extension FrequencyExtension on Frequency {
-  String get readable {
+extension FrequencyExtension on Frequency? {
+  String? get readable {
     if (this == Frequency.Daily) {
       return 'Daily';
     } else if (this == Frequency.EveryXDays) {
@@ -206,7 +206,7 @@ extension FrequencyExtension on Frequency {
     }
   }
 
-  int get initial {
+  int? get initial {
     if (this == Frequency.Daily) {
       return 1;
     } else if (this == Frequency.EveryXDays) {

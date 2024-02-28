@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studyme/models/measure/measure.dart';
 
@@ -11,14 +10,18 @@ class MeasureEditorName extends StatefulWidget {
   final bool save;
 
   const MeasureEditorName(
-      {@required this.measure, @required this.onSave, @required this.save});
+      {Key? key,
+      required this.measure,
+      required this.onSave,
+      required this.save})
+      : super(key: key);
 
   @override
-  _MeasureEditorNameState createState() => _MeasureEditorNameState();
+  MeasureEditorNameState createState() => MeasureEditorNameState();
 }
 
-class _MeasureEditorNameState extends State<MeasureEditorName> {
-  String _name;
+class MeasureEditorNameState extends State<MeasureEditorName> {
+  String? _name;
 
   @override
   void initState() {
@@ -30,13 +33,12 @@ class _MeasureEditorNameState extends State<MeasureEditorName> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(_name ?? ''),
-              Visibility(
+              const Visibility(
                 visible: true,
                 child: Text(
                   'Name',
@@ -64,14 +66,14 @@ class _MeasureEditorNameState extends State<MeasureEditorName> {
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                       color: Theme.of(context).primaryColor)),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               TextFormField(
                 autofocus: _name == null,
                 initialValue: _name,
                 onChanged: _changeName,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Name',
                 ),
               ),
@@ -81,7 +83,7 @@ class _MeasureEditorNameState extends State<MeasureEditorName> {
   }
 
   _canSubmit() {
-    return _name != null && _name.length > 0;
+    return _name != null && _name!.isNotEmpty;
   }
 
   _submit() {

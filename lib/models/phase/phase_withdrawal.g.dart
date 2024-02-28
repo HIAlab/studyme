@@ -17,10 +17,10 @@ class WithdrawalPhaseAdapter extends TypeAdapter<WithdrawalPhase> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return WithdrawalPhase(
-      letter: fields[2] as String,
+      letter: fields[2] as String?,
     )
-      ..type = fields[0] as String
-      ..name = fields[1] as String;
+      ..type = fields[0] as String?
+      ..name = fields[1] as String?;
   }
 
   @override
@@ -50,13 +50,12 @@ class WithdrawalPhaseAdapter extends TypeAdapter<WithdrawalPhase> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-WithdrawalPhase _$WithdrawalPhaseFromJson(Map<String, dynamic> json) {
-  return WithdrawalPhase(
-    letter: json['letter'] as String,
-  )
-    ..type = json['type'] as String
-    ..name = json['name'] as String;
-}
+WithdrawalPhase _$WithdrawalPhaseFromJson(Map<String, dynamic> json) =>
+    WithdrawalPhase(
+      letter: json['letter'] as String?,
+    )
+      ..type = json['type'] as String?
+      ..name = json['name'] as String?;
 
 Map<String, dynamic> _$WithdrawalPhaseToJson(WithdrawalPhase instance) =>
     <String, dynamic>{

@@ -6,17 +6,18 @@ import 'package:studyme/ui/widgets/action_button.dart';
 import 'package:studyme/ui/widgets/choice_card.dart';
 
 class TrialTypeEditor extends StatefulWidget {
-  final TrialType type;
+  final TrialType? type;
   final Function(TrialType type) onSave;
 
-  TrialTypeEditor({this.type, this.onSave});
+  const TrialTypeEditor({Key? key, required this.type, required this.onSave})
+      : super(key: key);
 
   @override
-  _TrialTypeEditorState createState() => _TrialTypeEditorState();
+  TrialTypeEditorState createState() => TrialTypeEditorState();
 }
 
-class _TrialTypeEditorState extends State<TrialTypeEditor> {
-  TrialType _type;
+class TrialTypeEditorState extends State<TrialTypeEditor> {
+  TrialType? _type;
 
   @override
   void initState() {
@@ -26,11 +27,10 @@ class _TrialTypeEditorState extends State<TrialTypeEditor> {
 
   @override
   Widget build(BuildContext context) {
-    String interventionAName =
-        Provider.of<AppData>(context).trial.interventionA.name;
+    String? interventionAName =
+        Provider.of<AppData>(context).trial!.interventionA!.name;
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           actions: <Widget>[
             ActionButton(
                 icon: Icons.check,
@@ -50,12 +50,12 @@ class _TrialTypeEditorState extends State<TrialTypeEditor> {
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         color: Theme.of(context).primaryColor)),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 ChoiceCard<TrialType>(
                   value: TrialType.reversal,
                   selectedValue: _type,
                   onSelect: _selectOption,
-                  title: Text('No'),
+                  title: const Text('No'),
                   body: [
                     Text(
                         'I just want to find out if “$interventionAName” helps me achieve my goal')
@@ -65,7 +65,7 @@ class _TrialTypeEditorState extends State<TrialTypeEditor> {
                     value: TrialType.alternatingTreatment,
                     selectedValue: _type,
                     onSelect: _selectOption,
-                    title: Text('Yes'),
+                    title: const Text('Yes'),
                     body: [
                       Text(
                           'I want to compare “$interventionAName” to something else to see which of the two options is better for achieving my goal')
@@ -81,7 +81,7 @@ class _TrialTypeEditorState extends State<TrialTypeEditor> {
   }
 
   _onSubmit() {
-    widget.onSave(_type);
+    widget.onSave(_type!);
   }
 
   _selectOption(TrialType type) {

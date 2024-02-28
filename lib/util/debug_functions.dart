@@ -4,7 +4,7 @@ import 'package:studyme/models/trial.dart';
 
 void deleteLogs(Trial trial) {
   Hive.deleteBoxFromDisk(LogData.completedTaskIdsKey);
-  trial.measures.forEach((element) {
-    Hive.deleteBoxFromDisk(element.id);
-  });
+  for (var element in trial.measures!) {
+    Hive.deleteBoxFromDisk(element.id!);
+  }
 }

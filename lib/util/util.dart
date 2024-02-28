@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 toast(context, text) {
   ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(content: Text(text), duration: Duration(seconds: 10)),
+    SnackBar(content: Text(text), duration: const Duration(seconds: 10)),
   );
 }
 
 class Option {
-  String name;
-  void Function() callback;
+  String? name;
+  void Function()? callback;
 
   Option({this.name, this.callback});
 }

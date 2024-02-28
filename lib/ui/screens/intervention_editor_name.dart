@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studyme/models/intervention.dart';
 import 'package:studyme/ui/screens/intervention_editor_instructions.dart';
@@ -6,27 +5,29 @@ import 'package:studyme/ui/screens/intervention_editor_instructions.dart';
 import '../widgets/action_button.dart';
 
 class InterventionEditorName extends StatefulWidget {
-  final Intervention intervention;
+  final Intervention? intervention;
   final bool isA;
-  final Function(Intervention intervention) onSave;
+  final Function(Intervention? intervention) onSave;
   final bool save;
 
   const InterventionEditorName(
-      {@required this.intervention,
-      @required this.isA,
-      @required this.onSave,
-      @required this.save});
+      {Key? key,
+      required this.intervention,
+      required this.isA,
+      required this.onSave,
+      required this.save})
+      : super(key: key);
 
   @override
-  _InterventionEditorNameState createState() => _InterventionEditorNameState();
+  InterventionEditorNameState createState() => InterventionEditorNameState();
 }
 
-class _InterventionEditorNameState extends State<InterventionEditorName> {
-  String _name;
+class InterventionEditorNameState extends State<InterventionEditorName> {
+  String? _name;
 
   @override
   void initState() {
-    _name = widget.intervention.name;
+    _name = widget.intervention!.name;
     super.initState();
   }
 
@@ -34,13 +35,12 @@ class _InterventionEditorNameState extends State<InterventionEditorName> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(_name ?? ''),
-              Visibility(
+              const Visibility(
                 visible: true,
                 child: Text(
                   'Name',
@@ -72,14 +72,14 @@ class _InterventionEditorNameState extends State<InterventionEditorName> {
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         color: Theme.of(context).primaryColor)),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
                   autofocus: _name == null,
                   initialValue: _name,
                   onChanged: _changeName,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Name',
                   ),
                 ),
@@ -90,11 +90,11 @@ class _InterventionEditorNameState extends State<InterventionEditorName> {
   }
 
   _canSubmit() {
-    return _name != null && _name.length > 0;
+    return _name != null && _name!.isNotEmpty;
   }
 
   _submit() {
-    widget.intervention.name = _name;
+    widget.intervention!.name = _name;
     widget.save
         ? widget.onSave(widget.intervention)
         : Navigator.push(

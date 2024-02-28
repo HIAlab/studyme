@@ -8,14 +8,15 @@ class InterventionPreview extends StatelessWidget {
   final bool isA;
   final Intervention intervention;
 
-  InterventionPreview({@required this.intervention, @required this.isA});
+  const InterventionPreview(
+      {Key? key, required this.intervention, required this.isA})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
-          title: Text(intervention.name),
+          title: Text(intervention.name!),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -23,28 +24,28 @@ class InterventionPreview extends StatelessWidget {
             child: Column(
               children: [
                 ListTile(
-                  title: Text("Name"),
-                  subtitle:
-                      Text(intervention.name, style: TextStyle(fontSize: 16)),
+                  title: const Text("Name"),
+                  subtitle: Text(intervention.name!,
+                      style: const TextStyle(fontSize: 16)),
                 ),
                 if (intervention.description != null)
                   ListTile(
-                    title: Text("Description"),
-                    subtitle: Text(intervention.description,
-                        style: TextStyle(fontSize: 16)),
+                    title: const Text("Description"),
+                    subtitle: Text(intervention.description!,
+                        style: const TextStyle(fontSize: 16)),
                   ),
                 if (intervention.instructions != null)
                   ListTile(
-                    title: Text("Instructions"),
-                    subtitle: Text(intervention.instructions,
-                        style: TextStyle(fontSize: 16)),
+                    title: const Text("Instructions"),
+                    subtitle: Text(intervention.instructions!,
+                        style: const TextStyle(fontSize: 16)),
                   ),
                 ButtonBar(
                   alignment: MainAxisAlignment.center,
                   children: [
                     OutlinedButton.icon(
-                        icon: Icon(Icons.add),
-                        label: Text("Add to Experiment"),
+                        icon: const Icon(Icons.add),
+                        label: const Text("Add to Experiment"),
                         onPressed: () {
                           _addIntervention(context);
                         }),
@@ -57,10 +58,10 @@ class InterventionPreview extends StatelessWidget {
   }
 
   _addIntervention(BuildContext context) {
-    Function saveFunction = (Intervention intervention) {
+    saveFunction(Intervention intervention) {
       _getSetter(context)(intervention);
       Navigator.pushNamedAndRemoveUntil(context, '/creator', (r) => false);
-    };
+    }
 
     Navigator.push(
         context,

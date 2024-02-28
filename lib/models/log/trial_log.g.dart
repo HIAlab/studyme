@@ -17,9 +17,9 @@ class TrialLogAdapter extends TypeAdapter<TrialLog> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TrialLog(
-      fields[0] as String,
-      fields[1] as DateTime,
-      fields[2] as num,
+      fields[0] as String?,
+      fields[1] as DateTime?,
+      fields[2] as num?,
     );
   }
 

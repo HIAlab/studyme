@@ -14,18 +14,19 @@ class TaskList extends StatefulWidget {
   final Trial trial;
   final DateTime date;
 
-  TaskList({this.trial, this.date});
+  const TaskList({Key? key, required this.trial, required this.date})
+      : super(key: key);
 
   @override
-  _TaskListState createState() => _TaskListState();
+  TaskListState createState() => TaskListState();
 }
 
-class _TaskListState extends State<TaskList> {
-  bool _isLoading;
+class TaskListState extends State<TaskList> {
+  late bool _isLoading;
 
-  List<String> _completedTaskIds;
+  late List<String?> _completedTaskIds;
 
-  List<Task> _todaysTasks;
+  late List<Task> _todaysTasks;
 
   @override
   void initState() {
@@ -41,37 +42,37 @@ class _TaskListState extends State<TaskList> {
   }
 
   loadLogs() async {
-    List<String> _data =
+    List<String?> data =
         await Provider.of<LogData>(context).getCompletedTaskIdsFor(widget.date);
     setState(() {
-      _completedTaskIds = _data;
+      _completedTaskIds = data;
       _isLoading = false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return _isLoading ? CircularProgressIndicator() : _buildTaskList();
+    return _isLoading ? const CircularProgressIndicator() : _buildTaskList();
   }
 
   _buildTaskList() {
-    Phase _currentPhase = widget.trial.getPhaseForDate(widget.date);
+    Phase? currentPhase = widget.trial.getPhaseForDate(widget.date);
     return Column(
       children: [
-        if (_currentPhase is InterventionPhase) ...[
+        if (currentPhase is InterventionPhase) ...[
           if (!_todaysTasks.any((element) => element is InterventionTask))
             HintCard(
-              titleText: 'No tasks for "${_currentPhase.name}" today!',
+              titleText: 'No tasks for "${currentPhase.name}" today!',
             ),
         ],
         if (!_todaysTasks.any((element) => element is MeasureTask))
-          HintCard(
+          const HintCard(
             titleText: "No data collected today!",
           ),
-        if (_todaysTasks.length > 0)
+        if (_todaysTasks.isNotEmpty)
           ListView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             itemCount: _todaysTasks.length,
             itemBuilder: (context, index) {
               Task task = _todaysTasks[index];

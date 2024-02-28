@@ -18,10 +18,10 @@ class InterventionAdapter extends TypeAdapter<Intervention> {
     };
     return Intervention(
       id: fields[0] as dynamic,
-      name: fields[1] as String,
-      description: fields[2] as String,
-      instructions: fields[3] as String,
-      schedule: fields[4] as Reminder,
+      name: fields[1] as String?,
+      description: fields[2] as String?,
+      instructions: fields[3] as String?,
+      schedule: fields[4] as Reminder?,
     );
   }
 
@@ -56,16 +56,14 @@ class InterventionAdapter extends TypeAdapter<Intervention> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Intervention _$InterventionFromJson(Map<String, dynamic> json) {
-  return Intervention(
-    id: json['id'],
-    name: json['name'] as String,
-    instructions: json['instructions'] as String,
-    schedule: json['schedule'] == null
-        ? null
-        : Reminder.fromJson(json['schedule'] as Map<String, dynamic>),
-  );
-}
+Intervention _$InterventionFromJson(Map<String, dynamic> json) => Intervention(
+      id: json['id'],
+      name: json['name'] as String?,
+      instructions: json['instructions'] as String?,
+      schedule: json['schedule'] == null
+          ? null
+          : Reminder.fromJson(json['schedule'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$InterventionToJson(Intervention instance) =>
     <String, dynamic>{

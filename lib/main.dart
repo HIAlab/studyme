@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/log/completed_task_log.dart';
@@ -40,20 +39,20 @@ void main() async {
     ChangeNotifierProvider<LogData>(
       create: (context) => LogData(),
     )
-  ], child: MyApp()));
+  ], child: const MyApp()));
 }
 
 _setupHive() async {
   await Hive.initFlutter();
-  Hive.registerAdapter<AppState>(AppStateAdapter());
+  Hive.registerAdapter<AppState?>(AppStateAdapter());
 
   Hive.registerAdapter<Trial>(TrialAdapter());
   Hive.registerAdapter<InterventionPhase>(InterventionPhaseAdapter());
   Hive.registerAdapter<WithdrawalPhase>(WithdrawalPhaseAdapter());
-  Hive.registerAdapter<TrialType>(TrialTypeAdapter());
+  Hive.registerAdapter<TrialType?>(TrialTypeAdapter());
   Hive.registerAdapter<TrialSchedule>(TrialScheduleAdapter());
   Hive.registerAdapter<Goal>(GoalAdapter());
-  Hive.registerAdapter<PhaseOrder>(PhaseOrderAdapter());
+  Hive.registerAdapter<PhaseOrder?>(PhaseOrderAdapter());
 
   Hive.registerAdapter<Reminder>(ReminderAdapter());
   Hive.registerAdapter<Intervention>(InterventionAdapter());
@@ -68,6 +67,8 @@ _setupHive() async {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -78,11 +79,11 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: Routes.init,
         routes: {
-          Routes.init: (context) => Init(),
-          Routes.onboarding: (context) => Onboarding(),
-          Routes.creator: (context) => CreatorDetails(),
-          Routes.measure_library: (context) => MeasureLibrary(),
-          Routes.dashboard: (context) => Dashboard(),
+          Routes.init: (context) => const Init(),
+          Routes.onboarding: (context) => const Onboarding(),
+          Routes.creator: (context) => const CreatorDetails(),
+          Routes.measure_library: (context) => const MeasureLibrary(),
+          Routes.dashboard: (context) => const Dashboard(),
         });
   }
 }

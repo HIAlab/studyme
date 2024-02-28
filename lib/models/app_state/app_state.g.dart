@@ -22,7 +22,7 @@ class AppStateAdapter extends TypeAdapter<AppState> {
       case 3:
         return AppState.DOING;
       default:
-        return null;
+        return AppState.ONBOARDING;
     }
   }
 

@@ -11,14 +11,15 @@ class TaskCard extends StatelessWidget {
   final Task task;
   final bool isCompleted;
 
-  TaskCard({this.task, this.isCompleted});
+  const TaskCard({Key? key, required this.task, required this.isCompleted})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
         child: ListTile(
-      leading: Text(task.time.readable, style: _getTextStyle()),
-      title: Text(task.title, style: _getTextStyle()),
+      leading: Text(task.time!.readable, style: _getTextStyle()),
+      title: Text(task.title!, style: _getTextStyle()),
       trailing: Icon(_getIcon()),
       onTap: _getOnTap(context),
     ));
@@ -28,32 +29,30 @@ class TaskCard extends StatelessWidget {
     return isCompleted ? Icons.check : Icons.chevron_right;
   }
 
-  TextStyle _getTextStyle() {
-    return isCompleted ? TextStyle(color: Colors.grey) : null;
+  TextStyle? _getTextStyle() {
+    return isCompleted ? const TextStyle(color: Colors.grey) : null;
   }
 
-  Function() _getOnTap(context) {
+  Function()? _getOnTap(context) {
     return isCompleted ? null : () => _select(context);
   }
 
   _select(context) {
     if (task is InterventionTask) {
-      InterventionTask _task = task as InterventionTask;
-      _navigateToInterventionScreen(context, _task);
+      _navigateToInterventionScreen(context, task as InterventionTask?);
     } else if (task is MeasureTask) {
-      MeasureTask _task = task as MeasureTask;
-      _navigateToMeasureScreen(context, _task);
+      _navigateToMeasureScreen(context, task as MeasureTask?);
     }
   }
 
-  _navigateToInterventionScreen(context, InterventionTask intervention) async {
+  _navigateToInterventionScreen(context, InterventionTask? intervention) async {
     Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => InterventionInteractor(intervention)));
   }
 
-  _navigateToMeasureScreen(context, MeasureTask task) async {
+  _navigateToMeasureScreen(context, MeasureTask? task) async {
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => MeasureInteractor(task)));
   }

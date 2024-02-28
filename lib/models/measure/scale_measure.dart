@@ -15,34 +15,34 @@ class ScaleMeasure extends Measure {
   static const IconData icon = Icons.linear_scale;
 
   @HiveField(5)
-  double min;
+  double? min;
 
   @HiveField(6)
-  String minLabel;
+  String? minLabel;
 
   @HiveField(7)
-  double max;
+  double? max;
 
   @HiveField(8)
-  String maxLabel;
+  String? maxLabel;
 
   @HiveField(9)
-  double initial;
+  double? initial;
 
   String get scaleString =>
-      "From:\t${min.toInt().toString()} ($minLabel), To: ${max.toInt().toString()} ($maxLabel) ";
+      "From:\t${min!.toInt().toString()} ($minLabel), To: ${max!.toInt().toString()} ($maxLabel) ";
 
   ScaleMeasure(
-      {String id,
-      String name,
-      String description,
-      double min,
+      {String? id,
+      String? name,
+      String? description,
+      double? min,
       this.minLabel,
-      double max,
+      double? max,
       this.maxLabel,
-      Reminder schedule})
-      : this.min = min ?? 0.0,
-        this.max = max ?? 10.0,
+      Reminder? schedule})
+      : min = min ?? 0.0,
+        max = max ?? 10.0,
         super(id: id, type: measureType, name: name, schedule: schedule);
 
   ScaleMeasure.clone(ScaleMeasure measure)
@@ -53,5 +53,6 @@ class ScaleMeasure extends Measure {
 
   factory ScaleMeasure.fromJson(Map<String, dynamic> json) =>
       _$ScaleMeasureFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$ScaleMeasureToJson(this);
 }

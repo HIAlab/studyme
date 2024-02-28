@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:studyme/ui/widgets/hightlighted_action_button.dart';
 
 class LibraryCreateButton extends StatelessWidget {
-  final Function() onPressed;
+  final Function()? onPressed;
 
-  LibraryCreateButton({this.onPressed});
+  const LibraryCreateButton({Key? key, this.onPressed}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Column(
         children: [
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           HighlightedActionButton(
               icon: Icons.add,
               labelText: 'Create your own',
@@ -21,7 +21,7 @@ class LibraryCreateButton extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
                   color: Theme.of(context).primaryColor)),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
         ],
       ),
     );

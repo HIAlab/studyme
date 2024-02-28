@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
@@ -9,70 +8,64 @@ import 'package:studyme/ui/widgets/hightlighted_action_button.dart';
 import 'package:studyme/ui/widgets/phase_card.dart';
 
 class CreatorSchedule extends StatelessWidget {
+  const CreatorSchedule({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AppData>(builder: (context, model, child) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Experiment Schedule'),
-          brightness: Brightness.dark,
+          title: const Text('Experiment Schedule'),
         ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ButtonBar(
-                        alignment: MainAxisAlignment.center,
-                        children: [
-                          OutlinedButton.icon(
-                              icon: Icon(Icons.edit),
-                              label: Text("Edit Schedule"),
-                              onPressed: () =>
-                                  _navigateToScheduleEditor(context)),
-                        ],
-                      ),
-                      Card(
-                          child: ListTile(
-                              leading: Icon(Icons.run_circle),
-                              title: Text("Start"),
-                              trailing: Text('Today'))),
-                      ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        itemCount: model.trial.schedule.phaseSequence.length,
-                        itemBuilder: (context, index) {
-                          String letter =
-                              model.trial.schedule.phaseSequence[index];
-                          Phase _phase =
-                              letter == 'a' ? model.trial.a : model.trial.b;
-                          return PhaseCard(
-                              phase: _phase,
-                              showSchedule: true,
-                              trailing: Text(
-                                  'for ${model.trial.schedule.phaseDuration} days'));
-                        },
-                      ),
-                      Card(
-                          child: ListTile(
-                              leading: Icon(Icons.flag),
-                              title: Text("End"),
-                              trailing: Text(
-                                  "after ${model.trial.schedule.totalDuration} days"))),
-                      SizedBox(height: 30),
-                      Center(
-                        child: HighlightedActionButton(
-                            icon: Icons.check,
-                            labelText: 'Start Experiment',
-                            onPressed: () => _startTrial(context, model)),
-                      ),
-                      SizedBox(height: 60),
-                    ]),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              ButtonBar(
+                alignment: MainAxisAlignment.center,
+                children: [
+                  OutlinedButton.icon(
+                      icon: const Icon(Icons.edit),
+                      label: const Text("Edit Schedule"),
+                      onPressed: () => _navigateToScheduleEditor(context)),
+                ],
               ),
-            ),
+              const Card(
+                  child: ListTile(
+                      leading: Icon(Icons.run_circle),
+                      title: Text("Start"),
+                      trailing: Text('Today'))),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: model.trial!.schedule!.phaseSequence!.length,
+                itemBuilder: (context, index) {
+                  String letter = model.trial!.schedule!.phaseSequence![index];
+                  Phase? phase =
+                      letter == 'a' ? model.trial!.a : model.trial!.b;
+                  return PhaseCard(
+                      phase: phase,
+                      showSchedule: true,
+                      trailing: Text(
+                          'for ${model.trial!.schedule!.phaseDuration} days'));
+                },
+              ),
+              Card(
+                  child: ListTile(
+                      leading: const Icon(Icons.flag),
+                      title: const Text("End"),
+                      trailing: Text(
+                          "after ${model.trial!.schedule!.totalDuration} days"))),
+              const SizedBox(height: 30),
+              Center(
+                child: HighlightedActionButton(
+                    icon: Icons.check,
+                    labelText: 'Start Experiment',
+                    onPressed: () => _startTrial(context, model)),
+              ),
+              const SizedBox(height: 60),
+            ]),
           ),
         ),
       );
@@ -83,7 +76,7 @@ class CreatorSchedule extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => TrialScheduleEditor(),
+        builder: (context) => const TrialScheduleEditor(),
       ),
     );
   }
@@ -92,6 +85,7 @@ class CreatorSchedule extends StatelessWidget {
     Provider.of<AppData>(context, listen: false)
         .addStepLogForSurvey('start trial');
     model.startTrial();
-    Navigator.pushNamedAndRemoveUntil(context, Routes.dashboard, (r) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, Routes.dashboard, (route) => false);
   }
 }

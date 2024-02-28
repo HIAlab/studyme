@@ -6,14 +6,14 @@ import 'package:studyme/ui/screens/goal_editor.dart';
 import 'package:studyme/ui/widgets/editable_list_tile.dart';
 
 class GoalOverview extends StatefulWidget {
-  const GoalOverview();
+  const GoalOverview({Key? key}) : super(key: key);
 
   @override
-  _GoalOverviewState createState() => _GoalOverviewState();
+  GoalOverviewState createState() => GoalOverviewState();
 }
 
-class _GoalOverviewState extends State<GoalOverview> {
-  bool _isDeleting;
+class GoalOverviewState extends State<GoalOverview> {
+  late bool _isDeleting;
 
   @override
   void initState() {
@@ -24,13 +24,12 @@ class _GoalOverviewState extends State<GoalOverview> {
   @override
   Widget build(BuildContext context) {
     return _isDeleting
-        ? Text('')
+        ? const Text('')
         : Consumer<AppData>(builder: (context, model, child) {
-            Goal goal = model.trial.goal;
+            Goal goal = model.trial!.goal!;
             return Scaffold(
                 appBar: AppBar(
-                  brightness: Brightness.dark,
-                  title: Text(goal.goal),
+                  title: Text(goal.goal!),
                 ),
                 body: SingleChildScrollView(
                   child: Padding(
@@ -38,16 +37,16 @@ class _GoalOverviewState extends State<GoalOverview> {
                     child: Column(
                       children: [
                         EditableListTile(
-                            title: Text("Goal"),
-                            subtitle:
-                                Text(goal.goal, style: TextStyle(fontSize: 16)),
+                            title: const Text("Goal"),
+                            subtitle: Text(goal.goal!,
+                                style: const TextStyle(fontSize: 16)),
                             onTap: () => _editGoal(goal)),
                         ButtonBar(
                           alignment: MainAxisAlignment.center,
                           children: [
                             OutlinedButton.icon(
-                                icon: Icon(Icons.delete),
-                                label: Text("Remove"),
+                                icon: const Icon(Icons.delete),
+                                label: const Text("Remove"),
                                 onPressed: _remove),
                           ],
                         ),
@@ -64,8 +63,8 @@ class _GoalOverviewState extends State<GoalOverview> {
       MaterialPageRoute(
         builder: (context) => GoalEditor(
             goal: goal,
-            onSave: (Goal _goal) {
-              _getSetter()(_goal);
+            onSave: (Goal goal) {
+              _getSetter()(goal);
               Navigator.pop(context);
             }),
       ),
@@ -76,7 +75,7 @@ class _GoalOverviewState extends State<GoalOverview> {
     setState(() {
       _isDeleting = true;
     });
-    _getSetter()(null);
+    _getSetter()();
     Navigator.pop(context);
   }
 

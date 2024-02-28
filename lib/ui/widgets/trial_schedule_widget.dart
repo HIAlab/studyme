@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studyme/models/trial_schedule.dart';
 import 'package:studyme/ui/widgets/intervention_letter.dart';
@@ -12,17 +11,19 @@ class TrialScheduleWidget extends StatefulWidget {
   final bool showExplanation;
   final int activeIndex;
 
-  TrialScheduleWidget(
-      {@required this.schedule,
+  const TrialScheduleWidget(
+      {Key? key,
+      required this.schedule,
       this.showDuration = false,
       this.showExplanation = false,
-      this.activeIndex = -1});
+      this.activeIndex = -1})
+      : super(key: key);
 
   @override
-  _TrialScheduleWidgetState createState() => _TrialScheduleWidgetState();
+  TrialScheduleWidgetState createState() => TrialScheduleWidgetState();
 }
 
-class _TrialScheduleWidgetState extends State<TrialScheduleWidget> {
+class TrialScheduleWidgetState extends State<TrialScheduleWidget> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,32 +34,32 @@ class _TrialScheduleWidgetState extends State<TrialScheduleWidget> {
             height: widget.showDuration ? 71 : 50,
             itemCount: widget.schedule.numberOfPhases + 1,
             callback: (int index) {
-              Widget _cardContent;
-              Widget _textBelowCard;
-              Color _cardColor = Colors.white;
+              Widget cardContent;
+              Widget? textBelowCard;
+              Color? cardColor = Colors.white;
 
               if (index == widget.schedule.numberOfPhases) {
-                _cardContent = Icon(Icons.flag);
+                cardContent = const Icon(Icons.flag);
                 if (widget.showDuration) {
-                  _textBelowCard = _buildTotalDurationText();
+                  textBelowCard = _buildTotalDurationText();
                 }
               } else {
-                String letter = widget.schedule.phaseSequence[index];
-                _cardContent = InterventionLetter(letter,
+                String letter = widget.schedule.phaseSequence![index];
+                cardContent = InterventionLetter(letter,
                     isInverted: index < widget.activeIndex);
                 if (widget.showDuration) {
-                  _textBelowCard = _buildPhaseDurationText();
+                  textBelowCard = _buildPhaseDurationText();
                 }
                 if (index < widget.activeIndex) {
-                  _cardColor = letterColorMap[letter];
+                  cardColor = letterColorMap[letter];
                 }
               }
 
               return TimelineCard(
                   isActive: index == widget.activeIndex,
-                  cardChild: _cardContent,
-                  cardColor: _cardColor,
-                  belowCardChild: _textBelowCard);
+                  cardChild: cardContent,
+                  cardColor: cardColor,
+                  belowCardChild: textBelowCard);
             }),
       ],
     );
@@ -66,14 +67,14 @@ class _TrialScheduleWidgetState extends State<TrialScheduleWidget> {
 
   _buildTotalDurationText() {
     return Text(
-      '= ${widget.schedule.phaseDuration * widget.schedule.numberOfPhases}d',
-      style: TextStyle(fontWeight: FontWeight.bold),
+      '= ${widget.schedule.phaseDuration! * widget.schedule.numberOfPhases}d',
+      style: const TextStyle(fontWeight: FontWeight.bold),
       overflow: TextOverflow.ellipsis,
     );
   }
 
   _buildPhaseDurationText() {
-    return Text((widget.schedule.phaseDuration.toString() + 'd'),
+    return Text(('${widget.schedule.phaseDuration}d'),
         overflow: TextOverflow.ellipsis);
   }
 }

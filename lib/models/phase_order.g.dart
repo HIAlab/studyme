@@ -18,7 +18,7 @@ class PhaseOrderAdapter extends TypeAdapter<PhaseOrder> {
       case 1:
         return PhaseOrder.counterbalanced;
       default:
-        return null;
+        return PhaseOrder.alternating;
     }
   }
 

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
@@ -11,13 +10,14 @@ import 'creator_1_section_measures.dart';
 import 'creator_1_section_goal.dart';
 
 class CreatorDetails extends StatelessWidget {
+  const CreatorDetails({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Consumer<AppData>(builder: (context, model, child) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Experiment Details'),
-          brightness: Brightness.dark,
+          title: const Text('Experiment Details'),
           actions: <Widget>[
             PopupMenuButton<String>(
               onSelected: (String result) {
@@ -26,7 +26,7 @@ class CreatorDetails extends StatelessWidget {
                 }
               },
               itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-                PopupMenuItem<String>(
+                const PopupMenuItem<String>(
                   value: 'onboarding',
                   child: Row(children: [
                     Icon(Icons.repeat, color: Colors.black),
@@ -38,34 +38,29 @@ class CreatorDetails extends StatelessWidget {
             )
           ],
         ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(children: [
-                  CreatorGoalSection(
-                    model,
-                  ),
-                  if (model.canDefineInterventions())
-                    CreatorInterventionSection(model),
-                  if (model.canDefineMeasures()) CreatorMeasureSection(model),
-                  if (model.canStartTrial()) ...[
-                    Text('or go to next step:',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            color: Theme.of(context).primaryColor)),
-                    SizedBox(height: 5),
-                    HighlightedActionButton(
-                        icon: Icons.arrow_forward,
-                        labelText: 'Set Up Experiment',
-                        onPressed: () =>
-                            _navigateToCreatorPhases(context, model))
-                  ],
-                ]),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(children: [
+              CreatorGoalSection(
+                model,
               ),
-            ),
+              if (model.canDefineInterventions())
+                CreatorInterventionSection(model),
+              if (model.canDefineMeasures()) CreatorMeasureSection(model),
+              if (model.canStartTrial()) ...[
+                Text('or go to next step:',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                        color: Theme.of(context).primaryColor)),
+                const SizedBox(height: 5),
+                HighlightedActionButton(
+                    icon: Icons.arrow_forward,
+                    labelText: 'Set Up Experiment',
+                    onPressed: () => _navigateToCreatorPhases(context, model))
+              ],
+            ]),
           ),
         ),
       );
@@ -78,7 +73,7 @@ class CreatorDetails extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => CreatorSetup(),
+        builder: (context) => const CreatorSetup(),
       ),
     );
   }

@@ -18,7 +18,7 @@ class TrialTypeAdapter extends TypeAdapter<TrialType> {
       case 1:
         return TrialType.alternatingTreatment;
       default:
-        return null;
+        return TrialType.reversal;
     }
   }
 

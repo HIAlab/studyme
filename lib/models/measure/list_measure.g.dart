@@ -17,13 +17,13 @@ class ListMeasureAdapter extends TypeAdapter<ListMeasure> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ListMeasure(
-      id: fields[0] as String,
-      name: fields[2] as String,
-      items: (fields[5] as List)?.cast<ListItem>(),
-      schedule: fields[4] as Reminder,
+      id: fields[0] as String?,
+      name: fields[2] as String?,
+      items: (fields[5] as List?)?.cast<ListItem>(),
+      schedule: fields[4] as Reminder?,
     )
-      ..type = fields[1] as String
-      ..unit = fields[3] as String;
+      ..type = fields[1] as String?
+      ..unit = fields[3] as String?;
   }
 
   @override
@@ -59,21 +59,18 @@ class ListMeasureAdapter extends TypeAdapter<ListMeasure> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-ListMeasure _$ListMeasureFromJson(Map<String, dynamic> json) {
-  return ListMeasure(
-    id: json['id'] as String,
-    name: json['name'] as String,
-    items: (json['items'] as List)
-        ?.map((e) =>
-            e == null ? null : ListItem.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    schedule: json['schedule'] == null
-        ? null
-        : Reminder.fromJson(json['schedule'] as Map<String, dynamic>),
-  )
-    ..type = json['type'] as String
-    ..unit = json['unit'] as String;
-}
+ListMeasure _$ListMeasureFromJson(Map<String, dynamic> json) => ListMeasure(
+      id: json['id'] as String?,
+      name: json['name'] as String?,
+      items: (json['items'] as List<dynamic>?)
+          ?.map((e) => ListItem.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      schedule: json['schedule'] == null
+          ? null
+          : Reminder.fromJson(json['schedule'] as Map<String, dynamic>),
+    )
+      ..type = json['type'] as String?
+      ..unit = json['unit'] as String?;
 
 Map<String, dynamic> _$ListMeasureToJson(ListMeasure instance) =>
     <String, dynamic>{

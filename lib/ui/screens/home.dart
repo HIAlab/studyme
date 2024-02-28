@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -11,26 +11,30 @@ import 'package:studyme/ui/widgets/phase_card.dart';
 import 'package:studyme/ui/widgets/task_list.dart';
 import 'package:studyme/ui/widgets/trial_schedule_widget.dart';
 
+import '../../routes.dart';
+
 class Home extends StatelessWidget {
+  const Home({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    int shiftByDays = Provider.of<AppData>(context, listen: false).shiftByDays;
     // listen to log data so screen is rebuilt when logs are added
     Provider.of<LogData>(context);
-    final Trial _trial = Provider.of<AppData>(context).trial;
-    final _dateToday = DateTime.now().add(Duration(days: 0));
+    final Trial trial = Provider.of<AppData>(context).trial!;
+    final dateToday = DateTime.now().add(Duration(days: shiftByDays));
+    Widget body;
+    int activeIndex;
 
-    Widget _body;
-    int _activeIndex;
-
-    if (_dateToday.isBefore(_trial.startDate)) {
-      _body = _buildBeforeStartBody(_trial);
-      _activeIndex = -1;
-    } else if (_dateToday.isAfter(_trial.endDate)) {
-      _body = _buildAfterEndBody(_trial);
-      _activeIndex = _trial.schedule.totalDuration;
+    if (dateToday.isBefore(trial.startDate!)) {
+      body = _buildBeforeStartBody(trial);
+      activeIndex = -1;
+    } else if (dateToday.isAfter(trial.endDate)) {
+      body = _buildAfterEndBody(trial);
+      activeIndex = trial.schedule!.totalDuration;
     } else {
-      _body = _buildActiveBody(context, _trial, _dateToday);
-      _activeIndex = _trial.getPhaseIndexForDate(_dateToday);
+      body = _buildActiveBody(context, trial, dateToday);
+      activeIndex = trial.getPhaseIndexForDate(dateToday);
     }
 
     return SingleChildScrollView(
@@ -38,18 +42,39 @@ class Home extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           TrialScheduleWidget(
-              schedule: _trial.schedule, activeIndex: _activeIndex),
-          _body,
+              schedule: trial.schedule!, activeIndex: activeIndex),
+          body,
+          kDebugMode && dateToday.isBefore(trial.endDate)
+              ? Align(
+                  alignment: Alignment.bottomLeft,
+                  child: ElevatedButton(
+                      onPressed: () {
+                        Provider.of<AppData>(context, listen: false)
+                            .shiftByDays++;
+                        Navigator.pushReplacementNamed(
+                            context, Routes.dashboard);
+                      },
+                      child: const Text('Skip to next day')))
+              : Container()
         ]),
       ),
     );
   }
 
   _buildActiveBody(BuildContext context, Trial trial, DateTime date) {
-    Phase _phase = trial.getPhaseForDate(date);
+    Phase? phase = trial.getPhaseForDate(date);
+    final dayOfPhase =
+        trial.getDayOfStudyFor(date) % trial.schedule!.phaseDuration! + 1;
+    int shiftByDays = Provider.of<AppData>(context, listen: false).shiftByDays;
+    final dateString = DateFormat('yyyy-MM-dd').format(date);
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      if (_phase != null) PhaseCard(phase: _phase),
-      SizedBox(height: 20),
+      if (phase != null) PhaseCard(phase: phase),
+      if (kDebugMode)
+        Text(
+            "Debug: Day of phase: $dayOfPhase of ${trial.schedule!.phaseDuration!}"),
+      if (kDebugMode)
+        Text("Debug: Today: $dateString (shifted by $shiftByDays days)"),
+      const SizedBox(height: 20),
       Text('Today',
           style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -61,17 +86,17 @@ class Home extends StatelessWidget {
 
   _buildBeforeStartBody(Trial trial) {
     return Column(children: [
-      SizedBox(height: 20),
+      const SizedBox(height: 20),
       HintCard(titleText: "Experiment hasn't started yet", body: [
         Text(
-            "Your experiment will start on ${DateFormat(DateFormat.YEAR_MONTH_DAY).format(trial.startDate)}")
+            "Your experiment will start on ${DateFormat(DateFormat.YEAR_MONTH_DAY).format(trial.startDate!)}")
       ])
     ]);
   }
 
   _buildAfterEndBody(Trial trial) {
     return Column(children: [
-      SizedBox(height: 20),
+      const SizedBox(height: 20),
       HintCard(titleText: "Experiment ended", body: [
         Text(
             "Your experiment ended on ${DateFormat(DateFormat.YEAR_MONTH_DAY).format(trial.endDate)}")

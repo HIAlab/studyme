@@ -11,14 +11,14 @@ import 'schedule_editor.dart';
 class InterventionOverview extends StatefulWidget {
   final bool isA;
 
-  const InterventionOverview({@required this.isA});
+  const InterventionOverview({Key? key, required this.isA}) : super(key: key);
 
   @override
-  _InterventionOverviewState createState() => _InterventionOverviewState();
+  InterventionOverviewState createState() => InterventionOverviewState();
 }
 
-class _InterventionOverviewState extends State<InterventionOverview> {
-  bool _isDeleting;
+class InterventionOverviewState extends State<InterventionOverview> {
+  late bool _isDeleting;
 
   @override
   void initState() {
@@ -29,15 +29,14 @@ class _InterventionOverviewState extends State<InterventionOverview> {
   @override
   Widget build(BuildContext context) {
     return _isDeleting
-        ? Text('')
+        ? const Text('')
         : Consumer<AppData>(builder: (context, model, child) {
             Intervention intervention = widget.isA
-                ? model.trial.interventionA
-                : model.trial.interventionB;
+                ? model.trial!.interventionA!
+                : model.trial!.interventionB!;
             return Scaffold(
                 appBar: AppBar(
-                  brightness: Brightness.dark,
-                  title: Text(intervention.name),
+                  title: Text(intervention.name!),
                 ),
                 body: SingleChildScrollView(
                   child: Padding(
@@ -45,30 +44,30 @@ class _InterventionOverviewState extends State<InterventionOverview> {
                     child: Column(
                       children: [
                         EditableListTile(
-                            title: Text("Name"),
-                            subtitle: Text(intervention.name,
-                                style: TextStyle(fontSize: 16)),
+                            title: const Text("Name"),
+                            subtitle: Text(intervention.name!,
+                                style: const TextStyle(fontSize: 16)),
                             canEdit: true,
                             onTap: () => _editName(intervention)),
                         EditableListTile(
-                            title: Text("Instructions"),
-                            subtitle: Text(intervention.instructions,
-                                style: TextStyle(fontSize: 16)),
+                            title: const Text("Instructions"),
+                            subtitle: Text(intervention.instructions!,
+                                style: const TextStyle(fontSize: 16)),
                             canEdit: true,
                             onTap: () => _editInstructions(intervention)),
                         if (intervention.schedule != null)
                           ListTile(
-                              title: Text("Schedule"),
-                              subtitle: Text(intervention.schedule.readable,
-                                  style: TextStyle(fontSize: 16)),
-                              trailing: Icon(Icons.chevron_right),
+                              title: const Text("Schedule"),
+                              subtitle: Text(intervention.schedule!.readable,
+                                  style: const TextStyle(fontSize: 16)),
+                              trailing: const Icon(Icons.chevron_right),
                               onTap: () => _editSchedule(intervention)),
                         ButtonBar(
                           alignment: MainAxisAlignment.center,
                           children: [
                             OutlinedButton.icon(
-                                icon: Icon(Icons.delete),
-                                label: Text("Remove"),
+                                icon: const Icon(Icons.delete),
+                                label: const Text("Remove"),
                                 onPressed: _remove),
                           ],
                         ),
@@ -86,8 +85,8 @@ class _InterventionOverviewState extends State<InterventionOverview> {
           builder: (context) => InterventionEditorName(
               isA: widget.isA,
               intervention: intervention.clone(),
-              onSave: (Intervention _intervention) {
-                _getSetter()(_intervention);
+              onSave: (Intervention? intervention) {
+                _getSetter()(intervention);
                 Navigator.pop(context);
               },
               save: true),
@@ -100,8 +99,8 @@ class _InterventionOverviewState extends State<InterventionOverview> {
         MaterialPageRoute(
           builder: (context) => InterventionEditorInstructions(
               intervention: intervention.clone(),
-              onSave: (Intervention _intervention) {
-                _getSetter()(_intervention);
+              onSave: (Intervention? intervention) {
+                _getSetter()(intervention);
                 Navigator.pop(context);
               },
               save: true),
@@ -115,8 +114,8 @@ class _InterventionOverviewState extends State<InterventionOverview> {
           builder: (context) => ScheduleEditor(
               title: intervention.name,
               objectWithSchedule: intervention,
-              onSave: (Intervention _intervention) {
-                _getSetter()(_intervention);
+              onSave: (Intervention intervention) {
+                _getSetter()(intervention);
                 Navigator.pop(context);
               }),
         ));

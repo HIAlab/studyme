@@ -1,24 +1,24 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studyme/models/measure/scale_measure.dart';
 
 class ScaleMeasureWidget extends StatefulWidget {
-  final ScaleMeasure measure;
+  final ScaleMeasure? measure;
 
-  final void Function(num value) updateValue;
+  final void Function(num value)? updateValue;
 
-  ScaleMeasureWidget(this.measure, this.updateValue);
+  const ScaleMeasureWidget(this.measure, this.updateValue, {Key? key})
+      : super(key: key);
 
   @override
-  _ScaleMeasureWidgetState createState() => _ScaleMeasureWidgetState();
+  ScaleMeasureWidgetState createState() => ScaleMeasureWidgetState();
 }
 
-class _ScaleMeasureWidgetState extends State<ScaleMeasureWidget> {
-  num _state;
+class ScaleMeasureWidgetState extends State<ScaleMeasureWidget> {
+  num? _state;
 
   @override
   void initState() {
-    _state = widget.measure.min;
+    _state = widget.measure!.min;
     super.initState();
   }
 
@@ -30,18 +30,18 @@ class _ScaleMeasureWidgetState extends State<ScaleMeasureWidget> {
           onChanged: (x) => setState(() {
             _state = x;
             if (widget.updateValue != null) {
-              widget.updateValue(x);
+              widget.updateValue!(x);
             }
           }),
-          value: _state,
-          min: widget.measure.min,
-          max: widget.measure.max,
-          label: _state.round().toString(),
-          divisions: (widget.measure.max - widget.measure.min).toInt(),
+          value: _state as double,
+          min: widget.measure!.min!,
+          max: widget.measure!.max!,
+          label: _state!.round().toString(),
+          divisions: (widget.measure!.max! - widget.measure!.min!).toInt(),
         ),
         Row(
           children: [
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,35 +51,35 @@ class _ScaleMeasureWidgetState extends State<ScaleMeasureWidget> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(widget.measure.min.toInt().toString(),
+                        Text(widget.measure!.min!.toInt().toString(),
                             textAlign: TextAlign.right,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
-                        Text(widget.measure.minLabel,
+                        Text(widget.measure!.minLabel!,
                             textAlign: TextAlign.left,
-                            style: TextStyle(fontSize: 18)),
+                            style: const TextStyle(fontSize: 18)),
                       ],
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Flexible(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(widget.measure.max.toInt().toString(),
+                        Text(widget.measure!.max!.toInt().toString(),
                             textAlign: TextAlign.right,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
-                        Text(widget.measure.maxLabel,
+                        Text(widget.measure!.maxLabel!,
                             textAlign: TextAlign.right,
-                            style: TextStyle(fontSize: 18)),
+                            style: const TextStyle(fontSize: 18)),
                       ],
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
           ],
         ),
       ],

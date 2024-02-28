@@ -5,16 +5,15 @@ part 'trial_log.g.dart';
 @HiveType(typeId: 50)
 class TrialLog {
   @HiveField(0)
-  String loggedItemId;
+  String? loggedItemId;
 
   @HiveField(1)
-  DateTime dateTime;
+  DateTime? dateTime;
 
   @HiveField(2)
-  num value;
+  num? value;
 
   TrialLog(this.loggedItemId, this.dateTime, this.value);
 
-  String get id =>
-      this.loggedItemId + this.dateTime.toString() + this.value.toString();
+  String get id => loggedItemId! + dateTime.toString() + value.toString();
 }

@@ -11,19 +11,21 @@ part 'phase_intervention.g.dart';
 class InterventionPhase extends Phase {
   static const String phaseType = 'intervention';
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @HiveField(3)
   Intervention intervention;
 
-  InterventionPhase({String letter, Intervention intervention})
-      : this.intervention = intervention,
-        super(type: phaseType, name: intervention.name, letter: letter);
+  InterventionPhase({String? letter, Intervention? intervention})
+      : intervention = intervention ?? Intervention(),
+        super(type: phaseType, name: intervention?.name, letter: letter);
 
+  @override
   List<Task> getTasksFor(int daysSinceBeginningOfTimeRange) {
-    return this.intervention.getTasksFor(daysSinceBeginningOfTimeRange);
+    return intervention.getTasksFor(daysSinceBeginningOfTimeRange);
   }
 
   factory InterventionPhase.fromJson(Map<String, dynamic> json) =>
       _$InterventionPhaseFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$InterventionPhaseToJson(this);
 }

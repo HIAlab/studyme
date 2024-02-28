@@ -11,62 +11,63 @@ import 'package:studyme/util/string_extension.dart';
 class MeasurePreview extends StatelessWidget {
   final Measure measure;
 
-  MeasurePreview({@required this.measure});
+  const MeasurePreview({Key? key, required this.measure}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Measure _measure = measure;
     return Scaffold(
-        appBar: AppBar(brightness: Brightness.dark, title: Text(_measure.name)),
+        appBar: AppBar(
+          title: Text(measure.name!),
+        ),
         body: SingleChildScrollView(
           child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Column(
                 children: [
                   ListTile(
-                    title: Text("Name"),
-                    subtitle:
-                        Text(_measure.name, style: TextStyle(fontSize: 16)),
+                    title: const Text("Name"),
+                    subtitle: Text(measure.name!,
+                        style: const TextStyle(fontSize: 16)),
                   ),
-                  if (_measure is KeyboardMeasure)
+                  if (measure is KeyboardMeasure)
                     ListTile(
-                      title: Text("Unit"),
-                      subtitle:
-                          Text(_measure.unit, style: TextStyle(fontSize: 16)),
+                      title: const Text("Unit"),
+                      subtitle: Text(measure.unit!,
+                          style: const TextStyle(fontSize: 16)),
                     ),
                   ListTile(
-                    title: Text("Input Type"),
+                    title: const Text("Input Type"),
                     subtitle: Column(
                       children: [
                         Row(
                           children: [
-                            Icon(_measure.getIcon()),
-                            SizedBox(width: 5),
-                            Text(_measure.type.capitalize(),
-                                style: TextStyle(fontSize: 16)),
+                            Icon(measure.getIcon()),
+                            const SizedBox(width: 5),
+                            Text(measure.type!.capitalize(),
+                                style: const TextStyle(fontSize: 16)),
                           ],
                         ),
                       ],
                     ),
                   ),
-                  if (_measure is ListMeasure)
+                  if (measure is ListMeasure)
                     ListTile(
-                      title: Text("List Items"),
-                      subtitle: Text(_measure.itemsString,
-                          style: TextStyle(fontSize: 16)),
+                      title: const Text("List Items"),
+                      subtitle: Text((measure as ListMeasure).itemsString,
+                          style: const TextStyle(fontSize: 16)),
                     ),
-                  if (_measure is ScaleMeasure)
+                  if (measure is ScaleMeasure)
                     ListTile(
-                      title: Text("Scale"),
-                      subtitle: Text(_measure.scaleString,
-                          style: TextStyle(fontSize: 16)),
+                      title: const Text("Scale"),
+                      subtitle: Text((measure as ScaleMeasure).scaleString,
+                          style: const TextStyle(fontSize: 16)),
                     ),
                   ButtonBar(
                     alignment: MainAxisAlignment.center,
                     children: [
                       OutlinedButton.icon(
-                          icon: Icon(Icons.add),
-                          label: Text("Add to Experiment"),
+                          icon: const Icon(Icons.add),
+                          label: const Text("Add to Experiment"),
                           onPressed: () => _addMeasure(context)),
                     ],
                   ),
@@ -76,10 +77,10 @@ class MeasurePreview extends StatelessWidget {
   }
 
   _addMeasure(BuildContext context) {
-    Function saveFunction = (Measure measure) {
+    saveFunction(Measure measure) {
       Provider.of<AppData>(context, listen: false).addMeasure(measure);
       Navigator.pushNamedAndRemoveUntil(context, '/creator', (r) => false);
-    };
+    }
 
     Navigator.push(
         context,

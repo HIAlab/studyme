@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studyme/models/measure/measure.dart';
 import 'package:studyme/models/measure/scale_measure.dart';
@@ -12,17 +11,21 @@ class MeasureEditorScale extends StatefulWidget {
   final bool save;
 
   const MeasureEditorScale(
-      {@required this.measure, @required this.onSave, @required this.save});
+      {Key? key,
+      required this.measure,
+      required this.onSave,
+      required this.save})
+      : super(key: key);
 
   @override
-  _MeasureEditorScaleState createState() => _MeasureEditorScaleState();
+  MeasureEditorScaleState createState() => MeasureEditorScaleState();
 }
 
-class _MeasureEditorScaleState extends State<MeasureEditorScale> {
-  double _min;
-  String _minLabel;
-  double _max;
-  String _maxLabel;
+class MeasureEditorScaleState extends State<MeasureEditorScale> {
+  double? _min;
+  String? _minLabel;
+  double? _max;
+  String? _maxLabel;
 
   @override
   void initState() {
@@ -37,13 +40,12 @@ class _MeasureEditorScaleState extends State<MeasureEditorScale> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(widget.measure.name),
-              Visibility(
+              Text(widget.measure.name!),
+              const Visibility(
                 visible: true,
                 child: Text(
                   'Scale',
@@ -72,39 +74,39 @@ class _MeasureEditorScaleState extends State<MeasureEditorScale> {
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         color: Theme.of(context).primaryColor)),
-                SizedBox(height: 10),
-                Text('Scale ranges from',
+                const SizedBox(height: 10),
+                const Text('Scale ranges from',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     )),
                 TextFormField(
                   keyboardType: TextInputType.number,
-                  initialValue: _min.toInt().toString(),
+                  initialValue: _min!.toInt().toString(),
                   onChanged: _updateMin,
-                  decoration: InputDecoration(labelText: 'Minimum Value'),
+                  decoration: const InputDecoration(labelText: 'Minimum Value'),
                 ),
                 TextFormField(
                   initialValue: _minLabel,
                   onChanged: _updateMinLabel,
-                  decoration:
-                      InputDecoration(labelText: 'Label for Minimum Value'),
+                  decoration: const InputDecoration(
+                      labelText: 'Label for Minimum Value'),
                 ),
-                SizedBox(height: 20),
-                Text('to',
+                const SizedBox(height: 20),
+                const Text('to',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     )),
                 TextFormField(
                   keyboardType: TextInputType.number,
-                  initialValue: _max.toInt().toString(),
+                  initialValue: _max!.toInt().toString(),
                   onChanged: _updateMax,
-                  decoration: InputDecoration(labelText: 'Maximum Value'),
+                  decoration: const InputDecoration(labelText: 'Maximum Value'),
                 ),
                 TextFormField(
                   initialValue: _maxLabel,
                   onChanged: _updateMaxLabel,
-                  decoration:
-                      InputDecoration(labelText: 'Label for Maximum Value'),
+                  decoration: const InputDecoration(
+                      labelText: 'Label for Maximum Value'),
                 ),
               ],
             ),
@@ -143,11 +145,11 @@ class _MeasureEditorScaleState extends State<MeasureEditorScale> {
   _canSubmit() {
     return _min != null &&
         _max != null &&
-        _min < _max &&
+        _min! < _max! &&
         _minLabel != null &&
-        _minLabel.length > 0 &&
+        _minLabel!.isNotEmpty &&
         _maxLabel != null &&
-        _maxLabel.length > 0;
+        _maxLabel!.isNotEmpty;
   }
 
   _submit() {

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studyme/models/measure/list_item.dart';
 import 'package:studyme/models/measure/list_measure.dart';
@@ -13,19 +12,23 @@ class MeasureEditorList extends StatefulWidget {
   final bool save;
 
   const MeasureEditorList(
-      {@required this.measure, @required this.onSave, @required this.save});
+      {Key? key,
+      required this.measure,
+      required this.onSave,
+      required this.save})
+      : super(key: key);
 
   @override
-  _MeasureEditorListState createState() => _MeasureEditorListState();
+  MeasureEditorListState createState() => MeasureEditorListState();
 }
 
-class _MeasureEditorListState extends State<MeasureEditorList> {
-  List<ListItem> _items;
-  String _editedChoice;
+class MeasureEditorListState extends State<MeasureEditorList> {
+  List<ListItem>? _items;
+  String? _editedChoice;
 
   @override
   void initState() {
-    _items = widget.measure.items.toList();
+    _items = widget.measure.items!.toList();
     super.initState();
   }
 
@@ -33,13 +36,12 @@ class _MeasureEditorListState extends State<MeasureEditorList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(widget.measure.name),
-              Visibility(
+              Text(widget.measure.name!),
+              const Visibility(
                 visible: true,
                 child: Text(
                   'List Items',
@@ -67,20 +69,20 @@ class _MeasureEditorListState extends State<MeasureEditorList> {
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         color: Theme.of(context).primaryColor)),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: _items.length,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: _items!.length,
                     itemBuilder: (content, index) {
-                      ListItem choice = _items[index];
+                      ListItem choice = _items![index];
 
                       return Card(
                           child: ListTile(
-                        title:
-                            Text(choice.value, style: TextStyle(fontSize: 20)),
+                        title: Text(choice.value!,
+                            style: const TextStyle(fontSize: 20)),
                         trailing: IconButton(
-                          icon: Icon(Icons.delete),
+                          icon: const Icon(Icons.delete),
                           onPressed: () => _removeChoice(index),
                         ),
                       ));
@@ -89,8 +91,8 @@ class _MeasureEditorListState extends State<MeasureEditorList> {
                   alignment: MainAxisAlignment.center,
                   children: [
                     OutlinedButton.icon(
-                        icon: Icon(Icons.add),
-                        label: Text('Add Item'),
+                        icon: const Icon(Icons.add),
+                        label: const Text('Add Item'),
                         onPressed: _addChoice),
                   ],
                 ),
@@ -107,7 +109,7 @@ class _MeasureEditorListState extends State<MeasureEditorList> {
     await showDialog(
         context: context,
         builder: (context) => AlertDialog(
-              title: Text("Add Option"),
+              title: const Text("Add Option"),
               content: TextFormField(
                 autofocus: true,
                 initialValue: null,
@@ -119,20 +121,20 @@ class _MeasureEditorListState extends State<MeasureEditorList> {
                       _updateEditedChoice(null);
                       Navigator.pop(context);
                     },
-                    child: Text("Cancel")),
+                    child: const Text("Cancel")),
                 TextButton(
                     onPressed: () => Navigator.pop(context, true),
-                    child: Text("Confirm"))
+                    child: const Text("Confirm"))
               ],
             ));
-    if (_editedChoice != null && _editedChoice.length > 0) {
+    if (_editedChoice != null && _editedChoice!.isNotEmpty) {
       setState(() {
-        _items.add(ListItem(value: _editedChoice));
+        _items!.add(ListItem(value: _editedChoice));
       });
     }
   }
 
-  _updateEditedChoice(String value) {
+  _updateEditedChoice(String? value) {
     setState(() {
       _editedChoice = value;
     });
@@ -140,13 +142,13 @@ class _MeasureEditorListState extends State<MeasureEditorList> {
 
   _removeChoice(int index) {
     setState(() {
-      _items.removeAt(index);
+      _items!.removeAt(index);
     });
   }
 
   _canSubmit() {
-    return _items.length > 0 &&
-        _items.every((element) => element.value != null);
+    return _items!.isNotEmpty &&
+        _items!.every((element) => element.value != null);
   }
 
   _submit() {

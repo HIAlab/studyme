@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 
 class ChoiceCard<T> extends StatelessWidget {
-  final T value;
-  final Widget title;
-  final List<Widget> body;
-  final T selectedValue;
+  final T? value;
+  final Widget? title;
+  final List<Widget>? body;
+  final T? selectedValue;
   final void Function(T value) onSelect;
 
-  ChoiceCard(
-      {this.value, this.title, this.body, this.selectedValue, this.onSelect});
+  const ChoiceCard(
+      {Key? key,
+      this.value,
+      this.title,
+      this.body,
+      this.selectedValue,
+      required this.onSelect})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +27,12 @@ class ChoiceCard<T> extends StatelessWidget {
                 ? Icons.radio_button_checked
                 : Icons.radio_button_off),
             title: title,
-            onTap: () => onSelect(value)),
+            onTap: () => onSelect(value as T)),
         if (body != null)
           Padding(
-              padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+              padding: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
               child: Column(
-                children: body,
+                children: body!,
               ))
       ],
     ));

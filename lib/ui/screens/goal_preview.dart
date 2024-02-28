@@ -6,14 +6,13 @@ import 'package:studyme/models/goal.dart';
 class GoalPreview extends StatelessWidget {
   final Goal goal;
 
-  GoalPreview({@required this.goal});
+  const GoalPreview({Key? key, required this.goal}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
-          title: Text(goal.goal),
+          title: Text(goal.goal!),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -21,15 +20,16 @@ class GoalPreview extends StatelessWidget {
             child: Column(
               children: [
                 ListTile(
-                  title: Text("Goal"),
-                  subtitle: Text(goal.goal, style: TextStyle(fontSize: 16)),
+                  title: const Text("Goal"),
+                  subtitle:
+                      Text(goal.goal!, style: const TextStyle(fontSize: 16)),
                 ),
                 ButtonBar(
                   alignment: MainAxisAlignment.center,
                   children: [
                     OutlinedButton.icon(
-                        icon: Icon(Icons.add),
-                        label: Text("Add to Experiment"),
+                        icon: const Icon(Icons.add),
+                        label: const Text("Add to Experiment"),
                         onPressed: () => _addGoal(context)),
                   ],
                 ),

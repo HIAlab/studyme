@@ -7,18 +7,20 @@ class Timeline extends StatefulWidget {
   final int itemCount;
   final Widget Function(int index) callback;
 
-  Timeline(
-      {@required this.activeIndex,
-      @required this.height,
-      @required this.itemCount,
-      @required this.callback});
+  const Timeline(
+      {Key? key,
+      required this.activeIndex,
+      required this.height,
+      required this.itemCount,
+      required this.callback})
+      : super(key: key);
 
   @override
-  _TimelineState createState() => _TimelineState();
+  TimelineState createState() => TimelineState();
 }
 
-class _TimelineState extends State<Timeline> {
-  ItemScrollController _scrollController = ItemScrollController();
+class TimelineState extends State<Timeline> {
+  final ItemScrollController _scrollController = ItemScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class _TimelineState extends State<Timeline> {
           .addPostFrameCallback((_) => _scrollController.jumpTo(index: offset));
     }
 
-    return Container(
+    return SizedBox(
       height: widget.height,
       child: Scrollbar(
         child: ScrollablePositionedList.builder(

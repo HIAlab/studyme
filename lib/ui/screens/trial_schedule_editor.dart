@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
@@ -9,18 +8,20 @@ import 'package:studyme/ui/widgets/trial_schedule_widget.dart';
 import 'package:studyme/util/util.dart';
 
 class TrialScheduleEditor extends StatefulWidget {
+  const TrialScheduleEditor({Key? key}) : super(key: key);
+
   @override
-  _TrialScheduleEditorState createState() => _TrialScheduleEditorState();
+  TrialScheduleEditorState createState() => TrialScheduleEditorState();
 }
 
-class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
-  TrialSchedule _phases;
+class TrialScheduleEditorState extends State<TrialScheduleEditor> {
+  TrialSchedule? _phases;
 
   @override
   void initState() {
-    final trial = Provider.of<AppData>(context, listen: false).trial;
+    final trial = Provider.of<AppData>(context, listen: false).trial!;
     if (trial.schedule != null) {
-      _phases = trial.schedule.clone();
+      _phases = trial.schedule!.clone();
     } else {
       _phases = TrialSchedule.createDefault();
     }
@@ -31,7 +32,6 @@ class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           actions: <Widget>[
             ActionButton(
                 icon: Icons.check, canPress: _canSubmit(), onPressed: _onSubmit)
@@ -49,31 +49,31 @@ class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                           color: Theme.of(context).primaryColor)),
-                  SizedBox(height: 10),
-                  TrialScheduleWidget(schedule: _phases, showDuration: true),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 10),
+                  TrialScheduleWidget(schedule: _phases!, showDuration: true),
+                  const SizedBox(height: 20),
                   TextFormField(
-                    initialValue: _phases.phaseDuration.toString(),
+                    initialValue: _phases!.phaseDuration.toString(),
                     keyboardType: TextInputType.number,
                     onChanged: _updatePhaseDuration,
-                    decoration:
-                        InputDecoration(labelText: 'Phase Duration (in days)'),
+                    decoration: const InputDecoration(
+                        labelText: 'Phase Duration (in days)'),
                   ),
-                  SizedBox(width: 5),
+                  const SizedBox(width: 5),
                   TextFormField(
-                    initialValue: _phases.numberOfPhasePairs.toString(),
+                    initialValue: _phases!.numberOfPhasePairs.toString(),
                     keyboardType: TextInputType.number,
                     onChanged: _updateNumberOfCycles,
-                    decoration:
-                        InputDecoration(labelText: 'Number of Phase Pairs'),
+                    decoration: const InputDecoration(
+                        labelText: 'Number of Phase Pairs'),
                   ),
-                  SizedBox(width: 5),
-                  SizedBox(height: 30),
-                  Text('Advanced Settings',
+                  const SizedBox(width: 5),
+                  const SizedBox(height: 30),
+                  const Text('Advanced Settings',
                       style: TextStyle(fontWeight: FontWeight.bold)),
                   DropdownButtonFormField<PhaseOrder>(
-                    decoration: InputDecoration(labelText: 'Phase Order'),
-                    value: _phases.phaseOrder,
+                    decoration: const InputDecoration(labelText: 'Phase Order'),
+                    value: _phases!.phaseOrder,
                     onChanged: _updatePhaseOrder,
                     items: [PhaseOrder.alternating, PhaseOrder.counterbalanced]
                         .map<DropdownMenuItem<PhaseOrder>>((value) {
@@ -91,10 +91,10 @@ class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
   }
 
   _canSubmit() {
-    return _phases.totalDuration > 0 &&
-        _phases.totalDuration < 1000 &&
-        _phases.phaseDuration <= 365 &&
-        _phases.numberOfPhasePairs < 100;
+    return _phases!.totalDuration > 0 &&
+        _phases!.totalDuration < 1000 &&
+        _phases!.phaseDuration! <= 365 &&
+        _phases!.numberOfPhasePairs! < 100;
   }
 
   _onSubmit() {
@@ -105,7 +105,7 @@ class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
   _updateNumberOfCycles(text) {
     textToIntSetter(text, (int number) {
       setState(() {
-        _phases.updateNumberOfCycles(number);
+        _phases!.updateNumberOfCycles(number);
       });
     });
   }
@@ -113,14 +113,14 @@ class _TrialScheduleEditorState extends State<TrialScheduleEditor> {
   _updatePhaseDuration(text) {
     textToIntSetter(text, (int number) {
       setState(() {
-        _phases.phaseDuration = number;
+        _phases!.phaseDuration = number;
       });
     });
   }
 
   _updatePhaseOrder(phaseOrder) {
     setState(() {
-      _phases.updatePhaseOrder(phaseOrder);
+      _phases!.updatePhaseOrder(phaseOrder);
     });
   }
 }

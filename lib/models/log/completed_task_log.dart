@@ -10,5 +10,5 @@ class CompletedTaskLog {
   @HiveField(1)
   DateTime dateTime;
 
-  CompletedTaskLog({this.taskId, this.dateTime});
+  CompletedTaskLog({required this.taskId, required this.dateTime});
 }

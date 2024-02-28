@@ -13,38 +13,43 @@ part 'intervention.g.dart';
 @HiveType(typeId: 101)
 class Intervention with HasSchedule {
   @HiveField(0)
-  String id;
+  String? id;
 
   @HiveField(1)
-  String name;
+  String? name;
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @HiveField(2)
-  String description;
+  String? description;
 
   @HiveField(3)
-  String instructions;
+  String? instructions;
 
+  @override
   @HiveField(4)
-  Reminder schedule;
+  Reminder? schedule;
 
   Intervention(
-      {id, this.name, this.description, this.instructions, Reminder schedule}) {
-    this.id = id ?? Uuid().v4();
+      {id,
+      this.name,
+      this.description,
+      this.instructions,
+      Reminder? schedule}) {
+    this.id = id ?? const Uuid().v4();
     this.schedule = schedule ?? Reminder();
   }
 
   Intervention.clone(Intervention intervention) {
-    this.id = Uuid().v4();
-    this.name = intervention.name;
-    this.description = intervention.description;
-    this.instructions = intervention.instructions;
-    this.schedule = intervention.schedule;
+    id = const Uuid().v4();
+    name = intervention.name;
+    description = intervention.description;
+    instructions = intervention.instructions;
+    schedule = intervention.schedule;
   }
 
   List<Task> getTasksFor(int daysSinceBeginningOfTimeRange) {
     List<TimeOfDay> times =
-        this.schedule.getTaskTimesFor(daysSinceBeginningOfTimeRange);
+        schedule!.getTaskTimesFor(daysSinceBeginningOfTimeRange);
     return times.map((time) => InterventionTask(this, time)).toList();
   }
 

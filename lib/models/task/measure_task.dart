@@ -10,5 +10,5 @@ class MeasureTask extends Task {
       : super(title: "Log your ${measure.name}", time: time);
 
   @override
-  String get id => measure.id + time.combined.toString();
+  String get id => measure.id! + time!.combined.toString();
 }

@@ -2,33 +2,35 @@ import 'package:flutter/material.dart';
 
 class TimelineCard extends StatelessWidget {
   final bool isActive;
-  final Widget cardChild;
-  final Color cardColor;
-  final Widget belowCardChild;
+  final Widget? cardChild;
+  final Color? cardColor;
+  final Widget? belowCardChild;
 
-  TimelineCard(
-      {this.isActive = false,
+  const TimelineCard(
+      {Key? key,
+      this.isActive = false,
       this.cardChild,
       this.cardColor,
-      this.belowCardChild});
+      this.belowCardChild})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 50,
       child: Column(children: [
-        Container(
+        SizedBox(
             height: 50,
             child: Card(
                 shape: isActive
                     ? RoundedRectangleBorder(
-                        side: new BorderSide(
+                        side: BorderSide(
                             color: Theme.of(context).primaryColor, width: 4.0),
                         borderRadius: BorderRadius.circular(4.0))
                     : null,
                 color: cardColor,
                 child: Center(child: cardChild))),
-        if (belowCardChild != null) belowCardChild
+        if (belowCardChild != null) belowCardChild!
       ]),
     );
   }

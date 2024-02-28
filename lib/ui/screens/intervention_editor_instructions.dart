@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studyme/models/intervention.dart';
 
@@ -6,28 +5,30 @@ import '../widgets/action_button.dart';
 import 'schedule_editor.dart';
 
 class InterventionEditorInstructions extends StatefulWidget {
-  final Intervention intervention;
+  final Intervention? intervention;
 
-  final Function(Intervention intervention) onSave;
+  final Function(Intervention? intervention) onSave;
   final bool save;
 
   const InterventionEditorInstructions(
-      {@required this.intervention,
-      @required this.onSave,
-      @required this.save});
+      {Key? key,
+      required this.intervention,
+      required this.onSave,
+      required this.save})
+      : super(key: key);
 
   @override
-  _InterventionEditorInstructionsState createState() =>
-      _InterventionEditorInstructionsState();
+  InterventionEditorInstructionsState createState() =>
+      InterventionEditorInstructionsState();
 }
 
-class _InterventionEditorInstructionsState
+class InterventionEditorInstructionsState
     extends State<InterventionEditorInstructions> {
-  String _instructions;
+  String? _instructions;
 
   @override
   void initState() {
-    _instructions = widget.intervention.instructions;
+    _instructions = widget.intervention!.instructions;
     super.initState();
   }
 
@@ -35,13 +36,12 @@ class _InterventionEditorInstructionsState
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          brightness: Brightness.dark,
           title: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(widget.intervention.name),
-              Visibility(
+              Text(widget.intervention!.name!),
+              const Visibility(
                 visible: true,
                 child: Text(
                   'Instructions',
@@ -70,7 +70,7 @@ class _InterventionEditorInstructionsState
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                         color: Theme.of(context).primaryColor)),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextFormField(
@@ -79,13 +79,13 @@ class _InterventionEditorInstructionsState
                   autofocus: _instructions == null,
                   initialValue: _instructions,
                   onChanged: _changeInstructions,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Instructions',
                   ),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
-                    '* The instructions will be shown to you when it is time for "${widget.intervention.name}".\nAim to be specific enough so you will know what to do.',
+                    '* The instructions will be shown to you when it is time for "${widget.intervention!.name}".\nAim to be specific enough so you will know what to do.',
                     style: TextStyle(
                         fontStyle: FontStyle.italic,
                         fontSize: 20,
@@ -97,18 +97,18 @@ class _InterventionEditorInstructionsState
   }
 
   _canSubmit() {
-    return _instructions != null && _instructions.length > 0;
+    return _instructions != null && _instructions!.isNotEmpty;
   }
 
   _submit() {
-    widget.intervention.instructions = _instructions;
+    widget.intervention!.instructions = _instructions;
     widget.save
         ? widget.onSave(widget.intervention)
         : Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => ScheduleEditor(
-                  title: widget.intervention.name,
+                  title: widget.intervention!.name,
                   objectWithSchedule: widget.intervention,
                   onSave: widget.onSave),
             ));

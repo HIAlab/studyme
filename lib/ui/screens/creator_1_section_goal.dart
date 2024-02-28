@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/ui/screens/goal_library.dart';
@@ -9,7 +8,7 @@ import 'goal_overview.dart';
 class CreatorGoalSection extends StatelessWidget {
   final AppData model;
 
-  CreatorGoalSection(this.model);
+  const CreatorGoalSection(this.model, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,26 +25,26 @@ class CreatorGoalSection extends StatelessWidget {
             alignment: MainAxisAlignment.center,
             children: [
               OutlinedButton.icon(
-                  icon: Icon(Icons.add),
-                  label: Text('Select'),
+                  icon: const Icon(Icons.add),
+                  label: const Text('Select'),
                   onPressed: () => _addGoal(context)),
             ],
           ),
         if (_goalIsSet())
-          GoalCard(goal: model.trial.goal, onTap: () => _viewGoal(context))
+          GoalCard(goal: model.trial!.goal, onTap: () => _viewGoal(context))
       ],
     );
   }
 
   bool _goalIsSet() {
-    return model.trial.goal != null;
+    return model.trial!.goal != null;
   }
 
   _addGoal(context) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => GoalLibrary(),
+        builder: (context) => const GoalLibrary(),
       ),
     );
   }
@@ -54,7 +53,7 @@ class CreatorGoalSection extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => GoalOverview(),
+        builder: (context) => const GoalOverview(),
       ),
     );
   }
