@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/app_data.dart';
 import 'package:studyme/models/app_state/default_interventions.dart';
 import 'package:studyme/models/intervention.dart';
+import 'package:studyme/routes.dart';
 import 'package:studyme/ui/screens/intervention_preview.dart';
 import 'package:studyme/ui/widgets/hint_card.dart';
 import 'package:studyme/ui/widgets/intervention_card.dart';
@@ -93,7 +94,7 @@ class InterventionLibrary extends StatelessWidget {
   _createIntervention(BuildContext context) {
     saveFunction(Intervention intervention) {
       _getSetter(context)(intervention);
-      Navigator.pushNamedAndRemoveUntil(context, '/creator', (r) => false);
+      Navigator.pushNamedAndRemoveUntil(context, Routes.creator, (r) => false);
     }
 
     Navigator.push(
@@ -102,7 +103,7 @@ class InterventionLibrary extends StatelessWidget {
         builder: (context) => InterventionEditorName(
             intervention: Intervention(),
             isA: isA,
-            onSave: saveFunction as dynamic Function(Intervention?),
+            onSave: saveFunction as void Function(Intervention),
             save: false),
       ),
     );
