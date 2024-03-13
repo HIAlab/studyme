@@ -30,7 +30,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace "health.studyu.me"
-    compileSdkVersion Math.max(flutter.compileSdkVersion, 33)
+    compileSdkVersion Math.max(flutter.compileSdkVersion, 34)
     ndkVersion flutter.ndkVersion
 
     defaultConfig {

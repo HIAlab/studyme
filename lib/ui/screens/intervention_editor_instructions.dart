@@ -5,9 +5,9 @@ import '../widgets/action_button.dart';
 import 'schedule_editor.dart';
 
 class InterventionEditorInstructions extends StatefulWidget {
-  final Intervention? intervention;
+  final Intervention intervention;
 
-  final Function(Intervention? intervention) onSave;
+  final Function(Intervention intervention) onSave;
   final bool save;
 
   const InterventionEditorInstructions(
@@ -28,7 +28,7 @@ class InterventionEditorInstructionsState
 
   @override
   void initState() {
-    _instructions = widget.intervention!.instructions;
+    _instructions = widget.intervention.instructions;
     super.initState();
   }
 
@@ -40,7 +40,7 @@ class InterventionEditorInstructionsState
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(widget.intervention!.name!),
+              Text(widget.intervention.name!),
               const Visibility(
                 visible: true,
                 child: Text(
@@ -85,7 +85,7 @@ class InterventionEditorInstructionsState
                 ),
                 const SizedBox(height: 20),
                 Text(
-                    '* The instructions will be shown to you when it is time for "${widget.intervention!.name}".\nAim to be specific enough so you will know what to do.',
+                    '* The instructions will be shown to you when it is time for "${widget.intervention.name}".\nAim to be specific enough so you will know what to do.',
                     style: TextStyle(
                         fontStyle: FontStyle.italic,
                         fontSize: 20,
@@ -101,14 +101,14 @@ class InterventionEditorInstructionsState
   }
 
   _submit() {
-    widget.intervention!.instructions = _instructions;
+    widget.intervention.instructions = _instructions;
     widget.save
         ? widget.onSave(widget.intervention)
         : Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => ScheduleEditor(
-                  title: widget.intervention!.name,
+                  title: widget.intervention.name,
                   objectWithSchedule: widget.intervention,
                   onSave: widget.onSave),
             ));

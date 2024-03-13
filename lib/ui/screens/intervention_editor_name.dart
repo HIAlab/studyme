@@ -5,9 +5,9 @@ import 'package:studyme/ui/screens/intervention_editor_instructions.dart';
 import '../widgets/action_button.dart';
 
 class InterventionEditorName extends StatefulWidget {
-  final Intervention? intervention;
+  final Intervention intervention;
   final bool isA;
-  final Function(Intervention? intervention) onSave;
+  final Function(Intervention intervention) onSave;
   final bool save;
 
   const InterventionEditorName(
@@ -27,7 +27,7 @@ class InterventionEditorNameState extends State<InterventionEditorName> {
 
   @override
   void initState() {
-    _name = widget.intervention!.name;
+    _name = widget.intervention.name;
     super.initState();
   }
 
@@ -94,7 +94,7 @@ class InterventionEditorNameState extends State<InterventionEditorName> {
   }
 
   _submit() {
-    widget.intervention!.name = _name;
+    widget.intervention.name = _name;
     widget.save
         ? widget.onSave(widget.intervention)
         : Navigator.push(
