@@ -27,11 +27,11 @@ class MeasureWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (measure.runtimeType) {
-      case KeyboardMeasure _:
+      case const (KeyboardMeasure):
         return KeyboardMeasureWidget(measure as KeyboardMeasure?, updateValue);
-      case ListMeasure _:
+      case const (ListMeasure):
         return ListMeasureWidget(measure as ListMeasure?, updateValue);
-      case ScaleMeasure _:
+      case const (ScaleMeasure):
         return ScaleMeasureWidget(measure as ScaleMeasure?, updateValue);
       default:
         return Container();

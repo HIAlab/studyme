@@ -52,11 +52,11 @@ abstract class Measure with HasSchedule {
 
   getIcon() {
     switch (runtimeType) {
-      case KeyboardMeasure _:
+      case const (KeyboardMeasure):
         return KeyboardMeasure.icon;
-      case ListMeasure _:
+      case const (ListMeasure):
         return ListMeasure.icon;
-      case ScaleMeasure _:
+      case const (ScaleMeasure):
         return ScaleMeasure.icon;
       default:
         return null;
@@ -65,11 +65,11 @@ abstract class Measure with HasSchedule {
 
   clone() {
     switch (runtimeType) {
-      case KeyboardMeasure _:
+      case const (KeyboardMeasure):
         return KeyboardMeasure.clone(this as KeyboardMeasure);
-      case ListMeasure _:
+      case const (ListMeasure):
         return ListMeasure.clone(this as ListMeasure);
-      case ScaleMeasure _:
+      case const (ScaleMeasure):
         return ScaleMeasure.clone(this as ScaleMeasure);
     }
   }
