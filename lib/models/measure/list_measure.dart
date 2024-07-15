@@ -1,5 +1,4 @@
-import 'package:charts_flutter/flutter.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:community_charts_common/community_charts_common.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -41,9 +40,9 @@ class ListMeasure extends Measure {
         super.clone();
 
   @override
-  dynamic get tickProvider => charts.NumericAxisSpec(
-        tickProviderSpec: charts.StaticNumericTickProviderSpec(
-          <charts.TickSpec<num>>[
+  dynamic get tickProvider => NumericAxisSpec(
+        tickProviderSpec: StaticNumericTickProviderSpec(
+          <TickSpec<num>>[
             ...items!
                 .asMap()
                 .entries

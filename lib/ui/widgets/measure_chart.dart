@@ -1,11 +1,12 @@
-import 'package:charts_flutter/flutter.dart' as charts;
 import "package:collection/collection.dart";
+import 'package:community_charts_flutter/community_charts_flutter.dart'
+    as charts;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:studyme/models/app_state/log_data.dart';
 import 'package:studyme/models/log/trial_log.dart';
-import 'package:studyme/models/measure/time_aggregation.dart';
 import 'package:studyme/models/measure/measure.dart';
+import 'package:studyme/models/measure/time_aggregation.dart';
 import 'package:studyme/models/phase/phase.dart';
 import 'package:studyme/models/trial.dart';
 
