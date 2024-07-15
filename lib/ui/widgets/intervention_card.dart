@@ -7,8 +7,7 @@ class InterventionCard extends StatelessWidget {
   final void Function()? onTap;
 
   const InterventionCard(
-      {Key? key, this.intervention, this.onTap, this.showSchedule = false})
-      : super(key: key);
+      {super.key, this.intervention, this.onTap, this.showSchedule = false});
 
   @override
   Widget build(BuildContext context) {

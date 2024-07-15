@@ -9,7 +9,7 @@ import 'package:studyme/ui/widgets/measure_card.dart';
 import 'package:studyme/ui/widgets/goal_card.dart';
 
 class CreatorSetup extends StatelessWidget {
-  const CreatorSetup({Key? key}) : super(key: key);
+  const CreatorSetup({super.key});
 
   @override
   Widget build(BuildContext context) {

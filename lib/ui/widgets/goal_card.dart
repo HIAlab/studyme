@@ -5,7 +5,7 @@ class GoalCard extends StatelessWidget {
   final Goal? goal;
   final void Function()? onTap;
 
-  const GoalCard({Key? key, this.goal, this.onTap}) : super(key: key);
+  const GoalCard({super.key, this.goal, this.onTap});
 
   @override
   Widget build(BuildContext context) {

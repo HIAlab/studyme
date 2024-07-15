@@ -10,11 +10,10 @@ class MeasureEditorName extends StatefulWidget {
   final bool save;
 
   const MeasureEditorName(
-      {Key? key,
+      {super.key,
       required this.measure,
       required this.onSave,
-      required this.save})
-      : super(key: key);
+      required this.save});
 
   @override
   MeasureEditorNameState createState() => MeasureEditorNameState();

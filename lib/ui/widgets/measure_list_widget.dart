@@ -8,8 +8,7 @@ class ListMeasureWidget extends StatefulWidget {
 
   final void Function(num value)? updateValue;
 
-  const ListMeasureWidget(this.measure, this.updateValue, {Key? key})
-      : super(key: key);
+  const ListMeasureWidget(this.measure, this.updateValue, {super.key});
 
   @override
   ListMeasureWidgetState createState() => ListMeasureWidgetState();

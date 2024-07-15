@@ -14,19 +14,15 @@ class KeyboardMeasure extends Measure {
   static const IconData icon = Icons.dialpad;
 
   KeyboardMeasure(
-      {String? id,
-      String? name,
+      {super.id,
+      super.name,
       String? description,
-      String? unit,
-      Reminder? schedule})
+      super.unit,
+      super.schedule})
       : super(
-            id: id,
-            type: measureType,
-            name: name,
-            unit: unit,
-            schedule: schedule);
+            type: measureType);
 
-  KeyboardMeasure.clone(KeyboardMeasure measure) : super.clone(measure);
+  KeyboardMeasure.clone(KeyboardMeasure super.measure) : super.clone();
 
   factory KeyboardMeasure.fromJson(Map<String, dynamic> json) =>
       _$KeyboardMeasureFromJson(json);

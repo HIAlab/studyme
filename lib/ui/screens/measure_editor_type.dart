@@ -15,8 +15,7 @@ class MeasureEditorType extends StatefulWidget {
   final Function(Measure measure) onSave;
 
   const MeasureEditorType(
-      {Key? key, required this.measure, required this.onSave})
-      : super(key: key);
+      {super.key, required this.measure, required this.onSave});
 
   @override
   MeasureEditorTypeState createState() => MeasureEditorTypeState();

@@ -11,12 +11,11 @@ class InterventionEditorName extends StatefulWidget {
   final bool save;
 
   const InterventionEditorName(
-      {Key? key,
+      {super.key,
       required this.intervention,
       required this.isA,
       required this.onSave,
-      required this.save})
-      : super(key: key);
+      required this.save});
 
   @override
   InterventionEditorNameState createState() => InterventionEditorNameState();

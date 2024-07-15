@@ -12,14 +12,13 @@ part 'phase_withdrawal.g.dart';
 class WithdrawalPhase extends Phase {
   static const String phaseType = 'withdrawal';
 
-  WithdrawalPhase({String? letter}) : super(letter: letter);
+  WithdrawalPhase({super.letter});
 
   WithdrawalPhase.fromIntervention(
-      {String? letter, required Intervention withdrawnIntervention})
+      {super.letter, required Intervention withdrawnIntervention})
       : super(
             type: phaseType,
-            name: 'Without "${withdrawnIntervention.name}"',
-            letter: letter);
+            name: 'Without "${withdrawnIntervention.name}"');
 
   @override
   List<Task> getTasksFor(int daysSinceBeginningOfTimeRange) {

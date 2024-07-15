@@ -33,23 +33,23 @@ class ScaleMeasure extends Measure {
       "From:\t${min!.toInt().toString()} ($minLabel), To: ${max!.toInt().toString()} ($maxLabel) ";
 
   ScaleMeasure(
-      {String? id,
-      String? name,
+      {super.id,
+      super.name,
       String? description,
       double? min,
       this.minLabel,
       double? max,
       this.maxLabel,
-      Reminder? schedule})
+      super.schedule})
       : min = min ?? 0.0,
         max = max ?? 10.0,
-        super(id: id, type: measureType, name: name, schedule: schedule);
+        super(type: measureType);
 
-  ScaleMeasure.clone(ScaleMeasure measure)
+  ScaleMeasure.clone(ScaleMeasure super.measure)
       : min = measure.min,
         max = measure.max,
         initial = measure.initial,
-        super.clone(measure);
+        super.clone();
 
   factory ScaleMeasure.fromJson(Map<String, dynamic> json) =>
       _$ScaleMeasureFromJson(json);

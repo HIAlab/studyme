@@ -7,7 +7,7 @@ import 'package:studyme/ui/widgets/measure_card.dart';
 class CreatorMeasureSection extends StatelessWidget {
   final AppData model;
 
-  const CreatorMeasureSection(this.model, {Key? key}) : super(key: key);
+  const CreatorMeasureSection(this.model, {super.key});
 
   @override
   Widget build(BuildContext context) {

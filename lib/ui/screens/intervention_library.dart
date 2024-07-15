@@ -14,7 +14,7 @@ import 'intervention_editor_name.dart';
 class InterventionLibrary extends StatelessWidget {
   final bool isA;
 
-  const InterventionLibrary({Key? key, required this.isA}) : super(key: key);
+  const InterventionLibrary({super.key, required this.isA});
 
   @override
   Widget build(BuildContext context) {

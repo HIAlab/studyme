@@ -14,8 +14,7 @@ class TaskList extends StatefulWidget {
   final Trial trial;
   final DateTime date;
 
-  const TaskList({Key? key, required this.trial, required this.date})
-      : super(key: key);
+  const TaskList({super.key, required this.trial, required this.date});
 
   @override
   TaskListState createState() => TaskListState();

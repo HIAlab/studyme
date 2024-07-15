@@ -11,11 +11,10 @@ class MeasureEditorScale extends StatefulWidget {
   final bool save;
 
   const MeasureEditorScale(
-      {Key? key,
+      {super.key,
       required this.measure,
       required this.onSave,
-      required this.save})
-      : super(key: key);
+      required this.save});
 
   @override
   MeasureEditorScaleState createState() => MeasureEditorScaleState();

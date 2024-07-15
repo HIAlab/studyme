@@ -10,7 +10,7 @@ import 'creator_1_section_measures.dart';
 import 'creator_1_section_goal.dart';
 
 class CreatorDetails extends StatelessWidget {
-  const CreatorDetails({Key? key}) : super(key: key);
+  const CreatorDetails({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -6,7 +6,7 @@ import 'package:studyme/models/goal.dart';
 class GoalPreview extends StatelessWidget {
   final Goal goal;
 
-  const GoalPreview({Key? key, required this.goal}) : super(key: key);
+  const GoalPreview({super.key, required this.goal});
 
   @override
   Widget build(BuildContext context) {

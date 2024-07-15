@@ -11,11 +11,10 @@ class ScheduleEditor extends StatefulWidget {
   final Function onSave;
 
   const ScheduleEditor(
-      {Key? key,
+      {super.key,
       required this.title,
       required this.objectWithSchedule,
-      required this.onSave})
-      : super(key: key);
+      required this.onSave});
 
   @override
   ScheduleEditorState createState() => ScheduleEditorState();

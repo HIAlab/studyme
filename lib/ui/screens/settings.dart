@@ -8,7 +8,7 @@ import 'package:studyme/util/debug_functions.dart';
 import '../../routes.dart';
 
 class Settings extends StatefulWidget {
-  const Settings({Key? key}) : super(key: key);
+  const Settings({super.key});
 
   @override
   SettingsState createState() => SettingsState();

@@ -6,7 +6,7 @@ import 'package:studyme/ui/widgets/phase_card.dart';
 import 'package:studyme/ui/widgets/measure_chart.dart';
 
 class History extends StatefulWidget {
-  const History({Key? key}) : super(key: key);
+  const History({super.key});
 
   @override
   HistoryState createState() => HistoryState();

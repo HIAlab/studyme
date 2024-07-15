@@ -7,12 +7,11 @@ class TimelineCard extends StatelessWidget {
   final Widget? belowCardChild;
 
   const TimelineCard(
-      {Key? key,
+      {super.key,
       this.isActive = false,
       this.cardChild,
       this.cardColor,
-      this.belowCardChild})
-      : super(key: key);
+      this.belowCardChild});
 
   @override
   Widget build(BuildContext context) {

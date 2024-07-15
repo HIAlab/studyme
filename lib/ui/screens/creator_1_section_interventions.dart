@@ -11,8 +11,7 @@ class CreatorInterventionSection extends StatelessWidget {
   final AppData model;
   final bool isActive;
 
-  const CreatorInterventionSection(this.model, {Key? key, this.isActive = true})
-      : super(key: key);
+  const CreatorInterventionSection(this.model, {super.key, this.isActive = true});
 
   @override
   Widget build(BuildContext context) {

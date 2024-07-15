@@ -15,11 +15,10 @@ class MeasureChart extends StatefulWidget {
   final TimeAggregation? timeAggregation;
 
   const MeasureChart(
-      {Key? key,
+      {super.key,
       required this.measure,
       required this.trial,
-      required this.timeAggregation})
-      : super(key: key);
+      required this.timeAggregation});
 
   @override
   MeasureChartState createState() => MeasureChartState();

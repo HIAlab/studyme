@@ -13,7 +13,7 @@ import '../../models/app_state/app_data.dart';
 class MeasureInteractor extends StatefulWidget {
   final MeasureTask? task;
 
-  const MeasureInteractor(this.task, {Key? key}) : super(key: key);
+  const MeasureInteractor(this.task, {super.key});
 
   @override
   MeasureInteractorState createState() => MeasureInteractorState();

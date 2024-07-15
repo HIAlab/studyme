@@ -9,8 +9,7 @@ class TrialTypeEditor extends StatefulWidget {
   final TrialType? type;
   final Function(TrialType type) onSave;
 
-  const TrialTypeEditor({Key? key, required this.type, required this.onSave})
-      : super(key: key);
+  const TrialTypeEditor({super.key, required this.type, required this.onSave});
 
   @override
   TrialTypeEditorState createState() => TrialTypeEditorState();

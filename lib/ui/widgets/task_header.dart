@@ -6,7 +6,7 @@ import 'package:studyme/util/time_of_day_extension.dart';
 class TaskHeader extends StatelessWidget {
   final Task? task;
 
-  const TaskHeader({Key? key, required this.task}) : super(key: key);
+  const TaskHeader({super.key, required this.task});
 
   @override
   Widget build(BuildContext context) {

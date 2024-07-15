@@ -11,11 +11,10 @@ class InterventionEditorInstructions extends StatefulWidget {
   final bool save;
 
   const InterventionEditorInstructions(
-      {Key? key,
+      {super.key,
       required this.intervention,
       required this.onSave,
-      required this.save})
-      : super(key: key);
+      required this.save});
 
   @override
   InterventionEditorInstructionsState createState() =>

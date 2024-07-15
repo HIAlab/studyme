@@ -6,8 +6,7 @@ class KeyboardMeasureWidget extends StatelessWidget {
 
   final void Function(num value)? updateValue;
 
-  const KeyboardMeasureWidget(this.measure, this.updateValue, {Key? key})
-      : super(key: key);
+  const KeyboardMeasureWidget(this.measure, this.updateValue, {super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -9,8 +9,7 @@ class InterventionPreview extends StatelessWidget {
   final Intervention intervention;
 
   const InterventionPreview(
-      {Key? key, required this.intervention, required this.isA})
-      : super(key: key);
+      {super.key, required this.intervention, required this.isA});
 
   @override
   Widget build(BuildContext context) {

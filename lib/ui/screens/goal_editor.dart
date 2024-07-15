@@ -6,8 +6,7 @@ class GoalEditor extends StatefulWidget {
   final Goal goal;
   final Function(Goal goal) onSave;
 
-  const GoalEditor({Key? key, required this.goal, required this.onSave})
-      : super(key: key);
+  const GoalEditor({super.key, required this.goal, required this.onSave});
 
   @override
   GoalEditorState createState() => GoalEditorState();

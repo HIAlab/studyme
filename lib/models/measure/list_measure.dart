@@ -28,17 +28,17 @@ class ListMeasure extends Measure {
           element.value!);
 
   ListMeasure(
-      {String? id,
-      String? name,
+      {super.id,
+      super.name,
       String? description,
       List<ListItem>? items,
-      Reminder? schedule})
+      super.schedule})
       : items = items ?? [],
-        super(id: id, type: measureType, name: name, schedule: schedule);
+        super(type: measureType);
 
-  ListMeasure.clone(ListMeasure measure)
+  ListMeasure.clone(ListMeasure super.measure)
       : items = List.of(measure.items!),
-        super.clone(measure);
+        super.clone();
 
   @override
   dynamic get tickProvider => charts.NumericAxisSpec(

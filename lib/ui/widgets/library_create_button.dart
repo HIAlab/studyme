@@ -4,7 +4,7 @@ import 'package:studyme/ui/widgets/hightlighted_action_button.dart';
 class LibraryCreateButton extends StatelessWidget {
   final Function()? onPressed;
 
-  const LibraryCreateButton({Key? key, this.onPressed}) : super(key: key);
+  const LibraryCreateButton({super.key, this.onPressed});
 
   @override
   Widget build(BuildContext context) {

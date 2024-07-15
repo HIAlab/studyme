@@ -8,7 +8,7 @@ import 'package:studyme/ui/widgets/trial_schedule_widget.dart';
 import 'package:studyme/util/util.dart';
 
 class TrialScheduleEditor extends StatefulWidget {
-  const TrialScheduleEditor({Key? key}) : super(key: key);
+  const TrialScheduleEditor({super.key});
 
   @override
   TrialScheduleEditorState createState() => TrialScheduleEditorState();

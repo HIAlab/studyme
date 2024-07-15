@@ -6,7 +6,7 @@ import 'package:studyme/ui/screens/goal_editor.dart';
 import 'package:studyme/ui/widgets/editable_list_tile.dart';
 
 class GoalOverview extends StatefulWidget {
-  const GoalOverview({Key? key}) : super(key: key);
+  const GoalOverview({super.key});
 
   @override
   GoalOverviewState createState() => GoalOverviewState();

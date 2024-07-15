@@ -11,8 +11,7 @@ class TaskCard extends StatelessWidget {
   final Task task;
   final bool isCompleted;
 
-  const TaskCard({Key? key, required this.task, required this.isCompleted})
-      : super(key: key);
+  const TaskCard({super.key, required this.task, required this.isCompleted});
 
   @override
   Widget build(BuildContext context) {

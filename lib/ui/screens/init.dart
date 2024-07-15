@@ -6,7 +6,7 @@ import 'package:studyme/routes.dart';
 import 'package:studyme/util/notifications.dart';
 
 class Init extends StatefulWidget {
-  const Init({Key? key}) : super(key: key);
+  const Init({super.key});
 
   @override
   InitState createState() => InitState();

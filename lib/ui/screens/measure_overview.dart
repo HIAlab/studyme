@@ -16,7 +16,7 @@ import 'schedule_editor.dart';
 
 class MeasureOverview extends StatefulWidget {
   final int index;
-  const MeasureOverview({Key? key, required this.index}) : super(key: key);
+  const MeasureOverview({super.key, required this.index});
 
   @override
   MeasureOverviewState createState() => MeasureOverviewState();

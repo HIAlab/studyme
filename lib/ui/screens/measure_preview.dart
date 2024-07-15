@@ -11,7 +11,7 @@ import 'package:studyme/util/string_extension.dart';
 class MeasurePreview extends StatelessWidget {
   final Measure measure;
 
-  const MeasurePreview({Key? key, required this.measure}) : super(key: key);
+  const MeasurePreview({super.key, required this.measure});
 
   @override
   Widget build(BuildContext context) {

@@ -5,7 +5,7 @@ import 'package:studyme/ui/widgets/timeline.dart';
 class PhaseWidget extends StatelessWidget {
   final Trial? trial;
 
-  const PhaseWidget({Key? key, this.trial}) : super(key: key);
+  const PhaseWidget({super.key, this.trial});
 
   @override
   Widget build(BuildContext context) {

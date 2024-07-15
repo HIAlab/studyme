@@ -5,8 +5,7 @@ class HintCard extends StatelessWidget {
   final List<Widget>? body;
   final bool canClose;
 
-  const HintCard({Key? key, this.titleText, this.body, this.canClose = false})
-      : super(key: key);
+  const HintCard({super.key, this.titleText, this.body, this.canClose = false});
 
   @override
   Widget build(BuildContext context) {

@@ -11,7 +11,7 @@ import '../../models/app_state/app_data.dart';
 class InterventionInteractor extends StatefulWidget {
   final InterventionTask? task;
 
-  const InterventionInteractor(this.task, {Key? key}) : super(key: key);
+  const InterventionInteractor(this.task, {super.key});
 
   @override
   InterventionInteractorState createState() => InterventionInteractorState();

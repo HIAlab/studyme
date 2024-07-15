@@ -11,7 +11,7 @@ import 'schedule_editor.dart';
 class InterventionOverview extends StatefulWidget {
   final bool isA;
 
-  const InterventionOverview({Key? key, required this.isA}) : super(key: key);
+  const InterventionOverview({super.key, required this.isA});
 
   @override
   InterventionOverviewState createState() => InterventionOverviewState();

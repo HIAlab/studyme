@@ -9,7 +9,7 @@ import 'package:studyme/ui/widgets/library_create_button.dart';
 import 'package:studyme/ui/widgets/goal_card.dart';
 
 class GoalLibrary extends StatelessWidget {
-  const GoalLibrary({Key? key}) : super(key: key);
+  const GoalLibrary({super.key});
 
   @override
   Widget build(BuildContext context) {

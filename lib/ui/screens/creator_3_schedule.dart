@@ -8,7 +8,7 @@ import 'package:studyme/ui/widgets/hightlighted_action_button.dart';
 import 'package:studyme/ui/widgets/phase_card.dart';
 
 class CreatorSchedule extends StatelessWidget {
-  const CreatorSchedule({Key? key}) : super(key: key);
+  const CreatorSchedule({super.key});
 
   @override
   Widget build(BuildContext context) {

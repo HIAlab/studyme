@@ -12,11 +12,10 @@ class MeasureEditorList extends StatefulWidget {
   final bool save;
 
   const MeasureEditorList(
-      {Key? key,
+      {super.key,
       required this.measure,
       required this.onSave,
-      required this.save})
-      : super(key: key);
+      required this.save});
 
   @override
   MeasureEditorListState createState() => MeasureEditorListState();

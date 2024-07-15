@@ -8,7 +8,7 @@ import 'goal_overview.dart';
 class CreatorGoalSection extends StatelessWidget {
   final AppData model;
 
-  const CreatorGoalSection(this.model, {Key? key}) : super(key: key);
+  const CreatorGoalSection(this.model, {super.key});
 
   @override
   Widget build(BuildContext context) {

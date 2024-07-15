@@ -15,9 +15,9 @@ class InterventionPhase extends Phase {
   @HiveField(3)
   Intervention intervention;
 
-  InterventionPhase({String? letter, Intervention? intervention})
+  InterventionPhase({super.letter, Intervention? intervention})
       : intervention = intervention ?? Intervention(),
-        super(type: phaseType, name: intervention?.name, letter: letter);
+        super(type: phaseType, name: intervention?.name);
 
   @override
   List<Task> getTasksFor(int daysSinceBeginningOfTimeRange) {

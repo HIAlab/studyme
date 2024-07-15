@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../routes.dart';
 
 class Onboarding extends StatefulWidget {
-  const Onboarding({Key? key}) : super(key: key);
+  const Onboarding({super.key});
 
   @override
   OnboardingState createState() => OnboardingState();

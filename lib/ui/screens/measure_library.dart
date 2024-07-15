@@ -10,7 +10,7 @@ import 'package:studyme/ui/widgets/measure_card.dart';
 import 'measure_preview.dart';
 
 class MeasureLibrary extends StatelessWidget {
-  const MeasureLibrary({Key? key}) : super(key: key);
+  const MeasureLibrary({super.key});
 
   @override
   Widget build(BuildContext context) {
