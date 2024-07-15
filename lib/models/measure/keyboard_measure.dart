@@ -14,13 +14,8 @@ class KeyboardMeasure extends Measure {
   static const IconData icon = Icons.dialpad;
 
   KeyboardMeasure(
-      {super.id,
-      super.name,
-      String? description,
-      super.unit,
-      super.schedule})
-      : super(
-            type: measureType);
+      {super.id, super.name, String? description, super.unit, super.schedule})
+      : super(type: measureType);
 
   KeyboardMeasure.clone(KeyboardMeasure super.measure) : super.clone();
 
