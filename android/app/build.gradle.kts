@@ -5,36 +5,41 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-def localProperties = new Properties()
-def localPropertiesFile = rootProject.file("local.properties")
+import java.util.Properties
+        import java.io.FileInputStream
+
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("local.properties")
 if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader("UTF-8") { reader ->
-        localProperties.load(reader)
-    }
+    localPropertiesFile.inputStream().use { localProperties.load(it) }
 }
 
-def flutterVersionCode = localProperties.getProperty("flutter.versionCode")
+var flutterVersionCode = localProperties.getProperty("flutter.versionCode")?.toInt()
 if (flutterVersionCode == null) {
-    flutterVersionCode = "1"
+    flutterVersionCode = 1
 }
 
-def flutterVersionName = localProperties.getProperty("flutter.versionName")
+var flutterVersionName = localProperties.getProperty("flutter.versionName")
 if (flutterVersionName == null) {
     flutterVersionName = "1.0"
 }
 
-def keystoreProperties = new Properties()
-def keystorePropertiesFile = rootProject.file('key.properties')
+val keystoreProperties = Properties()
+val keystorePropertiesFile = rootProject.file("key.properties")
 if (keystorePropertiesFile.exists()) {
-    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+    keystorePropertiesFile.inputStream().use { keystoreProperties.load(it) }
 }
 
 android {
     namespace = "health.studyu.me"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = maxOf(flutter.compileSdkVersion, 34)
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
+        // Start flutter_local_notifications
+        // Flag to enable support for the new language APIs
+        isCoreLibraryDesugaringEnabled = true
+        // End flutter_local_notifications
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
@@ -44,7 +49,9 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        // Start flutter_local_notifications
+        multiDexEnabled = true
+        // End flutter_local_notifications
         applicationId = "health.studyu.me"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
@@ -73,4 +80,14 @@ android {
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    // Start flutter_local_notifications
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+    // Fix crash on Android 12L / 13 using workaround
+    // See https://github.com/flutter/flutter/issues/110658#issuecomment-1320834920
+    implementation("androidx.window:window:1.0.0")
+    implementation("androidx.window:window-java:1.0.0")
+    // End flutter_local_notifications
 }
