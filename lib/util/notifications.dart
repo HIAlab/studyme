@@ -8,7 +8,7 @@ import 'package:timezone/timezone.dart' as tz;
 class Notifications {
   static Notifications? _instance;
   Notifications._();
-  late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
+  FlutterLocalNotificationsPlugin? _flutterLocalNotificationsPlugin;
 
   static Future<void> init() async {
     final notifications = Notifications._();
@@ -45,7 +45,7 @@ class Notifications {
       android: initializationSettingsAndroid,
       iOS: initializationSettingsDarwin,
     );
-    await _flutterLocalNotificationsPlugin.initialize(initializationSettings,
+    await _flutterLocalNotificationsPlugin!.initialize(initializationSettings,
         onDidReceiveNotificationResponse: onDidReceiveNotificationResponse);
   }
 
@@ -63,18 +63,24 @@ class Notifications {
 
   Future<void> scheduleNotificationFor(
       DateTime date, Task reminder, int id) async {
+    if (_flutterLocalNotificationsPlugin == null) return;
+
     tz.TZDateTime scheduledTime = _getScheduledTime(date, reminder.time!);
     tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     if (!scheduledTime.isBefore(now)) {
       const AndroidNotificationDetails androidNotificationDetails =
-          AndroidNotificationDetails('studyme_app', 'StudyMe',
-              channelDescription: 'StudyMe notifications',
-              importance: Importance.max,
-              priority: Priority.high,
-              ticker: 'ticker');
+          AndroidNotificationDetails(
+        'studyme_app',
+        'StudyMe',
+        channelDescription: 'StudyMe notifications',
+        icon: '@mipmap/ic_launcher',
+        importance: Importance.max,
+        priority: Priority.high,
+        ticker: 'ticker',
+      );
       const NotificationDetails notificationDetails =
           NotificationDetails(android: androidNotificationDetails);
-      await _flutterLocalNotificationsPlugin.zonedSchedule(
+      await _flutterLocalNotificationsPlugin!.zonedSchedule(
         id,
         'Time for your experiment',
         reminder.title,
@@ -95,14 +101,16 @@ class Notifications {
 
   Future<bool?>? requestPermission() {
     return _flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
+        ?.resolvePlatformSpecificImplementation<
             AndroidFlutterLocalNotificationsPlugin>()
         ?.requestNotificationsPermission();
   }
 
   Future<void> debugShowPendingRequests() async {
+    if (_flutterLocalNotificationsPlugin == null) return;
+
     final List<PendingNotificationRequest> pendingNotificationRequests =
-        await _flutterLocalNotificationsPlugin.pendingNotificationRequests();
+        await _flutterLocalNotificationsPlugin!.pendingNotificationRequests();
 
     if (pendingNotificationRequests.isNotEmpty) {
       for (var element in pendingNotificationRequests) {
@@ -115,6 +123,7 @@ class Notifications {
   }
 
   Future<void> clearAll() async {
-    _flutterLocalNotificationsPlugin.cancelAll();
+    if (_flutterLocalNotificationsPlugin == null) return;
+    await _flutterLocalNotificationsPlugin!.cancelAll();
   }
 }
