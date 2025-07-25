@@ -92,7 +92,7 @@ class ScheduleEditorState extends State<ScheduleEditor> {
                         ),
                       );
                     }),
-                ButtonBar(
+                OverflowBar(
                   alignment: MainAxisAlignment.center,
                   children: [
                     OutlinedButton.icon(
@@ -107,16 +107,16 @@ class ScheduleEditorState extends State<ScheduleEditor> {
         ));
   }
 
-  _canSubmit() {
+  bool? _canSubmit() {
     return _schedule?.times.isNotEmpty;
   }
 
-  _onSubmit() {
+  void _onSubmit() {
     widget.objectWithSchedule!.schedule = _schedule;
     widget.onSave(widget.objectWithSchedule);
   }
 
-  _buildFrequencySelector() {
+  Widget _buildFrequencySelector() {
     Widget dropDown = DropdownButtonFormField<Frequency>(
       onChanged: _changeFrequency,
       value: _frequency,
@@ -149,7 +149,7 @@ class ScheduleEditorState extends State<ScheduleEditor> {
     }
   }
 
-  _changeFrequency(Frequency? newFrequency) {
+  void _changeFrequency(Frequency? newFrequency) {
     if (newFrequency != _frequency) {
       setState(() {
         _frequency = newFrequency;
@@ -158,7 +158,7 @@ class ScheduleEditorState extends State<ScheduleEditor> {
     }
   }
 
-  _setFrequency(String text) {
+  void _setFrequency(String text) {
     try {
       int value = text.isNotEmpty ? int.parse(text) : 0;
       if (value > 1) {
@@ -185,7 +185,7 @@ class ScheduleEditorState extends State<ScheduleEditor> {
     }
   }
 
-  _removeTime(int index) {
+  void _removeTime(int index) {
     setState(() {
       _schedule!.removeTime(index);
     });

@@ -113,7 +113,7 @@ class MeasureEditorScaleState extends State<MeasureEditorScale> {
         ));
   }
 
-  _updateMin(text) {
+  void _updateMin(text) {
     textToDoubleSetter(text, (double number) {
       setState(() {
         _min = number;
@@ -121,13 +121,13 @@ class MeasureEditorScaleState extends State<MeasureEditorScale> {
     });
   }
 
-  _updateMinLabel(text) {
+  void _updateMinLabel(text) {
     setState(() {
       _minLabel = text;
     });
   }
 
-  _updateMax(text) {
+  void _updateMax(text) {
     textToDoubleSetter(text, (double number) {
       setState(() {
         _max = number;
@@ -135,13 +135,13 @@ class MeasureEditorScaleState extends State<MeasureEditorScale> {
     });
   }
 
-  _updateMaxLabel(text) {
+  void _updateMaxLabel(text) {
     setState(() {
       _maxLabel = text;
     });
   }
 
-  _canSubmit() {
+  bool _canSubmit() {
     return _min != null &&
         _max != null &&
         _min! < _max! &&
@@ -151,7 +151,7 @@ class MeasureEditorScaleState extends State<MeasureEditorScale> {
         _maxLabel!.isNotEmpty;
   }
 
-  _submit() {
+  void _submit() {
     widget.measure.min = _min;
     widget.measure.minLabel = _minLabel;
     widget.measure.max = _max;

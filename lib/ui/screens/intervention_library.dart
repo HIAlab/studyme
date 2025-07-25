@@ -67,7 +67,7 @@ class InterventionLibrary extends StatelessWidget {
     });
   }
 
-  _buildListWith(List<Intervention> interventions) {
+  ListView _buildListWith(List<Intervention> interventions) {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -81,7 +81,7 @@ class InterventionLibrary extends StatelessWidget {
     );
   }
 
-  _previewIntervention(context, Intervention intervention) {
+  void _previewIntervention(context, Intervention intervention) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -91,7 +91,7 @@ class InterventionLibrary extends StatelessWidget {
     );
   }
 
-  _createIntervention(BuildContext context) {
+  void _createIntervention(BuildContext context) {
     saveFunction(Intervention intervention) {
       _getSetter(context)(intervention);
       Navigator.pushNamedAndRemoveUntil(context, Routes.creator, (r) => false);
@@ -109,7 +109,7 @@ class InterventionLibrary extends StatelessWidget {
     );
   }
 
-  _getSetter(BuildContext context) {
+  void Function(Intervention intervention) _getSetter(BuildContext context) {
     return isA
         ? Provider.of<AppData>(context, listen: false).setInterventionA
         : Provider.of<AppData>(context, listen: false).setInterventionB;

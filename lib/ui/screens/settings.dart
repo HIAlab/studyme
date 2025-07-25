@@ -58,7 +58,7 @@ class SettingsState extends State<Settings> {
                 Text(
                     'The app will be reset and you can start creating a new experiment.')
               ]),
-          ButtonBar(
+          OverflowBar(
             alignment: MainAxisAlignment.center,
             children: [
               OutlinedButton.icon(
@@ -77,7 +77,7 @@ class SettingsState extends State<Settings> {
     );
   }
 
-  _editTrial(BuildContext context) async {
+  Future<void> _editTrial(BuildContext context) async {
     bool? confirmed = await showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -106,7 +106,7 @@ class SettingsState extends State<Settings> {
     }
   }
 
-  _resetNotificationsAndLogs(BuildContext context) {
+  void _resetNotificationsAndLogs(BuildContext context) {
     Provider.of<AppData>(context, listen: false).cancelAllNotifications();
     deleteLogs(Provider.of<AppData>(context, listen: false).trial!);
   }

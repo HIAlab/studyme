@@ -42,7 +42,7 @@ void main() async {
   ], child: const MyApp()));
 }
 
-_setupHive() async {
+Future<void> _setupHive() async {
   await Hive.initFlutter();
   Hive.registerAdapter<AppState?>(AppStateAdapter());
 

@@ -66,7 +66,7 @@ class HistoryState extends State<History> {
     });
   }
 
-  _changeTimeAggregation(TimeAggregation? selectedAggregation) {
+  void _changeTimeAggregation(TimeAggregation? selectedAggregation) {
     setState(() {
       _timeAggregation = selectedAggregation;
     });

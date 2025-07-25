@@ -36,7 +36,7 @@ class AppData extends ChangeNotifier {
     return measures;
   }
 
-  loadAppState() async {
+  Future<void> loadAppState() async {
     box = await Hive.openBox('app_data');
     _trial = box.get(activeTrialKey);
 
@@ -107,18 +107,18 @@ class AppData extends ChangeNotifier {
     notifyListeners();
   }
 
-  createNewTrial() {
+  void createNewTrial() {
     _trial = Trial();
     box.put(activeTrialKey, _trial);
   }
 
-  finishEditingDetails() {
+  void finishEditingDetails() {
     saveAppState(AppState.CREATING_PHASES);
     _trial!.generateWithSetInfos();
     _trial!.save();
   }
 
-  startTrial() {
+  void startTrial() {
     saveAppState(AppState.DOING);
     DateTime now = DateTime.now();
     _trial!.startDate = DateTime(now.year, now.month, now.day);
@@ -126,7 +126,7 @@ class AppData extends ChangeNotifier {
     scheduleFutureNotifications();
   }
 
-  saveAppState(AppState state) {
+  void saveAppState(AppState state) {
     box.put(stateKey, state);
   }
 

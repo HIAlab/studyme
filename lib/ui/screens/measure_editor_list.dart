@@ -86,7 +86,7 @@ class MeasureEditorListState extends State<MeasureEditorList> {
                         ),
                       ));
                     }),
-                ButtonBar(
+                OverflowBar(
                   alignment: MainAxisAlignment.center,
                   children: [
                     OutlinedButton.icon(
@@ -101,7 +101,7 @@ class MeasureEditorListState extends State<MeasureEditorList> {
         ));
   }
 
-  _addChoice() async {
+  Future<void> _addChoice() async {
     setState(() {
       _editedChoice = null;
     });
@@ -133,24 +133,24 @@ class MeasureEditorListState extends State<MeasureEditorList> {
     }
   }
 
-  _updateEditedChoice(String? value) {
+  void _updateEditedChoice(String? value) {
     setState(() {
       _editedChoice = value;
     });
   }
 
-  _removeChoice(int index) {
+  void _removeChoice(int index) {
     setState(() {
       _items!.removeAt(index);
     });
   }
 
-  _canSubmit() {
+  bool _canSubmit() {
     return _items!.isNotEmpty &&
         _items!.every((element) => element.value != null);
   }
 
-  _submit() {
+  void _submit() {
     widget.measure.items = _items;
     widget.save
         ? widget.onSave(widget.measure)

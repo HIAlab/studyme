@@ -22,7 +22,7 @@ class CreatorSchedule extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              ButtonBar(
+              OverflowBar(
                 alignment: MainAxisAlignment.center,
                 children: [
                   OutlinedButton.icon(
@@ -72,7 +72,7 @@ class CreatorSchedule extends StatelessWidget {
     });
   }
 
-  _navigateToScheduleEditor(context) {
+  void _navigateToScheduleEditor(context) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -81,7 +81,7 @@ class CreatorSchedule extends StatelessWidget {
     );
   }
 
-  _startTrial(context, model) {
+  void _startTrial(context, model) {
     Provider.of<AppData>(context, listen: false)
         .addStepLogForSurvey('start trial');
     model.startTrial();

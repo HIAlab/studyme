@@ -21,7 +21,7 @@ class CreatorGoalSection extends StatelessWidget {
                 fontSize: 20,
                 color: Theme.of(context).primaryColor)),
         if (!_goalIsSet())
-          ButtonBar(
+          OverflowBar(
             alignment: MainAxisAlignment.center,
             children: [
               OutlinedButton.icon(
@@ -40,7 +40,7 @@ class CreatorGoalSection extends StatelessWidget {
     return model.trial!.goal != null;
   }
 
-  _addGoal(context) {
+  void _addGoal(context) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -49,7 +49,7 @@ class CreatorGoalSection extends StatelessWidget {
     );
   }
 
-  _viewGoal(context) {
+  void _viewGoal(context) {
     Navigator.push(
       context,
       MaterialPageRoute(

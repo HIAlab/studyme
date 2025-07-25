@@ -21,7 +21,7 @@ class MeasureCard extends StatelessWidget {
     ));
   }
 
-  _getSubtitle() {
+  Text? _getSubtitle() {
     if (showSchedule && measure!.schedule != null) {
       return Text(measure!.schedule!.readable);
     } else {

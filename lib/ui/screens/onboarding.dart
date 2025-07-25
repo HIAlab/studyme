@@ -305,11 +305,11 @@ class OnboardingState extends State<Onboarding> {
     );
   }
 
-  _isAtEnd() {
+  bool _isAtEnd() {
     return _currentPage == _numPages - 1;
   }
 
-  _navigateToCreator() {
+  void _navigateToCreator() {
     Provider.of<AppData>(context, listen: false)
         .addStepLogForSurvey('complete onboarding');
     Provider.of<AppData>(context, listen: false)

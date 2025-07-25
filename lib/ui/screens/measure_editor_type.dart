@@ -122,11 +122,11 @@ class MeasureEditorTypeState extends State<MeasureEditorType> {
         ));
   }
 
-  _canSubmit() {
+  bool _canSubmit() {
     return _measure != null;
   }
 
-  _submit() {
+  void _submit() {
     if (_measure is ListMeasure) {
       Navigator.push(
           context,
@@ -155,7 +155,7 @@ class MeasureEditorTypeState extends State<MeasureEditorType> {
     }
   }
 
-  _changeMeasureType(String type) {
+  void _changeMeasureType(String type) {
     if (type != _measure!.type) {
       Measure? newMeasure;
       if (type == KeyboardMeasure.measureType) {

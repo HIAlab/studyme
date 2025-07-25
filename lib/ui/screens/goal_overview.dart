@@ -41,7 +41,7 @@ class GoalOverviewState extends State<GoalOverview> {
                             subtitle: Text(goal.goal!,
                                 style: const TextStyle(fontSize: 16)),
                             onTap: () => _editGoal(goal)),
-                        ButtonBar(
+                        OverflowBar(
                           alignment: MainAxisAlignment.center,
                           children: [
                             OutlinedButton.icon(
@@ -57,7 +57,7 @@ class GoalOverviewState extends State<GoalOverview> {
           });
   }
 
-  _editGoal(Goal goal) {
+  void _editGoal(Goal goal) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -71,7 +71,7 @@ class GoalOverviewState extends State<GoalOverview> {
     );
   }
 
-  _remove() {
+  void _remove() {
     setState(() {
       _isDeleting = true;
     });
@@ -79,7 +79,7 @@ class GoalOverviewState extends State<GoalOverview> {
     Navigator.pop(context);
   }
 
-  _getSetter() {
+  void Function(Goal goal) _getSetter() {
     return Provider.of<AppData>(context, listen: false).setGoal;
   }
 }

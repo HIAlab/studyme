@@ -47,7 +47,7 @@ class MeasureLibrary extends StatelessWidget {
     });
   }
 
-  _previewMeasure(context, measure) {
+  void _previewMeasure(context, measure) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -56,7 +56,7 @@ class MeasureLibrary extends StatelessWidget {
     );
   }
 
-  _createMeasure(context) {
+  void _createMeasure(context) {
     saveFunction(Measure measure) {
       Provider.of<AppData>(context, listen: false).addMeasure(measure);
       Navigator.pushNamedAndRemoveUntil(context, '/creator', (r) => false);

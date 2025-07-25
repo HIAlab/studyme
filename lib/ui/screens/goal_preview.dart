@@ -24,7 +24,7 @@ class GoalPreview extends StatelessWidget {
                   subtitle:
                       Text(goal.goal!, style: const TextStyle(fontSize: 16)),
                 ),
-                ButtonBar(
+                OverflowBar(
                   alignment: MainAxisAlignment.center,
                   children: [
                     OutlinedButton.icon(
@@ -39,7 +39,7 @@ class GoalPreview extends StatelessWidget {
         ));
   }
 
-  _addGoal(BuildContext context) {
+  void _addGoal(BuildContext context) {
     Provider.of<AppData>(context, listen: false).setGoal(goal);
     Navigator.pushNamedAndRemoveUntil(context, '/creator', (r) => false);
   }

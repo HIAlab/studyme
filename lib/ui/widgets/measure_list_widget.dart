@@ -40,7 +40,7 @@ class ListMeasureWidgetState extends State<ListMeasureWidget> {
     );
   }
 
-  _updateValue(num value) {
+  void _updateValue(num value) {
     setState(() {
       _state = value;
     });

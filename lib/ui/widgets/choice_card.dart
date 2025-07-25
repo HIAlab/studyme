@@ -37,7 +37,7 @@ class ChoiceCard<T> extends StatelessWidget {
     ));
   }
 
-  _isSelected() {
+  bool _isSelected() {
     return value == selectedValue;
   }
 }

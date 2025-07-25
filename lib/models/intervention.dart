@@ -53,7 +53,7 @@ class Intervention with HasSchedule {
     return times.map((time) => InterventionTask(this, time)).toList();
   }
 
-  clone() {
+  Intervention clone() {
     return Intervention.clone(this);
   }
 

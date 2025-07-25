@@ -61,7 +61,7 @@ class Home extends StatelessWidget {
     );
   }
 
-  _buildActiveBody(BuildContext context, Trial trial, DateTime date) {
+  Column _buildActiveBody(BuildContext context, Trial trial, DateTime date) {
     Phase? phase = trial.getPhaseForDate(date);
     final dayOfPhase =
         trial.getDayOfStudyFor(date) % trial.schedule!.phaseDuration! + 1;
@@ -84,7 +84,7 @@ class Home extends StatelessWidget {
     ]);
   }
 
-  _buildBeforeStartBody(Trial trial) {
+  Column _buildBeforeStartBody(Trial trial) {
     return Column(children: [
       const SizedBox(height: 20),
       HintCard(titleText: "Experiment hasn't started yet", body: [
@@ -94,7 +94,7 @@ class Home extends StatelessWidget {
     ]);
   }
 
-  _buildAfterEndBody(Trial trial) {
+  Column _buildAfterEndBody(Trial trial) {
     return Column(children: [
       const SizedBox(height: 20),
       HintCard(titleText: "Experiment ended", body: [

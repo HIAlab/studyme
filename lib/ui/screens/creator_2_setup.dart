@@ -92,7 +92,7 @@ class CreatorSetup extends StatelessWidget {
     });
   }
 
-  _navigateToCreatorPhases(BuildContext context, AppData model) {
+  void _navigateToCreatorPhases(BuildContext context, AppData model) {
     Provider.of<AppData>(context, listen: false)
         .addStepLogForSurvey('finish viewing setup');
     Navigator.push(

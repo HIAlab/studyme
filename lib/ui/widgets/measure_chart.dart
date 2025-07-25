@@ -42,7 +42,7 @@ class MeasureChartState extends State<MeasureChart> {
     loadLogs();
   }
 
-  loadLogs() async {
+  Future<void> loadLogs() async {
     List<TrialLog> data =
         await Provider.of<LogData>(context).getMeasureLogs(widget.measure);
     data.removeWhere((log) => !widget.trial!.isInStudyTimeframe(log.dateTime!));
@@ -242,13 +242,13 @@ class MeasureChartState extends State<MeasureChart> {
     return logs.map((log) => log.value).toList();
   }
 
-  _aggregate(List<num?> values) {
+  dynamic _aggregate(List<num?> values) {
     return _calculateMean(values);
   }
 
-  _calculateMean(List<num?> values) => _calculateSum(values) / values.length;
+  dynamic _calculateMean(List<num?> values) => _calculateSum(values) / values.length;
 
-  _calculateSum(List<num?> values) => values.reduce((a, b) => a! + b!);
+  num? _calculateSum(List<num?> values) => values.reduce((a, b) => a! + b!);
 }
 
 class _ChartValue {

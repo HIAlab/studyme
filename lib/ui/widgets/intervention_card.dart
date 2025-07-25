@@ -20,7 +20,7 @@ class InterventionCard extends StatelessWidget {
     ));
   }
 
-  _getSubtitle() {
+  Text? _getSubtitle() {
     if (showSchedule && intervention!.schedule != null) {
       return Text(intervention!.schedule!.readable);
     } else {

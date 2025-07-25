@@ -50,7 +50,7 @@ abstract class Measure with HasSchedule {
     schedule = measure.schedule;
   }
 
-  getIcon() {
+  IconData? getIcon() {
     switch (runtimeType) {
       case const (KeyboardMeasure):
         return KeyboardMeasure.icon;
@@ -63,7 +63,7 @@ abstract class Measure with HasSchedule {
     }
   }
 
-  clone() {
+  Measure clone() {
     switch (runtimeType) {
       case const (KeyboardMeasure):
         return KeyboardMeasure.clone(this as KeyboardMeasure);

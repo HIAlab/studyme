@@ -88,7 +88,7 @@ class MeasureOverviewState extends State<MeasureOverview> {
                               subtitle: Text(measure.schedule!.readable,
                                   style: const TextStyle(fontSize: 16)),
                               onTap: () => _editSchedule(measure)),
-                          ButtonBar(
+                          OverflowBar(
                             alignment: MainAxisAlignment.center,
                             children: [
                               OutlinedButton.icon(
@@ -103,7 +103,7 @@ class MeasureOverviewState extends State<MeasureOverview> {
           });
   }
 
-  _removeMeasure() {
+  void _removeMeasure() {
     setState(() {
       _isDeleting = true;
     });
@@ -111,7 +111,7 @@ class MeasureOverviewState extends State<MeasureOverview> {
     Navigator.pop(context);
   }
 
-  _editName(Measure measure) {
+  void _editName(Measure measure) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -120,7 +120,7 @@ class MeasureOverviewState extends State<MeasureOverview> {
         ));
   }
 
-  _editUnit(Measure measure) {
+  void _editUnit(Measure measure) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -129,7 +129,7 @@ class MeasureOverviewState extends State<MeasureOverview> {
         ));
   }
 
-  _editSchedule(Measure measure) {
+  void _editSchedule(Measure measure) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -141,7 +141,7 @@ class MeasureOverviewState extends State<MeasureOverview> {
         ));
   }
 
-  _editItems(ListMeasure measure) {
+  void _editItems(ListMeasure measure) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -150,7 +150,7 @@ class MeasureOverviewState extends State<MeasureOverview> {
         ));
   }
 
-  _editScale(ScaleMeasure measure) {
+  void _editScale(ScaleMeasure measure) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -159,7 +159,7 @@ class MeasureOverviewState extends State<MeasureOverview> {
         ));
   }
 
-  _getSaveFunction() {
+  Null Function(Measure measure) _getSaveFunction() {
     return (Measure measure) {
       Provider.of<AppData>(context, listen: false)
           .updateMeasure(widget.index, measure);

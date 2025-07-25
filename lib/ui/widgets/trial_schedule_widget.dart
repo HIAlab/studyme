@@ -64,7 +64,7 @@ class TrialScheduleWidgetState extends State<TrialScheduleWidget> {
     );
   }
 
-  _buildTotalDurationText() {
+  Text _buildTotalDurationText() {
     return Text(
       '= ${widget.schedule.phaseDuration! * widget.schedule.numberOfPhases}d',
       style: const TextStyle(fontWeight: FontWeight.bold),
@@ -72,7 +72,7 @@ class TrialScheduleWidgetState extends State<TrialScheduleWidget> {
     );
   }
 
-  _buildPhaseDurationText() {
+  Text _buildPhaseDurationText() {
     return Text(('${widget.schedule.phaseDuration}d'),
         overflow: TextOverflow.ellipsis);
   }

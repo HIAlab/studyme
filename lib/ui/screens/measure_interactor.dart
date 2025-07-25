@@ -58,14 +58,14 @@ class MeasureInteractorState extends State<MeasureInteractor> {
         ));
   }
 
-  _updateValue(value) {
+  void _updateValue(value) {
     setState(() {
       _value = value;
       _confirmed = value != null ? true : false;
     });
   }
 
-  _logValue() {
+  void _logValue() {
     final now = Provider.of<AppData>(context, listen: false).getNow();
     var time = DateTime(now.year, now.month, now.day, widget.task!.time!.hour,
         widget.task!.time!.minute);

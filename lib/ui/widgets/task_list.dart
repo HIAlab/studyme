@@ -40,7 +40,7 @@ class TaskListState extends State<TaskList> {
     loadLogs();
   }
 
-  loadLogs() async {
+  Future<void> loadLogs() async {
     List<String?> data =
         await Provider.of<LogData>(context).getCompletedTaskIdsFor(widget.date);
     setState(() {
@@ -54,7 +54,7 @@ class TaskListState extends State<TaskList> {
     return _isLoading ? const CircularProgressIndicator() : _buildTaskList();
   }
 
-  _buildTaskList() {
+  Column _buildTaskList() {
     Phase? currentPhase = widget.trial.getPhaseForDate(widget.date);
     return Column(
       children: [

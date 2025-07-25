@@ -81,11 +81,11 @@ class MeasureEditorNameState extends State<MeasureEditorName> {
         ));
   }
 
-  _canSubmit() {
+  bool _canSubmit() {
     return _name != null && _name!.isNotEmpty;
   }
 
-  _submit() {
+  void _submit() {
     widget.measure.name = _name;
     if (widget.save) {
       widget.onSave(widget.measure);
@@ -99,7 +99,7 @@ class MeasureEditorNameState extends State<MeasureEditorName> {
     }
   }
 
-  _changeName(text) {
+  void _changeName(text) {
     setState(() {
       _name = text;
     });

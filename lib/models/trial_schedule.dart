@@ -36,23 +36,23 @@ class TrialSchedule extends HiveObject {
         phaseSequence = schedule.phaseSequence,
         numberOfPhasePairs = schedule.numberOfPhasePairs;
 
-  clone() {
+  TrialSchedule clone() {
     return TrialSchedule.clone(this);
   }
 
   int get totalDuration => phaseDuration! * numberOfPhases;
 
-  updatePhaseOrder(PhaseOrder? newPhaseOrder) {
+  void updatePhaseOrder(PhaseOrder? newPhaseOrder) {
     phaseOrder = newPhaseOrder;
     _updatePhaseSequence();
   }
 
-  updateNumberOfCycles(int newNumberOfCycles) {
+  void updateNumberOfCycles(int newNumberOfCycles) {
     numberOfPhasePairs = newNumberOfCycles;
     _updatePhaseSequence();
   }
 
-  _updatePhaseSequence() {
+  void _updatePhaseSequence() {
     List<String> pair = ['a', 'b'];
     List<String> newPhaseSequence = [];
 

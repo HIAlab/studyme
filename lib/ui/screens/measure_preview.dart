@@ -62,7 +62,7 @@ class MeasurePreview extends StatelessWidget {
                       subtitle: Text((measure as ScaleMeasure).scaleString,
                           style: const TextStyle(fontSize: 16)),
                     ),
-                  ButtonBar(
+                  OverflowBar(
                     alignment: MainAxisAlignment.center,
                     children: [
                       OutlinedButton.icon(
@@ -76,7 +76,7 @@ class MeasurePreview extends StatelessWidget {
         ));
   }
 
-  _addMeasure(BuildContext context) {
+  void _addMeasure(BuildContext context) {
     saveFunction(Measure measure) {
       Provider.of<AppData>(context, listen: false).addMeasure(measure);
       Navigator.pushNamedAndRemoveUntil(context, '/creator', (r) => false);

@@ -19,7 +19,7 @@ class InitState extends State<Init> {
     return const Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 
-  _initAppState() async {
+  Future<void> _initAppState() async {
     // first make sure app data is fetched from box
     await Provider.of<AppData>(context, listen: false).loadAppState();
     await Notifications.init();

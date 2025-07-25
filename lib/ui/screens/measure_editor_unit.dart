@@ -81,11 +81,11 @@ class MeasureEditorUnitState extends State<MeasureEditorUnit> {
         ));
   }
 
-  _canSubmit() {
+  bool _canSubmit() {
     return _unit != null && _unit!.isNotEmpty;
   }
 
-  _submit() {
+  void _submit() {
     widget.measure.unit = _unit;
     if (widget.save) {
       widget.onSave(widget.measure);
@@ -101,7 +101,7 @@ class MeasureEditorUnitState extends State<MeasureEditorUnit> {
     }
   }
 
-  _changeUnit(text) {
+  void _changeUnit(text) {
     setState(() {
       _unit = text;
     });

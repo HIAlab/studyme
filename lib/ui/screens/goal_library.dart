@@ -46,7 +46,7 @@ class GoalLibrary extends StatelessWidget {
     });
   }
 
-  _previewGoal(context, Goal goal) {
+  void _previewGoal(context, Goal goal) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -55,7 +55,7 @@ class GoalLibrary extends StatelessWidget {
     );
   }
 
-  _createGoal(context) {
+  void _createGoal(context) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -65,7 +65,7 @@ class GoalLibrary extends StatelessWidget {
                 )));
   }
 
-  _getSaveFunction(context) {
+  Null Function(Goal goal) _getSaveFunction(context) {
     return (Goal goal) {
       Provider.of<AppData>(context, listen: false).setGoal(goal);
       Navigator.pushNamedAndRemoveUntil(context, '/creator', (r) => false);

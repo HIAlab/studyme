@@ -28,7 +28,7 @@ class CreatorInterventionSection extends StatelessWidget {
                   fontSize: 20,
                   color: Theme.of(context).primaryColor)),
           if (model.trial!.interventionA == null)
-            ButtonBar(
+            OverflowBar(
               alignment: MainAxisAlignment.center,
               children: [
                 OutlinedButton.icon(
@@ -50,7 +50,7 @@ class CreatorInterventionSection extends StatelessWidget {
                     fontSize: 20,
                     color: Theme.of(context).primaryColor)),
             if (model.trial!.type == null)
-              ButtonBar(
+              OverflowBar(
                 alignment: MainAxisAlignment.center,
                 children: [
                   OutlinedButton.icon(
@@ -76,7 +76,7 @@ class CreatorInterventionSection extends StatelessWidget {
                       fontSize: 20,
                       color: Theme.of(context).primaryColor)),
               if (model.trial!.interventionB == null)
-                ButtonBar(
+                OverflowBar(
                   alignment: MainAxisAlignment.center,
                   children: [
                     OutlinedButton.icon(
@@ -97,11 +97,11 @@ class CreatorInterventionSection extends StatelessWidget {
     );
   }
 
-  _firstInterventionSet() {
+  bool _firstInterventionSet() {
     return model.trial!.interventionA != null;
   }
 
-  _addIntervention(context, isA) {
+  void _addIntervention(context, isA) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -112,7 +112,7 @@ class CreatorInterventionSection extends StatelessWidget {
     );
   }
 
-  _viewIntervention(context, isA) {
+  void _viewIntervention(context, isA) {
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -121,7 +121,7 @@ class CreatorInterventionSection extends StatelessWidget {
     );
   }
 
-  _navigateToTrialTypeEditor(context) {
+  void _navigateToTrialTypeEditor(context) {
     Navigator.push(
       context,
       MaterialPageRoute(

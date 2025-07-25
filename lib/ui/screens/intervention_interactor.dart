@@ -51,7 +51,7 @@ class InterventionInteractorState extends State<InterventionInteractor> {
     );
   }
 
-  _markCompleted() {
+  void _markCompleted() {
     final now = Provider.of<AppData>(context, listen: false).getNow();
     Provider.of<LogData>(context, listen: false).addCompletedTaskLog(
         CompletedTaskLog(taskId: widget.task!.id, dateTime: now));

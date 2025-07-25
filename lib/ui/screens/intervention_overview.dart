@@ -62,7 +62,7 @@ class InterventionOverviewState extends State<InterventionOverview> {
                                   style: const TextStyle(fontSize: 16)),
                               trailing: const Icon(Icons.chevron_right),
                               onTap: () => _editSchedule(intervention)),
-                        ButtonBar(
+                        OverflowBar(
                           alignment: MainAxisAlignment.center,
                           children: [
                             OutlinedButton.icon(
@@ -78,7 +78,7 @@ class InterventionOverviewState extends State<InterventionOverview> {
           });
   }
 
-  _editName(intervention) {
+  void _editName(intervention) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -93,7 +93,7 @@ class InterventionOverviewState extends State<InterventionOverview> {
         ));
   }
 
-  _editInstructions(intervention) {
+  void _editInstructions(intervention) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -107,7 +107,7 @@ class InterventionOverviewState extends State<InterventionOverview> {
         ));
   }
 
-  _editSchedule(intervention) {
+  void _editSchedule(intervention) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -121,7 +121,7 @@ class InterventionOverviewState extends State<InterventionOverview> {
         ));
   }
 
-  _remove() {
+  void _remove() {
     setState(() {
       _isDeleting = true;
     });
@@ -129,7 +129,7 @@ class InterventionOverviewState extends State<InterventionOverview> {
     Navigator.pop(context);
   }
 
-  _getSetter() {
+  void Function(Intervention intervention) _getSetter() {
     return widget.isA
         ? Provider.of<AppData>(context, listen: false).setInterventionA
         : Provider.of<AppData>(context, listen: false).setInterventionB;

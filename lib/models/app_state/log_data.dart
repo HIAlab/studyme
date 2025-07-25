@@ -47,7 +47,7 @@ class LogData extends ChangeNotifier {
     notifyListeners();
   }
 
-  _addLogsFor(String boxname, List<TrialLog> logs) async {
+  Future<void> _addLogsFor(String boxname, List<TrialLog> logs) async {
     Box box = await Hive.openBox(boxname);
     for (var log in logs) {
       box.add(log);

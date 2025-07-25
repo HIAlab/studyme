@@ -88,11 +88,11 @@ class InterventionEditorNameState extends State<InterventionEditorName> {
         ));
   }
 
-  _canSubmit() {
+  bool _canSubmit() {
     return _name != null && _name!.isNotEmpty;
   }
 
-  _submit() {
+  void _submit() {
     widget.intervention.name = _name;
     widget.save
         ? widget.onSave(widget.intervention)
@@ -106,7 +106,7 @@ class InterventionEditorNameState extends State<InterventionEditorName> {
             ));
   }
 
-  _changeName(text) {
+  void _changeName(text) {
     setState(() {
       _name = text;
     });

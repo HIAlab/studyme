@@ -103,7 +103,7 @@ class Notifications {
         ?.requestNotificationsPermission();
   }
 
-  debugShowPendingRequests() async {
+  Future<void> debugShowPendingRequests() async {
     final List<PendingNotificationRequest> pendingNotificationRequests =
         await _flutterLocalNotificationsPlugin.pendingNotificationRequests();
 
@@ -117,7 +117,7 @@ class Notifications {
     }
   }
 
-  clearAll() async {
+  Future<void> clearAll() async {
     _flutterLocalNotificationsPlugin.cancelAll();
   }
 }

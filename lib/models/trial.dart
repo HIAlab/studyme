@@ -124,7 +124,7 @@ class Trial extends HiveObject {
     return test ~/ schedule!.phaseDuration!;
   }
 
-  generateWithSetInfos() {
+  void generateWithSetInfos() {
     schedule = TrialSchedule.createDefault();
     if (type == TrialType.reversal) {
       a = WithdrawalPhase.fromIntervention(

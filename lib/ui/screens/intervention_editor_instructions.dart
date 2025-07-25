@@ -95,11 +95,11 @@ class InterventionEditorInstructionsState
         ));
   }
 
-  _canSubmit() {
+  bool _canSubmit() {
     return _instructions != null && _instructions!.isNotEmpty;
   }
 
-  _submit() {
+  void _submit() {
     widget.intervention.instructions = _instructions;
     widget.save
         ? widget.onSave(widget.intervention)
@@ -113,7 +113,7 @@ class InterventionEditorInstructionsState
             ));
   }
 
-  _changeInstructions(text) {
+  void _changeInstructions(text) {
     setState(() {
       _instructions = text;
     });

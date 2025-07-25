@@ -24,7 +24,7 @@ class Reminder {
   Reminder({this.frequency = 1, List<DateTime>? timestamps})
       : timestamps = timestamps ?? [];
 
-  addTime(TimeOfDay time) {
+  void addTime(TimeOfDay time) {
     // only care about time and hour, but hive needs to save datetime
     final newTimestamp = _generateDateTime(time);
     if (!_containsTime(newTimestamp)) {
@@ -33,19 +33,19 @@ class Reminder {
     _sortTimes();
   }
 
-  removeTime(int index) {
+  void removeTime(int index) {
     timestamps.removeAt(index);
   }
 
-  _sortTimes() {
+  void _sortTimes() {
     timestamps.sort((a, b) => a.compareTo(b));
   }
 
-  _generateDateTime(TimeOfDay time) {
+  DateTime _generateDateTime(TimeOfDay time) {
     return DateTime(year, month, day, time.hour, time.minute);
   }
 
-  _containsTime(DateTime newTimestamp) {
+  bool _containsTime(DateTime newTimestamp) {
     for (var timestamp in timestamps) {
       if (timestamp.compareTo(newTimestamp) == 0) {
         return true;
@@ -94,7 +94,7 @@ class Reminder {
     }
   }
 
-  clone() {
+  Reminder clone() {
     return Reminder(
         frequency: frequency, timestamps: List<DateTime>.from(timestamps));
   }

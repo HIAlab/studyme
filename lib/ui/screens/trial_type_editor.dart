@@ -75,15 +75,15 @@ class TrialTypeEditorState extends State<TrialTypeEditor> {
         ));
   }
 
-  _canSubmit() {
+  bool _canSubmit() {
     return _type != null;
   }
 
-  _onSubmit() {
+  void _onSubmit() {
     widget.onSave(_type!);
   }
 
-  _selectOption(TrialType type) {
+  void _selectOption(TrialType type) {
     setState(() {
       _type = type;
     });

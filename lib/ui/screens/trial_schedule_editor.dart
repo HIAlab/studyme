@@ -90,19 +90,19 @@ class TrialScheduleEditorState extends State<TrialScheduleEditor> {
         ));
   }
 
-  _canSubmit() {
+  bool _canSubmit() {
     return _phases!.totalDuration > 0 &&
         _phases!.totalDuration < 1000 &&
         _phases!.phaseDuration! <= 365 &&
         _phases!.numberOfPhasePairs! < 100;
   }
 
-  _onSubmit() {
+  void _onSubmit() {
     Provider.of<AppData>(context, listen: false).updateSchedule(_phases);
     Navigator.pop(context, true);
   }
 
-  _updateNumberOfCycles(text) {
+  void _updateNumberOfCycles(text) {
     textToIntSetter(text, (int number) {
       setState(() {
         _phases!.updateNumberOfCycles(number);
@@ -110,7 +110,7 @@ class TrialScheduleEditorState extends State<TrialScheduleEditor> {
     });
   }
 
-  _updatePhaseDuration(text) {
+  void _updatePhaseDuration(text) {
     textToIntSetter(text, (int number) {
       setState(() {
         _phases!.phaseDuration = number;
@@ -118,7 +118,7 @@ class TrialScheduleEditorState extends State<TrialScheduleEditor> {
     });
   }
 
-  _updatePhaseOrder(phaseOrder) {
+  void _updatePhaseOrder(phaseOrder) {
     setState(() {
       _phases!.updatePhaseOrder(phaseOrder);
     });

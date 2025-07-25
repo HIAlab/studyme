@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-toast(context, text) {
+void toast(context, text) {
   ScaffoldMessenger.of(context).showSnackBar(
     SnackBar(content: Text(text), duration: const Duration(seconds: 10)),
   );
@@ -13,7 +13,7 @@ class Option {
   Option({this.name, this.callback});
 }
 
-textToIntSetter(text, setterFunction) {
+void textToIntSetter(text, setterFunction) {
   try {
     int value = text.length > 0 ? int.parse(text) : 0;
     setterFunction(value);
@@ -22,7 +22,7 @@ textToIntSetter(text, setterFunction) {
   }
 }
 
-textToDoubleSetter(text, setterFunction) {
+void textToDoubleSetter(text, setterFunction) {
   try {
     double value = text.length > 0 ? double.parse(text) : 0;
     setterFunction(value);

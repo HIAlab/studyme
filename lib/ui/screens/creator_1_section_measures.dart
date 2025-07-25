@@ -34,7 +34,7 @@ class CreatorMeasureSection extends StatelessWidget {
                 });
           },
         ),
-        ButtonBar(
+        OverflowBar(
           alignment: MainAxisAlignment.center,
           children: [
             OutlinedButton.icon(
@@ -48,11 +48,11 @@ class CreatorMeasureSection extends StatelessWidget {
     );
   }
 
-  _addMeasure(context) {
+  void _addMeasure(context) {
     Navigator.pushNamed(context, Routes.measure_library);
   }
 
-  _viewMeasure(context, int index) {
+  void _viewMeasure(context, int index) {
     Navigator.push(
       context,
       MaterialPageRoute(

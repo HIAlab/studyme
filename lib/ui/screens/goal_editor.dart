@@ -60,15 +60,15 @@ class GoalEditorState extends State<GoalEditor> {
         ));
   }
 
-  _canSubmit() {
+  bool _canSubmit() {
     return _goal != null && _goal!.isNotEmpty;
   }
 
-  _onSubmit() {
+  void _onSubmit() {
     widget.onSave(Goal(goal: _goal));
   }
 
-  _changeGoal(String value) {
+  void _changeGoal(String value) {
     setState(() {
       _goal = value;
     });

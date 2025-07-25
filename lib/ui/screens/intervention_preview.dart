@@ -39,7 +39,7 @@ class InterventionPreview extends StatelessWidget {
                     subtitle: Text(intervention.instructions!,
                         style: const TextStyle(fontSize: 16)),
                   ),
-                ButtonBar(
+                OverflowBar(
                   alignment: MainAxisAlignment.center,
                   children: [
                     OutlinedButton.icon(
@@ -56,7 +56,7 @@ class InterventionPreview extends StatelessWidget {
         ));
   }
 
-  _addIntervention(BuildContext context) {
+  void _addIntervention(BuildContext context) {
     saveFunction(Intervention intervention) {
       _getSetter(context)(intervention);
       Navigator.pushNamedAndRemoveUntil(context, '/creator', (r) => false);
@@ -72,7 +72,7 @@ class InterventionPreview extends StatelessWidget {
         ));
   }
 
-  _getSetter(BuildContext context) {
+  void Function(Intervention intervention) _getSetter(BuildContext context) {
     return isA
         ? Provider.of<AppData>(context, listen: false).setInterventionA
         : Provider.of<AppData>(context, listen: false).setInterventionB;
