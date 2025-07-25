@@ -15,7 +15,6 @@ class Init extends StatefulWidget {
 class InitState extends State<Init> {
   @override
   Widget build(BuildContext context) {
-    _initAppState();
     return const Scaffold(body: Center(child: CircularProgressIndicator()));
   }
 
@@ -38,5 +37,11 @@ class InitState extends State<Init> {
       appData.scheduleFutureNotifications();
       Navigator.pushReplacementNamed(context, Routes.dashboard);
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initAppState();
   }
 }

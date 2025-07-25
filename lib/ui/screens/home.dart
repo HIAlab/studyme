@@ -21,7 +21,15 @@ class Home extends StatelessWidget {
     int shiftByDays = Provider.of<AppData>(context, listen: false).shiftByDays;
     // listen to log data so screen is rebuilt when logs are added
     Provider.of<LogData>(context);
-    final Trial trial = Provider.of<AppData>(context).trial!;
+    final Trial? trial = Provider.of<AppData>(context).trial;
+
+    // Handle case where trial is not yet loaded
+    if (trial == null) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+
     final dateToday = DateTime.now().add(Duration(days: shiftByDays));
     Widget body;
     int activeIndex;
