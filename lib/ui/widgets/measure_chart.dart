@@ -246,7 +246,11 @@ class MeasureChartState extends State<MeasureChart> {
     return _calculateMean(values);
   }
 
-  dynamic _calculateMean(List<num?> values) => _calculateSum(values) / values.length;
+  dynamic _calculateMean(List<num?> values) {
+    final sum = _calculateSum(values);
+    if (sum == null || values.isEmpty) return null;
+    return sum / values.length;
+  }
 
   num? _calculateSum(List<num?> values) => values.reduce((a, b) => a! + b!);
 }

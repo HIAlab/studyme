@@ -78,14 +78,14 @@ class InterventionOverviewState extends State<InterventionOverview> {
           });
   }
 
-  void _editName(intervention) {
+  void _editName(Intervention intervention) {
     Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => InterventionEditorName(
               isA: widget.isA,
               intervention: intervention.clone(),
-              onSave: (Intervention? intervention) {
+              onSave: (Intervention intervention) {
                 _getSetter()(intervention);
                 Navigator.pop(context);
               },
@@ -93,13 +93,13 @@ class InterventionOverviewState extends State<InterventionOverview> {
         ));
   }
 
-  void _editInstructions(intervention) {
+  void _editInstructions(Intervention intervention) {
     Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => InterventionEditorInstructions(
               intervention: intervention.clone(),
-              onSave: (Intervention? intervention) {
+              onSave: (Intervention intervention) {
                 _getSetter()(intervention);
                 Navigator.pop(context);
               },
@@ -107,7 +107,7 @@ class InterventionOverviewState extends State<InterventionOverview> {
         ));
   }
 
-  void _editSchedule(intervention) {
+  void _editSchedule(Intervention intervention) {
     Navigator.push(
         context,
         MaterialPageRoute(
@@ -129,7 +129,7 @@ class InterventionOverviewState extends State<InterventionOverview> {
     Navigator.pop(context);
   }
 
-  void Function(Intervention intervention) _getSetter() {
+  void Function(Intervention? intervention) _getSetter() {
     return widget.isA
         ? Provider.of<AppData>(context, listen: false).setInterventionA
         : Provider.of<AppData>(context, listen: false).setInterventionB;

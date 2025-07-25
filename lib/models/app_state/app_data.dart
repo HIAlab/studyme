@@ -4,9 +4,9 @@ import 'package:studyme/models/app_state/app_state.dart';
 import 'package:studyme/models/app_state/default_measures.dart';
 import 'package:studyme/models/intervention.dart';
 import 'package:studyme/models/measure/measure.dart';
-import 'package:studyme/models/trial_schedule.dart';
 import 'package:studyme/models/task/task.dart';
 import 'package:studyme/models/trial.dart';
+import 'package:studyme/models/trial_schedule.dart';
 import 'package:studyme/models/trial_type.dart';
 import 'package:studyme/util/notifications.dart';
 import 'package:studyme/util/time_of_day_extension.dart';
@@ -54,7 +54,7 @@ class AppData extends ChangeNotifier {
     _trial!.save();
   }
 
-  void setGoal(Goal goal) {
+  void setGoal(Goal? goal) {
     _trial!.goal = goal;
     _trial!.save();
     notifyListeners();
@@ -67,13 +67,13 @@ class AppData extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setInterventionA(Intervention intervention) {
+  void setInterventionA(Intervention? intervention) {
     _trial!.interventionA = intervention;
     _trial!.save();
     notifyListeners();
   }
 
-  void setInterventionB(Intervention intervention) {
+  void setInterventionB(Intervention? intervention) {
     _trial!.interventionB = intervention;
     _trial!.save();
     notifyListeners();

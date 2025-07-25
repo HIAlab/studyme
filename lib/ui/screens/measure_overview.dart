@@ -146,7 +146,9 @@ class MeasureOverviewState extends State<MeasureOverview> {
         context,
         MaterialPageRoute(
           builder: (context) => MeasureEditorList(
-              measure: measure.clone(), onSave: _getSaveFunction(), save: true),
+              measure: measure.clone() as ListMeasure,
+              onSave: _getSaveFunction(),
+              save: true),
         ));
   }
 
@@ -155,7 +157,9 @@ class MeasureOverviewState extends State<MeasureOverview> {
         context,
         MaterialPageRoute(
           builder: (context) => MeasureEditorScale(
-              measure: measure.clone(), onSave: _getSaveFunction(), save: true),
+              measure: measure.clone() as ScaleMeasure,
+              onSave: _getSaveFunction(),
+              save: true),
         ));
   }
 

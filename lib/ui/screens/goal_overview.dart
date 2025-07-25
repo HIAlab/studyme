@@ -75,11 +75,11 @@ class GoalOverviewState extends State<GoalOverview> {
     setState(() {
       _isDeleting = true;
     });
-    _getSetter()();
+    _getSetter()(null);
     Navigator.pop(context);
   }
 
-  void Function(Goal goal) _getSetter() {
+  void Function(Goal? goal) _getSetter() {
     return Provider.of<AppData>(context, listen: false).setGoal;
   }
 }

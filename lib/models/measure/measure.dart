@@ -71,6 +71,9 @@ abstract class Measure with HasSchedule {
         return ListMeasure.clone(this as ListMeasure);
       case const (ScaleMeasure):
         return ScaleMeasure.clone(this as ScaleMeasure);
+      default:
+        throw UnsupportedError(
+            'Cloning not supported for measure type: $runtimeType');
     }
   }
 
